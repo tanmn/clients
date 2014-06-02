@@ -1,0 +1,108 @@
+
+@font-face {
+    font-family : viberfontbold;
+    src         : url(../fonts/HelveticaNeue-CondensedBold.otf);
+}
+@font-face {
+    font-family : viberfontnormal;
+    src         : url(../fonts/helvetica-normal.ttf);
+}
+@font-face {
+    font-family : viberfontlight;
+    src         : url(../fonts/HelveticaNeue-Light.otf);
+}
+html {
+    background : #5a3975 url(../img/microsite/gradient_bg.jpg) 50% 0% repeat-x;
+}
+body{
+    color      : #fff;
+}
+#wrapper.homepage {
+    position   : relative;
+    background : url(../img/microsite/background.jpg) 50% 0% no-repeat;
+}
+.container {
+    position : relative;
+    width    : 1024px!important;
+}
+#content {
+    min-height : 450px;
+}
+#icon {
+    position : absolute;
+    top      : 20px;
+    left     : 80px;
+    z-index  : 10
+}
+#icon:hover{
+    top : 19px;
+}
+#icon a, #icon a img{
+    display : block;
+    height  : 131px;
+    width   : 131px;
+}
+.page-header {
+    height         : 90px;
+    margin         : 0;
+    padding-bottom : 12px;
+    background     : url(../img/microsite/top_bg.png) 50% 0% repeat-x;
+    border-bottom  : none;
+}
+.page-header ul {
+    margin-bottom : 0;
+    padding-top   : 10px;
+    text-align    : center;
+}
+.page-header ul > li {
+    display     : inline-block;
+    margin      : 0 20px;
+    text-shadow : 1px 1px 1px rgba(0,0,0,.3);
+}
+.page-header ul > li > a {
+    font-family     : 'viberfontbold';
+    font-size       : 18px;
+    font-weight     : 300;
+    color           : #fff;
+    text-decoration : none;
+    text-transform  : uppercase;
+}
+.page-header ul > li > a:hover, .page-header ul > li > a.active{
+    color : #aae1f7;
+}
+.page-header ul > li img {
+    vertical-align : baseline;
+}
+.form-horizontal .control-label {
+    padding-bottom : 7px;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    margin-top    : 2px;
+    margin-bottom : 2px;
+}
+#download_viber{
+    display                              : block;
+    font-size                            : 18px;
+    font-weight                          : 700;
+    color                                : #fff;
+    text-transform                       : uppercase;
+    text-decoration: none;
+    margin-bottom : 20px;
+}
+footer {
+    padding          : 15px 0 10px 0;
+    background-color : #ffffff;
+    color            : #c4b5d1;
+    text-align       : center;
+    font-size: 16px;
+}
+footer > ul > li {
+    display     : inline-block;
+    padding     : 0 5px;
+    line-height : 20px;
+    list-style  : none;
+}
+footer > ul > li > a, footer > ul > li > a:hover, footer > ul > li {
+    font-weight : bold;
+    color       : #7b519d;
+}
