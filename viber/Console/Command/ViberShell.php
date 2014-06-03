@@ -11,7 +11,7 @@ App::uses('ConnectionManager', 'Model');
 
 set_time_limit(0);
 ini_set('memory_limit', '256M');
-Configure::write('debug', 2);
+Configure::write('debug', 0);
 
 
 class ViberShell extends AppShell {
@@ -42,7 +42,12 @@ class ViberShell extends AppShell {
 
         $time_start = microtime(true);
 
-        $output = $this->process();
+        if($this->command == 'today'){
+            $output = $this->process(date('Y-m-d'));
+        }else{
+            $output = $this->process();
+        }
+
 
         $time_stop = microtime(true);
 
@@ -248,12 +253,13 @@ class ViberShell extends AppShell {
             'report_date' => $date
         ));
 
-        $this->MasterPoint->MasterGroup->saveAll($groups);
+        if(!empty($groups))
+            $this->MasterPoint->MasterGroup->saveAll($groups);
 
-        if (!$this->MasterPoint->saveMany($summary)) {
-            $dbo->rollback();
-        } else {
+        if (empty($summary) || $this->MasterPoint->saveMany($summary)) {
             $dbo->commit();
+        } else {
+            $dbo->rollback();
         }
 
         return array('points' => $summary, 'groups' => $groups);
