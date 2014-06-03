@@ -114,3 +114,103 @@ $this->end('script');
         </div>
     </div>
 </div>
+
+<div id="Results">
+    <div id="BackBox"></div>
+    <div id="ResultHolder" class="row-fluid clearfix">
+        <div class="col-xs-6">
+            <h4>
+                Cá nhân
+                <small class="pull-right">Điểm</small>
+            </h4>
+
+            <ul id="TopUsers" class="result-list">
+                <li>
+                    <span class="position">1</span>
+                    <span class="name">Cá nhân 1</span>
+                    <span class="points">0</span>
+                </li>
+                <li>
+                    <span class="position">2</span>
+                    <span class="name">Cá nhân 2</span>
+                    <span class="points">0</span>
+                </li>
+                <li>
+                    <span class="position">3</span>
+                    <span class="name">Cá nhân 3</span>
+                    <span class="points">0</span>
+                </li>
+                <li>
+                    <span class="position">4</span>
+                    <span class="name">Cá nhân 4</span>
+                    <span class="points">0</span>
+                </li>
+                <li>
+                    <span class="position">5</span>
+                    <span class="name">Cá nhân 5</span>
+                    <span class="points">0</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-6">
+            <h4>
+                Nhóm
+                <small class="pull-right">Điểm</small>
+            </h4>
+
+            <ul id="TopGroups" class="result-list">
+                <li>
+                    <span class="name">Nhóm 1</span>
+                    <span class="points">0</span>
+                </li>
+                <li>
+                    <span class="name">Nhóm 2</span>
+                    <span class="points">0</span>
+                </li>
+                <li>
+                    <span class="name">Nhóm 3</span>
+                    <span class="points">0</span>
+                </li>
+                <li>
+                    <span class="name">Nhóm 4</span>
+                    <span class="points">0</span>
+                </li>
+                <li>
+                    <span class="name">Nhóm 5</span>
+                    <span class="points">0</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="ViewPoints" class="row-fluid clearfix">
+        <div class="col-xs-6 col-xs-offset-3 text-center">
+            <h3>Nhập số điện thoại:</h3>
+            <h4>Nhập số điện thoại hoặc mã theo dõi của bạn:</h4>
+
+            <?php
+            echo $this->Form->create(
+                false,
+                array(
+                    'id' => 'ResultForm',
+                    'class' => 'form',
+                    'role' => 'form',
+                    'inputDefaults' => array(
+                        'div' => 'form-group',
+                        'label' => false,
+                        'class' => 'form-control'
+                    )
+                )
+            );
+
+            echo $this->Form->input('phone', array('id' => 'txtTargetPhone', 'value' => '+84'));
+            echo $this->Form->submit('Hiện số điểm hiện tại của bạn', array('class' => 'btn btn-block', 'div' => false, 'id' => 'btnGetPoints'));
+            echo $this->Form->input('point', array('id' => 'txtPoints', 'readonly' => true));
+
+
+            echo $this->Form->end();
+            ?>
+        </div>
+    </div>
+</div>

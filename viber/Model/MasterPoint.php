@@ -74,7 +74,7 @@ class MasterPoint extends AppModel {
 		),
 	);
 
-    public $hasMany = array(
+    public $belongsTo = array(
         'MasterGroup' => array(
             'className' => 'MasterGroup',
             'foreignKey' => 'group_code',

@@ -51,4 +51,8 @@ class AppModel extends Model {
 
         return false;
     }
+
+    public function formatPhone($phone){
+        return preg_replace('/^(\+84|0)(\d{3,3}).*(\d{3,3})$/', '0$2.....$3', $phone);
+    }
 }

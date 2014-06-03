@@ -40,4 +40,15 @@ class MasterGroup extends AppModel {
 			),
 		),
 	);
+
+    public $hasMany = array(
+        'MasterPoint' => array(
+            'className' => 'MasterPoint',
+            'foreignKey' => 'group_code',
+            'conditions' => array(),
+            'order' => '',
+            'limit' => '',
+            'dependent' => false
+        )
+    );
 }
