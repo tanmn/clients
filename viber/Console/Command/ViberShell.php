@@ -238,7 +238,7 @@ class ViberShell extends AppShell {
         }
 
         if(!$this->testConnections('default')){
-            return $summary;
+            return array('points' => $summary, 'groups' => $groups);
         }
 
         $dbo = $this->MasterPoint->getDataSource();
