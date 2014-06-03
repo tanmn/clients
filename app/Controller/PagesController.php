@@ -21,7 +21,8 @@ App::uses('AppController', 'Controller');
  */
 class PagesController extends AppController {
 
-	public $uses = array();
+    public $uses = array();
+	public $helpers = array('QrCode');
 
     public function beforeFilter() {
     	$this->set('active', '');

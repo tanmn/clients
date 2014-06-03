@@ -34,9 +34,11 @@ $this->end('script');
 <div id="Main" class="text-center clearfix">
     <?php echo $this->Html->link(
         $this->Html->image('microsite/qr_button.png'),
-        '#',
+        $this->QrCode->base_url . urlencode(Router::url('/', true)) . $this->QrCode->_optionsString(array()),
         array(
-            'escape' => false
+            'escape' => false,
+            'id' => 'btnQrCode',
+            'class' => 'fancybox fancybox.image'
         )
     ); ?>
 

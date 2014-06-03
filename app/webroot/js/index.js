@@ -49,4 +49,12 @@ $(function() {
 
         return false;
     });
+
+    $('#btnQrCode').attr('rel', 'gallery').fancybox({
+        padding : 0,
+        autoSize: true,
+        closeClick: false,
+        openEffect: 'none',
+        closeEffect: 'none',
+    });
 });
