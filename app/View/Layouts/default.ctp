@@ -26,6 +26,11 @@
             echo $this->Html->script('vendor/modernizr-2.6.2-respond-1.1.0.min');
             echo $this->Html->script('vendor/jquery-1.10.1.min');
         ?>
+
+        <script type="text/javascript">
+            var BASE = '<?php echo Router::url('/', TRUE); ?>';
+            var APIS = '<?php echo Router::url('/Apis/', TRUE); ?>';
+        </script>
     </head>
 
     <body id="wrapper" class="homepage">

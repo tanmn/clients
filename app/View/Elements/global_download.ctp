@@ -1,6 +1,6 @@
 <?php $download_link = 'http://viber.com/'; ?>
 
-<div class="container text-center">
+<div class="container text-center" style="margin-top : 20px;">
     <?php echo $this->Html->link(
         $this->Html->image('microsite/call_btn.png'),
         $download_link,

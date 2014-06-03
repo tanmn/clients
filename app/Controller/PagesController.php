@@ -23,8 +23,20 @@ class PagesController extends AppController {
 
 	public $uses = array();
 
+    public function beforeFilter() {
+    	$this->set('active', '');
+	}
+
     public function home(){
+
         $this->set('title_for_layout', 'Trang chủ');
+        $this->set('active', 'home');
+    }
+
+    public function results(){
+
+        $this->set('title_for_layout', 'Kết quả');
+        $this->set('active', 'results');
     }
 
 	public function display() {
