@@ -18,5 +18,6 @@ unset($MY_NUM, $VIBER_PATH, $SYSTEM_PATH);
 Configure::write('ADMINISTRATORS', array(
     // 'tuannh@c3tek.biz',
     // 'giangnam.nguyen@teetalk.vn',
-    'tanmn@c3tek.biz',
+    // 'bichphuong.nguyen@faceinteraction.vn',
+    'tanmn@c3tek.biz'
 ));
