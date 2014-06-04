@@ -75,14 +75,14 @@
     pointer-events : none;
 }
 #Column1 {
-    background : url(../img/microsite/players.png) 50% 30px no-repeat;
+    background : url(../img/microsite/players.png) 50% 20px no-repeat;
 }
 #Column1 .thumb {
     background : url(../img/microsite/gray_20.png) 0 0 repeat;
     border     : none;
 }
 #Column2 {
-    background : url(../img/microsite/fox.png) 50% 25px no-repeat;
+    background : url(../img/microsite/fox.png) 50% 0px no-repeat;
 }
 #Column3 {
     background : url(../img/microsite/leg_cat.png) 50% 0px no-repeat;

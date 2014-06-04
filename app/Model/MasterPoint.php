@@ -100,12 +100,11 @@ class MasterPoint extends AppModel {
                 'fields' => array(
                     // $alias . '.group_code',
                     'MasterGroup.group_name',
-                    $alias . '.number',
                     $alias . '.points'
                 ),
                 'conditions' => $conditions,
                 'contain' => array('MasterGroup'),
-                'group' => array($alias . '.group_code', 'MasterGroup.group_name', $alias . '.number'),
+                'group' => array($alias . '.group_code', 'MasterGroup.group_name'),
                 'order' => array($alias . '.points' => 'DESC'),
                 'limit' => $limit
             )

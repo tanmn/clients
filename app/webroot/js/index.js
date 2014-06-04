@@ -4,6 +4,10 @@ $(function() {
     $('#Results').hide();
     $('#ResultHolder').hide();
 
+    function isPhone(phone) {
+        return (/^(\+84|0)\d{9,10}$/).test(phone);
+    }
+
     function getHotline(phone) {
         $.post(APIS + 'getHotline', {
             'phone': phone
@@ -25,7 +29,7 @@ $(function() {
 
             $('#ResultHolder .result-list > li').hide();
 
-            var i, l, element;
+            var i, l, element, has_data = false;
 
             if ('groups' in json && json.groups.length) {
                 var TopGroups = $('#TopGroups > li');
@@ -37,20 +41,28 @@ $(function() {
                     element.css({
                         'visibility': ''
                     }).hide().fadeIn().show();
+
+                    has_data = true;
                 }
             }
 
             if ('users' in json && json.users.length) {
                 var TopUsers = $('#TopUsers > li');
 
-                for (i = 0, l = json.groups.length; i < l; i++) {
+                for (i = 0, l = json.users.length; i < l; i++) {
                     element = TopUsers.eq(i);
-                    element.find('.name').text(json.groups[i].MasterPoint.number || 'No name');
-                    element.find('.points').text(json.groups[i].MasterPoint.points || 0);
+                    element.find('.name').text(json.users[i].MasterPoint.number || 'No name');
+                    element.find('.points').text(json.users[i].MasterPoint.points || 0);
                     element.css({
                         'visibility': ''
                     }).hide().fadeIn().show();
+
+                    has_data = true;
                 }
+            }
+
+            if (!has_data) {
+                fail();
             }
 
         }, 'json').fail(fail).always(function() {
@@ -86,6 +98,13 @@ $(function() {
 
         if (!phone) {
             alert('Vui lòng nhập số điện thoại của bạn.');
+            $('#txtPhone').focus();
+            return false;
+        }
+
+        if (!isPhone(phone)) {
+            alert('Số điện thoại bạn nhập không hợp lệ.');
+            $('#txtPhone').focus();
             return false;
         }
 
@@ -103,6 +122,13 @@ $(function() {
 
         if (!phone) {
             alert('Vui lòng nhập số điện thoại của bạn.');
+            $('#txtTargetPhone').focus();
+            return false;
+        }
+
+        if (!isPhone(phone)) {
+            alert('Số điện thoại bạn nhập không hợp lệ.');
+            $('#txtTargetPhone').focus();
             return false;
         }
 

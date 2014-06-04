@@ -1,0 +1,61 @@
+
+#Results {
+    padding : 0 50px;
+}
+
+.nav-tabs>li {
+    padding : 3px 0 1px 0;
+    border  : 1px transparent solid;
+}
+
+.nav-tabs>li>a {
+    background     : #aae1f7;
+    font-size      : 16px;
+    font-weight    : 600;
+    color          : #0076a3;
+    line-height    : 22px;
+    text-transform : uppercase;
+    border         : none!important;
+    border-radius  : 0!important;
+}
+
+.nav-tabs>li>a:hover {
+    background : url(../img/microsite/white_85.png) 0 0 repeat;
+}
+
+.nav-tabs>li.active {
+    background    : url(../img/microsite/white_85.png) 0 0 repeat;
+    border-radius : 0;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    background     : transparent;
+    font-family    : 'viberfontbold';
+    font-size      : 23px;
+    color          : #7b509c;
+    text-transform : none;
+}
+
+.tab-pane {
+    padding     : 15px;
+
+    font-family : 'viberfontlight';
+    font-size   : 17px;
+    text-align  : center;
+}
+
+#TabContents {
+    position   : relative;
+    z-index    : 10;
+
+    background : url(../img/microsite/white_85.png) 0 0 repeat;
+    color      : #333;
+}
+
+#Figure {
+    margin : 20px auto;
+}
+
+.tab-pane {
+    min-height : 100px;
+}
