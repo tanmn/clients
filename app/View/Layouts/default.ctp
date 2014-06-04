@@ -11,9 +11,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <?php echo $this->Html->meta('icon'); ?>
 
-        <title><?php echo $title_for_layout; ?></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <title><?php echo $title_for_layout; ?> | Nhắn Viber, Đi Brazil</title>
+        <meta name="description" content="Nhắn Viber, Đi Brazil">
+        <meta name="viewport" content="width=1024px">
 
         <?php
             echo $this->fetch('meta');
@@ -74,5 +74,15 @@
             echo $this->Html->script('plugins');
             echo $this->Html->script('main');
         ?>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-51586108-1', 'vibertogobrazil.com');
+            ga('send', 'pageview');
+        </script>
     </body>
 </html>

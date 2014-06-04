@@ -20,13 +20,12 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class PagesController extends AppController {
-
-    public $uses = array();
 	public $helpers = array('QrCode');
 
     public function beforeFilter() {
     	$this->set('active', '');
 	}
+
 
     public function home(){
 
@@ -34,11 +33,41 @@ class PagesController extends AppController {
         $this->set('active', 'home');
     }
 
+
     public function results(){
 
         $this->set('title_for_layout', 'Kết quả');
         $this->set('active', 'results');
     }
+
+
+    public function sticker(){
+
+        $this->set('title_for_layout', 'Nhãn Dán');
+        $this->set('active', 'stickers');
+    }
+
+
+    public function events(){
+
+        $this->set('title_for_layout', 'Sự Kiện');
+        $this->set('active', 'events');
+    }
+
+
+    public function condition(){
+
+        $this->set('title_for_layout', 'Thể Lệ Tham Dự');
+        $this->set('active', 'conditions');
+    }
+
+
+    public function sticker1(){
+
+        $this->set('title_for_layout', 'Thể Lệ Tham Dự');
+        $this->set('active', 'sticker1');
+    }
+
 
 	public function display() {
 		$path = func_get_args();

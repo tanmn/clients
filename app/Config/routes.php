@@ -17,10 +17,11 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
     Router::connect('/', array('controller' => 'pages', 'action' => 'home'));
-    Router::connect('/the-le/*', array('controller' => 'pages', 'action' => 'display', 'blank'));
-    Router::connect('/nhan-dan/*', array('controller' => 'pages', 'action' => 'display', 'blank'));
-    Router::connect('/su-kien/*', array('controller' => 'pages', 'action' => 'display', 'blank'));
+    Router::connect('/the-le/*', array('controller' => 'pages', 'action' => 'condition'));
+    Router::connect('/nhan-dan/*', array('controller' => 'pages', 'action' => 'sticker'));
+    Router::connect('/su-kien/*', array('controller' => 'pages', 'action' => 'events'));
     Router::connect('/ket-qua/*', array('controller' => 'pages', 'action' => 'results'));
+    Router::connect('/test/*', array('controller' => 'pages', 'action' => 'sticker1'));
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */

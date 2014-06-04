@@ -1,5 +1,6 @@
 $(function() {
-    var is_open = false;
+    var is_open = false,
+        interval = null;
 
     $('#Results').hide();
     $('#ResultHolder').hide();
@@ -22,6 +23,8 @@ $(function() {
     }
 
     function getStats() {
+        if (!is_open) return;
+
         $('#ResultHolder .result-list').addClass('loading').find('> li').show().css('visibility', 'hidden');
 
         $.post(APIS + 'getStats', {}, function(json) {
@@ -72,6 +75,10 @@ $(function() {
         function fail() {
             $('#ResultHolder').slideUp();
         }
+    }
+
+    function runInterval() {
+        interval = setInterval(getStats, 60 * 1000);
     }
 
     function getPoints(phone) {
@@ -159,17 +166,24 @@ $(function() {
     });
 
     $('#openResults').click(function(e) {
-        if (is_open) {
-            $('#ResultHolder').slideUp();;
+        is_open = !is_open;
+
+        if (!is_open) {
+            $('#ResultHolder').slideUp();
             $('#Results').fadeOut();
+
+            if (interval) {
+                clearInterval(interval);
+                interval = null;
+            }
         } else {
             $('#Results').fadeIn().show();
             $('#ResultHolder').slideDown().show();
 
             getStats();
+            runInterval();
         }
 
-        is_open = !is_open;
         return false;
     });
 

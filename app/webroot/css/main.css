@@ -44,6 +44,12 @@ body {
     height : 131px;
     width : 131px;
 }
+#icon a:hover img{
+    display: none;
+}
+#icon a:hover{
+    background : url(../img/microsite/help_btn_active.png) 50% 0% repeat-x;
+}
 .page-header {
     height : 90px;
     margin : 0;

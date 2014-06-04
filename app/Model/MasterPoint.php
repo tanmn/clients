@@ -91,6 +91,21 @@ class MasterPoint extends AppModel {
         )
     );
 
+    public function afterFind($results, $primary = false) {
+        $alias = $this->alias;
+
+        if(is_array($results)){
+            foreach ($results as $key => $object) {
+                if(is_array($object) && !empty($object[$alias]['number'])){
+                    $results[$key][$alias]['number'] = $this->formatPhone($object[$alias]['number']);
+                }
+            }
+        }
+
+        return $results;
+    }
+
+
     public function getTopGroups($limit = 10, $conditions = array()){
         $alias = $this->alias;
 
@@ -129,22 +144,6 @@ class MasterPoint extends AppModel {
                 'limit' => $limit
             )
         );
-
-        return $results;
-    }
-
-
-
-    public function afterFind($results, $primary = false) {
-        $alias = $this->alias;
-
-        if(is_array($results)){
-            foreach ($results as $key => $object) {
-                if(is_array($object) && !empty($object[$alias]['number'])){
-                    $results[$key][$alias]['number'] = $this->formatPhone($object[$alias]['number']);
-                }
-            }
-        }
 
         return $results;
     }

@@ -70,7 +70,7 @@ $this->end('script');
 
             echo '<div class="form-inputs">';
             echo $this->Form->input('phone', array('id' => 'txtPhone', 'value' => '+84'));
-            echo $this->Form->submit('Nhận mã theo dõi', array('class' => 'btn btn-block', 'div' => 'form-group', 'id' => 'btnGetHotline'));
+            echo $this->Form->submit('Nhận mã tính điểm', array('class' => 'btn btn-block', 'div' => 'form-group', 'id' => 'btnGetHotline'));
             echo '</div>';
 
             echo $this->Form->input('hotline', array('disabled' => true, 'value' => '', 'id' => 'txtHotline'));

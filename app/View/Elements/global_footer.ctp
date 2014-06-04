@@ -3,7 +3,7 @@
     <li>|</li>
     <li><?php echo $this->Html->link('Thể lệ tham dự', '/the-le'); ?></li>
     <li>|</li>
-    <li><?php echo $this->Html->link('Trang chủ', '/su-kien'); ?></li>
+    <li><?php echo $this->Html->link('Sự kiện', '/su-kien'); ?></li>
     <li>|</li>
     <li><?php echo $this->Html->link('Kết quả', '/ket-qua'); ?></li>
     <li>|</li>
