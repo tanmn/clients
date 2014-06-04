@@ -2,7 +2,7 @@ $(function() {
     var jxhr = null;
 
     $('.scroller').niceScroll({
-        autohidemode: false,
+        autohidemode: true,
         cursorcolor: '#aae1f7',
         background: '#472d71',
         horizrailenabled: false
@@ -20,13 +20,18 @@ $(function() {
 
         if (jxhr) jxhr.abort();
 
+        scroller.resize();
+
         jxhr = $.post(APIS + 'getTopUsers', {
             type: id
         }, function(json) {
             table1.empty();
             table2.empty();
 
-            if (!(json && json.length)) return false;
+            if (!(json && json.length)) {
+                scroller.resize();
+                return false;
+            }
 
             for (var i = 0, l = json.length; i < l; i++) {
                 var pos = i % 2 == 0 ? table1 : table2,
