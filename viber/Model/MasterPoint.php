@@ -84,4 +84,50 @@ class MasterPoint extends AppModel {
             'dependent' => false
         )
     );
+
+    public $virtualFields = array(
+        'points' => 'SUM(IF(msg_type = "sticker", quantity * 3, quantity * 1))'
+    );
+
+    public function getTopGroups($limit = 10, $conditions = array()){
+        $alias = $this->alias;
+
+        $results = $this->find(
+            'all',
+            array(
+                'fields' => array(
+                    // $alias . '.group_code',
+                    'MasterGroup.group_name',
+                    $alias . '.points'
+                ),
+                'conditions' => $conditions,
+                'contain' => array('MasterGroup'),
+                'group' => array($alias . '.group_code', 'MasterGroup.group_name'),
+                'order' => array($alias . '.points' => 'DESC'),
+                'limit' => $limit
+            )
+        );
+
+        return $results;
+    }
+
+    public function getTopUsers($limit = 10, $conditions = array()){
+        $alias = $this->alias;
+
+        $results = $this->find(
+            'all',
+            array(
+                'fields' => array(
+                    $alias . '.number',
+                    $alias . '.points'
+                ),
+                'conditions' => $conditions,
+                'group' => array($alias . '.number'),
+                'order' => array($alias . '.points' => 'DESC'),
+                'limit' => $limit
+            )
+        );
+
+        return $results;
+    }
 }

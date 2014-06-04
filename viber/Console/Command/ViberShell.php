@@ -46,6 +46,8 @@ class ViberShell extends AppShell {
             $output = $this->process(date('Y-m-d'));
         }else{
             $output = $this->process();
+            $top_250 = $this->getTop250();
+            $this->mailTop250($top_250);
         }
 
 
@@ -279,6 +281,18 @@ class ViberShell extends AppShell {
 
 
 
+    protected function getTop250(){
+        $date = date('Y-m-d', time() - 86400);
+
+        $top250 = $this->MasterPoint->getTopUsers(250, array(
+            'MasterPoint.report_date' => $date
+        ));
+
+        return $top250;
+    }
+
+
+
     protected function mailErrors($data = NULL){
         if(empty($this->errors)) return;
 
@@ -317,6 +331,49 @@ class ViberShell extends AppShell {
         }
 
         $Email->subject('[VIBER APP] Error report from hotline ' . MY_NUM);
+
+        try{
+            $Email->send($message);
+        }catch(Exception $e){
+            $this->out('Mail not sent: ' . $e->getMessage());
+        }
+    }
+
+    protected function mailTop250($data = NULL){
+        if(empty($data)) return;
+
+        $date = date('Y-m-d', time() - 86400);
+
+        $message = 'Dear administrators,';
+        $message .= "\n\n";
+        $message .= 'I send you the list of top 250 winners on ' . $date . '.';
+        $message .= "\n\n";
+        $message .= "-------LIST BEGIN-------";
+        $message .= "\n\n";
+        $message .= "# ; Phone number ; Points\n";
+
+        foreach ($data as $key => $value) {
+            $index = $key + 1;
+            $message .= "{$index} ; {$value['MasterPoint']['number']} ; {$value['MasterPoint']['points']}\n";
+        }
+
+        $message .= "\n";
+        $message .= "-------LIST STOP--------";
+        $message .= "\n\n";
+        $message .= "Total: " . count($data) . " users.";
+        $message .= "\n\n";
+
+        $message .= 'This message was sent automatically from client ' . MY_NUM . ' at ' . date('Y-m-d H:i:s') . '.';
+
+        App::uses('CakeEmail', 'Network/Email');
+        $Email = new CakeEmail('gmail');
+        $Email->to(Configure::read('ADMINISTRATORS'));
+
+        if(isset($attachment)){
+            $Email->attachments($attachment);
+        }
+
+        $Email->subject('[VIBER APP] Winner report from hotline ' . MY_NUM . ' on ' . $date);
 
         try{
             $Email->send($message);
