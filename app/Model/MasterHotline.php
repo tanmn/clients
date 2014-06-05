@@ -33,4 +33,12 @@ class MasterHotline extends AppModel {
 			),
 		),
 	);
+
+    public function beforeSave($options = array()) {
+        return false;
+    }
+
+    public function beforeDelete($cascade = true) {
+        return false;
+    }
 }

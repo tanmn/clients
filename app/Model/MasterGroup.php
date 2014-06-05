@@ -51,4 +51,12 @@ class MasterGroup extends AppModel {
             'dependent' => false
         )
     );
+
+    public function beforeSave($options = array()) {
+        return false;
+    }
+
+    public function beforeDelete($cascade = true) {
+        return false;
+    }
 }

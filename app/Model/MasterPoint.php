@@ -91,6 +91,14 @@ class MasterPoint extends AppModel {
         )
     );
 
+    public function beforeSave($options = array()) {
+        return false;
+    }
+
+    public function beforeDelete($cascade = true) {
+        return false;
+    }
+
     public function afterFind($results, $primary = false) {
         $alias = $this->alias;
 
