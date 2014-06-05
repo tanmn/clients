@@ -52,7 +52,7 @@ $this->end('script');
         </div>
 
         <div id="Figure" class="text-center" class="clearfix">
-            <?php echo $this->Html->image('microsite/winners.png'); ?>
+            <?php echo $this->Html->image('microsite/STICKERS_dzooo3.png'); ?>
         </div>
     </div>
 </div>
