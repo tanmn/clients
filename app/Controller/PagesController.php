@@ -68,9 +68,13 @@ class PagesController extends AppController {
 
 
     public function sticker1(){
+        $this->loadModel('UserQrcode');
 
         $this->set('title_for_layout', 'Thể Lệ Tham Dự');
         $this->set('active', 'sticker1');
+        $data = $this->UserQrcode->getQrcode();
+        $this->set('data',$data);
+
     }
 
 
