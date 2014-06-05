@@ -187,5 +187,31 @@ $(function() {
         return false;
     });
 
-    $('#btnQrCode').click(function(){return false;})
+    //    $('#btnQrCode').click(function(){return false;})
+    // fixed by TAN 2014-06-05!!!!
+    $('.inline').fancybox();
+    $("#btnQrGet").click(function(event) {
+        event.preventDefault();
+        var myphone = $("#txtQRMyPhone").val();
+        $.ajax({
+            url: BASE + "test",
+            type: "post",
+            dataType: "json",
+            data: {
+                phone: myphone
+            },
+            success: function(data) {
+                if (data.status == true) {
+                    var img = "<a href='" + data.path + "' download><img src='" + data.path + "' /></a>";
+
+                    $('#abc').html(img);
+                } else {
+                    alert(data.error);
+                }
+            },
+            error: function(a, b, c) {
+                alert(c);
+            }
+        });
+    });
 });

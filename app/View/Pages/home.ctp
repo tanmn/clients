@@ -34,13 +34,43 @@ $this->end('script');
 <div id="Main" class="text-center clearfix">
     <?php echo $this->Html->link(
         $this->Html->image('microsite/qr_button.png'),
-        $this->QrCode->base_url . urlencode(Router::url('/', true)) . $this->QrCode->_optionsString(array()),
+        '#pop',
+        // $this->QrCode->base_url . urlencode(Router::url('/', true)) . $this->QrCode->_optionsString(array()),
         array(
             'escape' => false,
             'id' => 'btnQrCode',
-            'class' => 'fancybox fancybox.image'
+            'class' => 'inline'
         )
     ); ?>
+
+    <div  style="display:none" sclass="thumb" id="pop">
+        <?php
+        echo $this->Form->create(
+            false,
+            array(
+                'id' => 'QRForm',
+                'class' => 'form',
+                'role' => 'form',
+                'inputDefaults' => array(
+                    'div' => 'form-group',
+                    'label' => false,
+                    'class' => 'form-control'
+                )
+            )
+        );
+
+        echo '<div class="form-inputs">';
+        echo $this->Form->input('myphone', array('id' => 'txtQRMyPhone', 'value' => '+84'));
+        echo $this->Form->submit('Nhận mã Qrcode', array('class' => 'btn btn-block', 'div' => 'form-group', 'id' => 'btnQrGet'));
+        echo '</div>';
+
+
+        echo $this->Form->end();
+
+        ?>
+        <div id="abc"></div>
+    </div>
+
 
     <div id="Description">
         Sự kiện diễn ra từ ngày 04/06 đến hết ngày 13/07/2014

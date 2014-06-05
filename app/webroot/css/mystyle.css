@@ -1,0 +1,246 @@
+/*start sticker*/
+.content-sticker ul li,
+#content1 ul li{
+    list-style: none;
+    line-height: 25px;
+    margin-top: 10px;
+    text-align:justify;
+}
+#sticker{
+    margin-top:-60px;
+}
+.content-sticker{
+    background-color: rgba(245, 242, 248, 0.8);
+}
+.content-sticker ul li {
+    float: left;
+    height: 250px;
+    margin: 10px;
+    text-align: center;
+}
+.content-sticker ul li .stickimage{
+    height: 220px;
+
+}
+.content-sticker .downloadimage{
+    background-image: url("/img/buttondownload.png");
+    width: 162px;
+    height: 35px;
+    margin: 0px auto;
+}
+.content-sticker ul li a{
+    line-height: 35px;
+    text-transform: uppercase;
+}
+.content-sticker ul li a:hover{
+    text-decoration: none;
+}
+.content-sticker ul li a:hover .downloadimage{
+    border: 1px solid #ccc;
+}
+#sticker .rule{
+    height: 460px;
+    font-size: 16px;
+}
+/*end sticker*/
+/* -- event-- */
+#events{
+    width: 100%;
+    border-radius: 1px;
+    background-color: rgba(255,255,255,0.8);
+    /*margin-top: 18px;*/
+    min-height: 450px;
+    margin-top:-8px;
+}
+#events .content_event{
+    text-align: center;
+    padding-top: 20px;
+}
+#events .text_event{
+    text-align: center;
+    font-size: 30px;
+    color:#875FA5 ;
+    width: 80%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+/* -- the le -- */
+.thele .title{
+    margin-left: 40%;
+    text-align: center;
+
+}
+#thele ul{
+    padding: 0px;
+}
+#thele{
+    margin-left: 40%;
+    color: #875FA5;
+}
+#thele > img.thelecuocthi {
+    margin-top: 24px;
+}
+#thele > div {
+    width: 100%;
+    border-radius: 1px;
+    background-color: rgba(255,255,255,0.8);
+    /*margin-top: 18px;*/
+    padding: 30px 10px 20px 30px;
+    margin-bottom: 20px;
+}
+#thele .rule {
+    font-family: 'Open Sans',sans-serif;
+    font-size: 18px;
+    padding-right: 24px;
+}
+#thele td > p {
+    margin: 4px;
+}
+#thele .rule{
+    height: 460px;
+    font-size: 16px;
+}
+.term strong {
+    color: #7b519d;
+}
+@media (max-width: 640px) {
+    .pc{
+        display: none;
+    }
+    .mobie{
+        display:list-item !important;
+    }
+    .page-header .container #icon{
+        display: none;
+    }
+    .page-header .container .logo{
+        text-align: center;
+        line-height: 90px;
+    }
+    .page-header ul > li{
+        display: block;
+        border-top: 1px solid #bd28ce;
+        margin: 0px;
+        height: 70px;
+        line-height: 70px;
+        padding-left: 80px;
+    }
+    .page-header ul > li img{
+        margin-top: 10px;
+        float: left;
+        width: 44px;
+    }
+    .page-header ul > li > a{
+        font-size: 30px !important;
+        margin-left: 10px;
+        float: left;
+    }
+    .page-header .dropdown-toggle {
+        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border: none;
+        border-radius: 6px 6px 0 0;
+        width: 58px;
+        height: 57px;
+        z-index: 999;
+        position: absolute;
+        top:0px;
+
+    }
+    .page-header .open .dropdown-toggle{
+        right: 0px;
+    }
+    .page-header .container {
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: 100% !important;
+    }
+    .page-header .container ul {
+        left: 0;
+        position: absolute;
+        top: 0px;
+        width: 80% !important;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        background-color: #9900b3;
+        z-index: 10;
+    }
+
+}
+@media (min-width: 640px) and (max-width: 809px) {
+    #header .navbar .bg-navbar {
+        display: none;
+    }
+}
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #header .navbar {
+        background-image: none;
+        background-color: #7b519d;
+    }
+    #header .navbar .bg-navbar {
+        display: none;
+    }
+    #header .navbar .navbar-top ul > li {
+        display: inline-block !important;
+        padding: 0 10px;
+    }
+    #header .navbar-fb {
+        display: none;
+    }
+    #header .navbar .menu-mb {
+        display: none;
+    }
+
+    #the-le > div {
+        height: 520px;
+    }
+    #thele .rule {
+        height: 460px;
+        font-size: 16px;
+    }
+    .hidden-md {
+        display:  none;
+    }
+
+}
+/* FB devices (Fb app, 810px) */
+@media only screen and (max-width: 810px) and (min-width: 810px) {
+    #header .navbar {
+        background-image: none;
+        background-color: #7b519d;
+    }
+    #header .navbar .bg-navbar {
+        display: none;
+    }
+    #header .navbar .navbar-top ul > li:not([data-logo]) {
+        display: none;
+    }
+    #header .navbar .navbar-top {
+        margin-bottom: 0px;
+    }
+    #header .navbar .navbar-top ul {
+        margin-bottom: 4px;
+    }
+    #header .navbar .menu-mb {
+        display: none;
+    }
+
+    #thele {
+        margin-top: 60px;
+    }
+    #thele > div {
+        height: 700px;
+    }
+    #thele .rule {
+        height: 640px;
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 768px) and (min-width: 768px) {
+    #main {
+        height: 940px;
+    }
+}

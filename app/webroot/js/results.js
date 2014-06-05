@@ -1,7 +1,7 @@
 $(function() {
     var jxhr = null;
 
-    function getWinners(id, options){
+    function getWinners(id, options) {
         var target_tab = $('#' + id),
             scroller = target_tab.find('.scroller').getNiceScroll(),
             table1 = target_tab.find('table:eq(0) tbody'),
@@ -18,6 +18,10 @@ $(function() {
         }, options || {}), function(json) {
             table1.empty();
             table2.empty();
+
+            if(id == 'daily'){
+                $('#txtDate').text(options.date);
+            }
 
             if (!(json && json.length)) {
                 scroller.resize();
@@ -57,17 +61,21 @@ $(function() {
         var tab = $(e.target),
             id = tab.attr('href').replace('#', '');
 
-        getWinners(id);
+        if (id == 'daily') {
+            $('#btnFilter').click();
+        } else {
+            getWinners(id);
+        }
+    });
+
+    $('#btnFilter').click(function(e) {
+        var target_date = $('#txtFilterDate').val();
+
+        getWinners('daily', {
+            date: target_date
+        });
+        return false;
     });
 
     $('a[data-toggle="tab"]:eq(0)').click();
-
-    $('#btnFilter').click(function(e){
-        var target_date = $('#txtFilterDate').val();
-
-        $('#txtDate').text(target_date);
-
-        getWinners('daily', {date: target_date});
-        return false;
-    });
 });

@@ -24,6 +24,11 @@ class ApisController extends AppController {
         $this->output = $this->MasterHotline->find(
             'first',
             array(
+                'fields' => array(
+                    'MasterHotline.id',
+                    'MasterHotline.hotline',
+                    'MasterHotline.created'
+                ),
                 'conditions' => array(
                     'MasterHotline.active_flag' => true
                 )

@@ -26,7 +26,7 @@ class ViberShell extends AppShell {
 
     protected function _welcome() {
         $this->out();
-        $this->out('VIBER PROCESS by AppSeeds (http://appseeds.shinsenter.com)');
+        $this->out('VIBER PROCESS by AppSeeds');
         $this->hr();
     }
 
@@ -52,6 +52,7 @@ class ViberShell extends AppShell {
 
 
         $time_stop = microtime(true);
+        $time = (($time_stop - $time_start) * 1);
 
         @file_put_contents(DATA, serialize($output));
 
@@ -62,8 +63,12 @@ class ViberShell extends AppShell {
         $this->out($this->getOwnerCount() . ' outgoing messages from ' . MY_NUM . ' were excluded!');
 
         $this->hr();
-        $this->out('Total process time: ' . (($time_stop - $time_start) * 1) . 's');
+        $this->out('Total process time: ' . $time . 's');
         $this->out();
+
+        if($time > 30){
+            $this->mailOverloaded($time);
+        }
 
         $this->mailErrors($output);
     }
@@ -374,6 +379,26 @@ class ViberShell extends AppShell {
         }
 
         $Email->subject('[VIBER APP] Winner report from hotline ' . MY_NUM . ' on ' . $date);
+
+        try{
+            $Email->send($message);
+        }catch(Exception $e){
+            $this->out('Mail not sent: ' . $e->getMessage());
+        }
+    }
+
+    public function mailOverloaded($time){
+        App::uses('CakeEmail', 'Network/Email');
+        $Email = new CakeEmail('gmail');
+        $Email->to(array('tuannh@c3tek.biz', 'tanmn@c3tek.biz'));
+
+        $date = date('Y-m-d', time() - 86400);
+
+        $message = 'Dear Tan, Tuan,';
+        $message .= "\n\n";
+        $message .= 'It seems process has been taking to long to respond. Time detected: ' . $time . 's.';
+
+        $Email->subject('[VIBER APP] Overloaded warning from ' . MY_NUM . ' on ' . $date);
 
         try{
             $Email->send($message);

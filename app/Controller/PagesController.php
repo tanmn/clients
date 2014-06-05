@@ -68,12 +68,19 @@ class PagesController extends AppController {
 
 
     public function sticker1(){
+
+        $phone = $_POST["phone"];
+        $phone = preg_replace('/[^\d]/', '',$phone);
+        $phone = preg_replace('/^(0|84)/', '+84', $phone);
         $this->loadModel('UserQrcode');
 
-        $this->set('title_for_layout', 'Thể Lệ Tham Dự');
-        $this->set('active', 'sticker1');
-        $data = $this->UserQrcode->getQrcode();
-        $this->set('data',$data);
+        $data = $this->UserQrcode->getQrcode($phone);
+        if(count($data) == 0){
+            $result = array();
+            $result["error"] = "Số điện thoại của bạn không trúng thưởng hoặc chưa tham gia chương trình.";
+            $result["status"] = false;
+            die(json_encode($result));
+        }
 
     }
 

@@ -89,10 +89,13 @@
 }
 .col-xs-4 .thumb img {
 }
-#PhoneForm {
+#PhoneForm{
     padding : 30px 30px;
 }
-#PhoneForm input, #ResultForm input {
+#QRForm{
+    padding : 50px 50px;
+}
+#PhoneForm input, #ResultForm input,#QRForm input {
     height             : 42px;
     padding            : 10px 12px;
     font-family        : 'viberfontlight';
@@ -122,7 +125,7 @@ input#txtHotline.active {
 .form-inputs {
     padding : 0 20px;
 }
-#PhoneForm input[type=submit],#ResultForm input[type=submit] {
+#PhoneForm input[type=submit],#QRForm input[type=submit],#ResultForm input[type=submit] {
     background-color   : #aae1f7;
     color              : #004a80;
     line-height        : 20px;
@@ -130,7 +133,7 @@ input#txtHotline.active {
     box-shadow         : 0 1px 2px #684e7f;
     -webkit-box-shadow : 0 1px 2px #684e7f;
 }
-#PhoneForm input[type=submit]:hover {
+#PhoneForm input[type=submit]:hover,#QRForm input[type=submit]:hover {
     background-color : #7dc8e5;
 }
 #Prize {
