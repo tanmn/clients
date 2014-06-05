@@ -147,4 +147,24 @@ class MasterPoint extends AppModel {
 
         return $results;
     }
+
+    public function getAvailableDate(){
+        $todate = date('Y-m-d');
+        $alias = $this->alias;
+
+        $date = Set::flatten((array) $this->find(
+            'all',
+            array(
+                'fields' => array(
+                    'DISTINCT ' . $alias . '.report_date'
+                ),
+                'conditions' => array(
+                    $alias . '.report_date <>' => $todate
+                ),
+                'order' => array($alias . '.report_date' => 'DESC')
+            )
+        ));
+
+        return array_values($date);
+    }
 }

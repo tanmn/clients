@@ -59,10 +59,8 @@ class ApisController extends AppController {
         $context = array();
 
         switch($type){
-            case 'all': break;
-
             case 'daily':
-                $date = date('Y-m-d');
+                $date = date('Y-m-d', time() - 86400);
 
                 if(isset($this->request->data['date'])){
                     $user_date = strtotime($this->request->data['date']);
@@ -75,26 +73,52 @@ class ApisController extends AppController {
                 break;
 
             case 'week1':
+                if(time() < strtotime('2014-06-11 06:00:00')){
+                    $this->output = NULL;
+                    return;
+                }
                 $context = array(
                     'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-04', '2014-06-10')
                 );
                 break;
 
             case 'week2':
+                if(time() < strtotime('2014-06-18 06:00:00')){
+                    $this->output = NULL;
+                    return;
+                }
                 $context = array(
                     'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
                 );
                 break;
 
             case 'week3':
+                if(time() < strtotime('2014-06-25 06:00:00')){
+                    $this->output = NULL;
+                    return;
+                }
                 $context = array(
                     'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-18', '2014-06-24')
                 );
                 break;
 
             case 'week4':
+                if(time() < strtotime('2014-07-02 06:00:00')){
+                    $this->output = NULL;
+                    return;
+                }
                 $context = array(
                     'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-25', '2014-07-01')
+                );
+                break;
+
+            case 'all':
+                if(time() < strtotime('2014-07-14 04:00:00')){
+                    $this->output = NULL;
+                    return;
+                }
+                $context = array(
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-04', '2014-07-01')
                 );
                 break;
 

@@ -1,17 +1,8 @@
 $(function() {
     var jxhr = null;
 
-    $('.scroller').niceScroll({
-        autohidemode: true,
-        cursorcolor: '#aae1f7',
-        background: '#472d71',
-        horizrailenabled: false
-    });
-
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-        var tab = $(e.target),
-            id = tab.attr('href').replace('#', ''),
-            target_tab = $('#' + id),
+    function getWinners(id, options){
+        var target_tab = $('#' + id),
             scroller = target_tab.find('.scroller').getNiceScroll(),
             table1 = target_tab.find('table:eq(0) tbody'),
             table2 = target_tab.find('table:eq(1) tbody');
@@ -22,9 +13,9 @@ $(function() {
 
         scroller.resize();
 
-        jxhr = $.post(APIS + 'getTopUsers', {
+        jxhr = $.post(APIS + 'getTopUsers', $.extend({
             type: id
-        }, function(json) {
+        }, options || {}), function(json) {
             table1.empty();
             table2.empty();
 
@@ -53,7 +44,30 @@ $(function() {
                 scroller.resize();
             }, 50);
         }, 'json');
+    }
+
+    $('.scroller').niceScroll({
+        autohidemode: true,
+        cursorcolor: '#aae1f7',
+        background: '#472d71',
+        horizrailenabled: false
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+        var tab = $(e.target),
+            id = tab.attr('href').replace('#', '');
+
+        getWinners(id);
     });
 
     $('a[data-toggle="tab"]:eq(0)').click();
+
+    $('#btnFilter').click(function(e){
+        var target_date = $('#txtFilterDate').val();
+
+        $('#txtDate').text(target_date);
+
+        getWinners('daily', {date: target_date});
+        return false;
+    });
 });

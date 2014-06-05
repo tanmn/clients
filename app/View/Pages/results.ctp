@@ -26,7 +26,30 @@ $this->end('script');
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane" id="daily">
-                <p>Kết quả người chơi có số điểm cao ngày <?php echo date('Y-m-d'); ?>:</p>
+                <p>Kết quả người chơi có số điểm cao ngày <span id="txtDate"><?php echo date('Y-m-d', time() - 86400); ?></span>:</p>
+
+                <?php
+                echo $this->Form->create(
+                    false,
+                    array(
+                        'id' => 'FilterForm',
+                        'class' => 'form-inline',
+                        'role' => 'form',
+                        'inputDefaults' => array(
+                            'div' => false,
+                            'label' => false,
+                            'class' => 'form-control'
+                        )
+                    )
+                );
+
+                echo $this->Form->input('date', array('id' => 'txtFilterDate', 'options' => $available_date, 'default' => date('Y-m-d', time() - 86400)));
+                echo ' ';
+                echo $this->Form->submit('Xem điểm theo ngày', array('class' => 'btn', 'div' => false, 'id' => 'btnFilter'));
+
+                echo $this->Form->end();
+                ?>
+
                 <?php echo $this->Element('result_table'); ?>
             </div>
             <div class="tab-pane" id="week1">

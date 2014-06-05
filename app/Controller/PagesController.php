@@ -35,9 +35,14 @@ class PagesController extends AppController {
 
 
     public function results(){
+        $this->loadModel('MasterPoint');
+
+        $todate = date('Y-m-d');
+        $available_date = $this->MasterPoint->getAvailableDate();
 
         $this->set('title_for_layout', 'Kết quả');
         $this->set('active', 'results');
+        $this->set('available_date', array_combine($available_date, $available_date));
     }
 
 
