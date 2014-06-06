@@ -78,4 +78,7 @@ $(function() {
     });
 
     $('a[data-toggle="tab"]:eq(0)').click();
+    $(".dropdown-toggle1").click(function(){
+        $(".dropdown-menu1").toggle();
+    });
 });

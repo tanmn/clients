@@ -4,10 +4,6 @@ $(function() {
         $("#showtop").click(function(){
             $("#dstop").toggle();
         });
-
-        $(".dropdown-toggle").click(function(){
-            $(".dropdown-menu").toggle();
-        });
         $("#submit").click(function () {
             $(".qrcode").show();
         });

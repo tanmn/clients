@@ -28,11 +28,11 @@ if(!isset($active)) $active = '';
         </ul>
         <div class="mobie" style="display:none">
             <div class="logo">
-            <?php echo $this->Html->link($this->Html->image('microsite/head_button.jpg'), '#', array('escape' => false)); ?>
+            <?php echo $this->Html->link($this->Html->image('microsite/head_button.jpg'), '/', array('escape' => false)); ?>
             </div>
 
-        <ul class="dropdown-menu">
-                   <li><img src="/img/mobie/menu_icon_4.png" /><?php echo $this->Html->link('Thể lệ tham dự', '/',
+        <ul class="dropdown-menu1">
+                   <li><img src="/img/mobie/menu_icon_4.png" /><?php echo $this->Html->link('Thể lệ tham dự', '/the-le',
                                array('class' => ($active == 'the-le' ? 'active' : '')))?></li>
                     <li><img src="/img/mobie/menu_icon_3.png" /><?php echo $this->Html->link('Sự kiện', '/su-kien',
                                array('class' => ($active == 'events' ? 'active' : ''))); ?></a></li>
@@ -42,7 +42,7 @@ if(!isset($active)) $active = '';
                     <li><img src="/img/mobie/menu_icon_1.png" /><?php echo $this->Html->link('Kết quả', '/ket-qua',
                                array('class' => ($active == 'results' ? 'active' : ''))); ?></li>
                 </ul>
-                <div class="dropdown-toggle" data-toggle="dropdown"></div>
+                <div class="dropdown-toggle1" data-toggle="dropdown"></div>
          </div>
     </div>
 </div>

@@ -119,35 +119,43 @@
         line-height: 90px;
     }
     .page-header ul > li{
-        display: block;
+        display: inline-block;
         border-top: 1px solid #bd28ce;
         margin: 0px;
         height: 70px;
         line-height: 70px;
-        padding-left: 80px;
+        padding-left: 60px;
+        width: 100%;
+
     }
     .page-header ul > li img{
         margin-top: 10px;
         float: left;
         width: 44px;
+        /*position: absolute;*/
     }
     .page-header ul > li > a{
         font-size: 30px !important;
-        margin-left: 10px;
+        margin-left: 35px;
         float: left;
+        margin-top: 0px;
     }
-    .page-header .dropdown-toggle {
+    .page-header ul > li > a:hover{
+        background: none;
+    }
+    .page-header .dropdown-toggle1 {
         background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
         border: none;
         border-radius: 6px 6px 0 0;
         width: 58px;
         height: 57px;
-        z-index: 999;
+        z-index: 10;
         position: absolute;
         top:0px;
 
+
     }
-    .page-header .open .dropdown-toggle{
+    .page-header .open .dropdown-toggle1{
         right: 0px;
     }
     .page-header .container {
@@ -166,81 +174,45 @@
         text-align: left;
         background-color: #9900b3;
         z-index: 10;
-    }
-
-}
-@media (min-width: 640px) and (max-width: 809px) {
-    #header .navbar .bg-navbar {
         display: none;
     }
-}
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    #header .navbar {
-        background-image: none;
-        background-color: #7b519d;
+    .container{
+        width: 100% !important;
     }
-    #header .navbar .bg-navbar {
-        display: none;
+    #events .content_event{
+        width: 100% !important;
     }
-    #header .navbar .navbar-top ul > li {
-        display: inline-block !important;
-        padding: 0 10px;
+    #events .content_event img{
+        width: 100% !important;
     }
-    #header .navbar-fb {
-        display: none;
-    }
-    #header .navbar .menu-mb {
-        display: none;
-    }
-
-    #the-le > div {
-        height: 520px;
-    }
-    #thele .rule {
-        height: 460px;
-        font-size: 16px;
-    }
-    .hidden-md {
-        display:  none;
-    }
-
-}
-/* FB devices (Fb app, 810px) */
-@media only screen and (max-width: 810px) and (min-width: 810px) {
-    #header .navbar {
-        background-image: none;
-        background-color: #7b519d;
-    }
-    #header .navbar .bg-navbar {
-        display: none;
-    }
-    #header .navbar .navbar-top ul > li:not([data-logo]) {
-        display: none;
-    }
-    #header .navbar .navbar-top {
-        margin-bottom: 0px;
-    }
-    #header .navbar .navbar-top ul {
-        margin-bottom: 4px;
-    }
-    #header .navbar .menu-mb {
-        display: none;
-    }
-
-    #thele {
-        margin-top: 60px;
-    }
-    #thele > div {
-        height: 700px;
-    }
-    #thele .rule {
-        height: 640px;
-        font-size: 16px;
+    .content-sticker ul{
+        margin:0px;
+        padding: 0px;
     }
 }
-@media only screen and (max-width: 768px) and (min-width: 768px) {
-    #main {
-        height: 940px;
+@media only screen and (max-width:480px) {
+    .page-header ul > li{
+        display: block;
+        border-top: 1px solid #bd28ce;
+        margin: 0px;
+        height: 70px;
+        line-height: 70px;
+        padding-left: 10px;
+    }
+    .page-header ul > li > a{
+        font-size: 25px !important;
+        margin-left: 35px;
+        float: left;
+        margin-top: 0px;
+    }
+    .thele .title,#thele{
+        margin-left: 0px;
+    }
+    .content-sticker ul{
+        margin:0px;
+        padding: 0px;
+    }
+    .content-sticker ul li{
+        float: none;
     }
 }

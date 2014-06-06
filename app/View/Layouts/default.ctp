@@ -13,7 +13,8 @@
 
         <title><?php echo $title_for_layout; ?> | Nhắn Viber, Đi Brazil</title>
         <meta name="description" content="Nhắn Viber, Đi Brazil">
-        <meta name="viewport" content="width=1024px">
+      
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <?php
             echo $this->fetch('meta');
@@ -31,6 +32,9 @@
             var BASE = '<?php echo Router::url('/', TRUE); ?>';
             var APIS = '<?php echo Router::url('/Apis/', TRUE); ?>';
         </script>
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
     </head>
 
     <body id="wrapper" class="homepage">

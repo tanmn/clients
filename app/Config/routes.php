@@ -21,7 +21,7 @@
     Router::connect('/nhan-dan/*', array('controller' => 'pages', 'action' => 'sticker'));
     Router::connect('/su-kien/*', array('controller' => 'pages', 'action' => 'events'));
     Router::connect('/ket-qua/*', array('controller' => 'pages', 'action' => 'results'));
-    Router::connect('/test/*', array('controller' => 'pages', 'action' => 'sticker1'));
+
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */

@@ -214,4 +214,7 @@ $(function() {
             }
         });
     });
+    $(".dropdown-toggle1").click(function(){
+        $(".dropdown-menu1").toggle();
+    });
 });

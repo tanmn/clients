@@ -102,3 +102,124 @@ padding: 5px 12px;
 #FilterForm input[type=submit]:hover {
     background-color : #7dc8e5;
 }
+@media (max-width: 640px) {
+    .pc{
+        display: none;
+    }
+    .mobie{
+        display:list-item !important;
+    }
+    .page-header .container #icon{
+        display: none;
+    }
+    .page-header .container .logo{
+        text-align: center;
+        line-height: 90px;
+    }
+    .page-header ul > li{
+        display: block;
+        border-top: 1px solid #bd28ce;
+        margin: 0px;
+        height: 70px;
+        line-height: 70px;
+        padding-left: 60px;
+    }
+    .page-header ul > li img{
+        margin-top: 10px;
+        float: left;
+        width: 44px;
+        /*position: absolute;*/
+    }
+    .page-header ul > li > a{
+        font-size: 30px !important;
+        margin-left: 35px;
+        float: left;
+        margin-top: 0px;
+        z-index: 20;
+    }
+    .page-header ul > li > a:hover{
+        background: none;
+    }
+    .page-header .dropdown-toggle1{
+        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border: none;
+        border-radius: 6px 6px 0 0;
+        width: 58px;
+        height: 57px;
+        z-index: 5;
+        position: absolute;
+        top:0px;
+
+
+    }
+    .page-header .open .dropdown-toggle1{
+        right: 0px;
+    }
+    .page-header .container {
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: 100% !important;
+    }
+    .page-header .container ul {
+        left: 0;
+        position: absolute;
+        top: 0px;
+        width: 80% !important;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        background-color: #9900b3;
+        z-index: 10;
+        display: none;
+    }
+    .container{
+        width: 100% !important;
+    }
+    #events .content_event{
+        width: 100% !important;
+    }
+    #events .content_event img{
+        width: 100% !important;
+    }
+    .content-sticker ul{
+        margin:0px;
+        padding: 0px;
+    }
+    #Results{
+        padding: 0px;
+    }
+}
+@media only screen and (max-width:480px) {
+    .page-header ul > li{
+        display: block;
+        border-top: 1px solid #bd28ce;
+        margin: 0px;
+        height: 70px;
+        line-height: 70px;
+        padding-left: 10px;
+    }
+    .page-header ul > li > a{
+        font-size: 25px !important;
+        margin-left: 35px;
+        float: left;
+        margin-top: 0px;
+        z-index: 20;
+    }
+    .thele .title,#thele{
+        margin-left: 0px;
+    }
+    .content-sticker ul{
+        margin:0px;
+        padding: 0px;
+    }
+    .content-sticker ul li{
+        float: none;
+    }
+    #Results{
+        padding: 0px;
+    }
+    .col-xs-6{
+        width: 100%;
+    }
+}
