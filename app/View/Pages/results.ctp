@@ -26,7 +26,7 @@ $this->end('script');
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane" id="daily">
-                <p>Kết quả người chơi có số điểm cao ngày <span id="txtDate"><?php echo date('Y-m-d', time() - 86400); ?></span>:</p>
+                <p>Kết quả người chơi có số điểm cao ngày <span id="txtDate"><?php echo date('d-m-Y', time() - 86400); ?></span>:</p>
 
                 <?php
                 echo $this->Form->create(
@@ -43,7 +43,7 @@ $this->end('script');
                     )
                 );
 
-                echo $this->Form->input('date', array('id' => 'txtFilterDate', 'options' => $available_date, 'default' => date('Y-m-d', time() - 86400)));
+                echo $this->Form->input('date', array('id' => 'txtFilterDate', 'options' => $available_date, 'default' => date('d-m-Y', time() - 86400)));
                 echo ' ';
                 echo $this->Form->submit('Xem điểm theo ngày', array('class' => 'btn', 'div' => false, 'id' => 'btnFilter'));
 

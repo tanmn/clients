@@ -117,7 +117,7 @@ class MasterPoint extends AppModel {
     public function getTopGroups($limit = 10, $conditions = array()){
         $alias = $this->alias;
 
-        $cache_name = md5($limit . json_encode($conditions));
+        $cache_name = 'Groups_' . md5($limit . json_encode($conditions));
 
         $results = $this->find(
             'all',
@@ -143,7 +143,7 @@ class MasterPoint extends AppModel {
     public function getTopUsers($limit = 10, $conditions = array()){
         $alias = $this->alias;
 
-        $cache_name = md5($limit . json_encode($conditions));
+        $cache_name = 'Users_' . md5($limit . json_encode($conditions));
 
         $results = $this->find(
             'all',
