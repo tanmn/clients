@@ -24,6 +24,38 @@ class AppModel extends Model {
     public $cacheQueries = TRUE;
     public $recursive = 1;
 
+    public function find($type = 'first', $query = array()) {
+        $doQuery = true;
+
+        //check if we want the cache
+        if (!empty($query['cache'])) {
+            $cacheConfig = 'default';
+
+            //check if we have specified a custom config, e.g. different expiry time
+            if (!empty($query['cacheConfig'])) {
+                $cacheConfig = $query['cacheConfig'];
+            }
+
+            $cacheName = $this->name;
+            if (is_string($query['cache']))
+                $cacheName .= $query['cache'];
+
+            //if so, check if the cache exists
+            if (($data = Cache::read($cacheName, $cacheConfig)) === false) {
+                $data = parent::find($type, $query);
+                Cache::write($cacheName, $data, $cacheConfig);
+            }
+
+            $doQuery = false;
+        }
+
+        if ($doQuery) {
+            $data = parent::find($type, $query);
+        }
+
+        return $data;
+    }
+
     /**
    * Connects to specified database
    *

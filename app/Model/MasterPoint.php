@@ -117,6 +117,8 @@ class MasterPoint extends AppModel {
     public function getTopGroups($limit = 10, $conditions = array()){
         $alias = $this->alias;
 
+        $cache_name = md5($limit . json_encode($conditions));
+
         $results = $this->find(
             'all',
             array(
@@ -129,7 +131,9 @@ class MasterPoint extends AppModel {
                 'contain' => array('MasterGroup'),
                 'group' => array($alias . '.group_code', 'MasterGroup.group_name'),
                 'order' => array($alias . '.points' => 'DESC'),
-                'limit' => $limit
+                'limit' => $limit,
+                'cacheConfig' => 'apis',
+                'cache' => '_' . $cache_name
             )
         );
 
@@ -138,6 +142,8 @@ class MasterPoint extends AppModel {
 
     public function getTopUsers($limit = 10, $conditions = array()){
         $alias = $this->alias;
+
+        $cache_name = md5($limit . json_encode($conditions));
 
         $results = $this->find(
             'all',
@@ -149,7 +155,9 @@ class MasterPoint extends AppModel {
                 'conditions' => $conditions,
                 'group' => array($alias . '.number'),
                 'order' => array($alias . '.points' => 'DESC'),
-                'limit' => $limit
+                'limit' => $limit,
+                'cacheConfig' => 'apis',
+                'cache' => '_' . $cache_name
             )
         );
 
@@ -169,7 +177,9 @@ class MasterPoint extends AppModel {
                 'conditions' => array(
                     $alias . '.report_date <>' => $todate
                 ),
-                'order' => array($alias . '.report_date' => 'DESC')
+                'order' => array($alias . '.report_date' => 'DESC'),
+                'cacheConfig' => 'apis',
+                'cache' => 'AvailableDates'
             )
         ));
 

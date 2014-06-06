@@ -322,6 +322,17 @@ require APP . 'Config' . DS . 'environment.php';
  *	));
  */
 
+Cache::config('apis', array(
+    'engine' => 'File',
+    'duration' => (Configure::read('debug') > 0 ? '+10 seconds' : '+5 minutes'),
+    'probability' => 100,
+    'path' => CACHE . 'persistent' . DS,
+    'prefix' => 'apis_',
+    'lock' => false,
+    'serialize' => true,
+    'mask' => 0664,
+));
+
 /**
  * Configure the cache handlers that CakePHP will use for internal
  * metadata like class maps, and model schema.
