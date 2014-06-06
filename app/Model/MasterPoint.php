@@ -168,7 +168,7 @@ class MasterPoint extends AppModel {
         $todate = date('Y-m-d');
         $alias = $this->alias;
 
-        $date = Set::flatten((array) $this->find(
+        $dates = Set::flatten((array) $this->find(
             'all',
             array(
                 'fields' => array(
@@ -183,6 +183,11 @@ class MasterPoint extends AppModel {
             )
         ));
 
-        return array_values($date);
+        foreach($dates as $k => $v){
+            $v = explode('-', $v);
+            $dates[$k] = "{$v[2]}-{$v[1]}-{$v[0]}";
+        }
+
+        return array_values($dates);
     }
 }

@@ -61,7 +61,7 @@ $this->end('script');
 
         echo '<div class="form-inputs">';
         echo $this->Form->input('myphone', array('id' => 'txtQRMyPhone', 'value' => '+84'));
-        echo $this->Form->submit('Nhận mã Qrcode', array('class' => 'btn btn-block', 'div' => 'form-group', 'id' => 'btnQrGet'));
+        echo $this->Form->submit('Nhận mã QR', array('class' => 'btn btn-block', 'div' => 'form-group', 'id' => 'btnQrGet'));
         echo '</div>';
 
 

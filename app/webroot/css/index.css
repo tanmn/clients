@@ -93,7 +93,7 @@
     padding : 30px 30px;
 }
 #QRForm{
-    padding : 50px 50px;
+    padding : 55px 55px;
 }
 #PhoneForm input, #ResultForm input,#QRForm input {
     height             : 42px;
@@ -377,8 +377,8 @@ input#txtHotline.active {
         padding-left: 10px;
     }
     .page-header ul > li > a{
-        font-size: 25px !important;
-        margin-left: 35px;
+        font-size: 20px !important;
+        margin-left: 20px;
         float: left;
         margin-top: 0px;
     }
@@ -413,7 +413,7 @@ input#txtHotline.active {
         margin:0px;
         padding: 0px;
     }
-    #ResultHolder ul.result-list > li,#ResultHolder ul.result-list > li .position{
+    #ResultHolder ul.result-list > li,#ResultHolder ul.result-list > li .position,.form-inputs{
         margin:0px;
         padding: 0px;
     }
@@ -427,4 +427,8 @@ input#txtHotline.active {
     #ResultHolder ul.result-list > li .points{
         padding-right: 10px;
     }
+    .col-xs-4 .thumb, .thumb-link, .thumb-link .play{
+    width: 100%;
+    }
+
 }

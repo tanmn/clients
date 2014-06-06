@@ -1,5 +1,5 @@
 $(function() {
-    var jxhr = null;
+    var jxhr = null, last_scroll = null;
 
     function getWinners(id, options) {
         var target_tab = $('#' + id),
@@ -11,7 +11,11 @@ $(function() {
 
         if (jxhr) jxhr.abort();
 
-        scroller.resize();
+        if(last_scroll){
+            last_scroll.resize();
+        }
+
+        last_scroll = scroller;
 
         jxhr = $.post(APIS + 'getTopUsers', $.extend({
             type: id
@@ -51,7 +55,7 @@ $(function() {
     }
 
     $('.scroller').niceScroll({
-        autohidemode: true,
+        autohidemode: false,
         cursorcolor: '#aae1f7',
         background: '#472d71',
         horizrailenabled: false

@@ -77,7 +77,7 @@ class PagesController extends AppController {
         $data = $this->UserQrcode->getQrcode($phone);
         if(count($data) == 0){
             $result = array();
-            $result["error"] = "Số điện thoại của bạn không trúng thưởng hoặc chưa tham gia chương trình.";
+            $result["error"] = "Nếu bạn nằm trong danh sách trúng thưởng mỗi ngày, vui lòng nhập số điện thoại của bạn để nhận mã QR tham dự sự kiện của chúng tôi.";
             $result["status"] = false;
             die(json_encode($result));
         }

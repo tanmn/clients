@@ -200,8 +200,8 @@ padding: 5px 12px;
         padding-left: 10px;
     }
     .page-header ul > li > a{
-        font-size: 25px !important;
-        margin-left: 35px;
+        font-size: 20px !important;
+        margin-left: 25px;
         float: left;
         margin-top: 0px;
         z-index: 20;
@@ -220,6 +220,9 @@ padding: 5px 12px;
         padding: 0px;
     }
     .col-xs-6{
+        width: 100%;
+    }
+    .col-xs-4 .thumb, .thumb-link, .thumb-link .play{
         width: 100%;
     }
 }

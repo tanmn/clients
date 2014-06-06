@@ -68,8 +68,14 @@ class ApisController extends AppController {
                 $date = date('Y-m-d', time() - 86400);
 
                 if(isset($this->request->data['date'])){
-                    $user_date = strtotime($this->request->data['date']);
-                    if($user_date) $date = date('Y-m-d', $user_date);
+                    $input_date = explode('-', $this->request->data['date']);
+
+                    if(count($input_date) == 3){
+                        $input_date = "{$input_date[2]}-{$input_date[1]}-{$input_date[0]}";
+                        $user_date = strtotime($input_date);
+
+                        if($user_date) $date = date('Y-m-d', $user_date);
+                    }
                 }
 
                 $context = array(
