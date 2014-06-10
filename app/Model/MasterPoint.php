@@ -164,6 +164,7 @@ class MasterPoint extends AppModel {
                 'group' => array($alias . '.number'),
                 'order' => array($alias . '.points' => 'DESC'),
                 'limit' => $limit,
+                'contain' => array('MasterUser.name', 'MasterUser.avatar'),
                 'cacheConfig' => 'apis',
                 'cache' => '_' . $cache_name
             )
@@ -200,6 +201,47 @@ class MasterPoint extends AppModel {
     }
 
     public function getGroupUsers($group_id = FALSE){
+        $alias = $this->alias;
+        $conditions = array();
 
+        if(!empty($group_id)){
+            $conditions[$alias . '.group_code'] = $group_id;
+        }
+
+        $cache_name = md5(json_encode($conditions));
+
+        $users = $this->find(
+            'all',
+            array(
+                'fields' => array(
+                    // 'DISTINCT ' . $alias . '.number',
+                    // $alias . '.group_code'
+                    'MasterUser.name',
+                    'MasterUser.avatar'
+                ),
+                'conditions' => $conditions,
+                'contain' => array('MasterUser.name', 'MasterUser.avatar'),
+                'cacheConfig' => 'apis',
+                'cache' => 'GroupUsers' . $cache_name
+            )
+        );
+
+        $groups = array();
+
+        foreach($users as $user){
+            $gr_code = $user[$alias]['group_code'];
+
+            if(!isset($groups[$gr_code])) $groups[$gr_code] = array();
+
+            $groups[$gr_code][] = $user;
+        }
+
+        unset($users);
+
+        if(count($groups) == 1){
+            $groups = array_pop($groups);
+        }
+
+        return $groups;
     }
 }

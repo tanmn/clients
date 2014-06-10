@@ -9,7 +9,7 @@ class ApisController extends AppController {
     public $layout = 'ajax';
 
     public function beforeFilter($options = array()){
-        if(!($this->request->is('post') || $this->request->is('ajax'))) return $this->redirect('/');
+        // if(!($this->request->is('post') || $this->request->is('ajax'))) return $this->redirect('/');
     }
 
     public function beforeRender($options = array()){
@@ -60,7 +60,7 @@ class ApisController extends AppController {
     public function getTopUsers(){
         $this->loadModel('MasterPoint');
 
-        $type = $this->request->data['type'];
+        $type = @$this->request->data['type'];
         $context = array();
 
         switch($type){
@@ -141,5 +141,16 @@ class ApisController extends AppController {
         $result = $this->MasterPoint->getTopUsers(250, $context);
 
         $this->output = $result;
+    }
+
+
+    public function getGroupUser($group){
+        $this->loadModel('MasterPoint');
+
+        if(isset($this->request->data['group_code'])){
+            $group = $this->request->data['group_code'];
+        }
+
+        $this->output = $this->MasterPoint->getGroupUsers($group);
     }
 }
