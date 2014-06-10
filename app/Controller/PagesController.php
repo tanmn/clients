@@ -71,7 +71,7 @@ class PagesController extends AppController {
 
         $phone = $_POST["phone"];
         $phone = preg_replace('/[^\d]/', '',$phone);
-        $phone = preg_replace('/^(0|84)/', '+84', $phone);
+        $phone = preg_replace('/^(0|84|840)/', '+84', $phone);
         $this->loadModel('UserQrcode');
 
         $data = $this->UserQrcode->getQrcode($phone);

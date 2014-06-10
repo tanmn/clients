@@ -88,6 +88,14 @@ class MasterPoint extends AppModel {
             'order' => '',
             'limit' => '',
             'dependent' => false
+        ),
+        'MasterUser' => array(
+            'className' => 'MasterUser',
+            'foreignKey' => 'number',
+            'conditions' => array(),
+            'order' => '',
+            'limit' => '',
+            'dependent' => false
         )
     );
 
@@ -189,5 +197,9 @@ class MasterPoint extends AppModel {
         }
 
         return array_values($dates);
+    }
+
+    public function getGroupUsers($group_id = FALSE){
+
     }
 }

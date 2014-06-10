@@ -39,4 +39,23 @@ class ChatRelation extends AppModel {
 			),
 		),
 	);
+
+	public $belongsTo = array(
+        'ChatInfo' => array(
+            'className' => 'ChatInfo',
+            'foreignKey' => 'ChatID',
+            'conditions' => array(),
+            'order' => '',
+            'limit' => '',
+            'dependent' => false
+        ),
+        'User' => array(
+            'className' => 'OriginNumberInfo',
+            'foreignKey' => 'Number',
+            'conditions' => array(),
+            'order' => '',
+            'limit' => '',
+            'dependent' => false
+        )
+    );
 }

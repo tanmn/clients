@@ -13,7 +13,7 @@
 
         <title><?php echo $title_for_layout; ?> | Nhắn Viber, Đi Brazil</title>
         <meta name="description" content="Nhắn Viber, Đi Brazil">
-      
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <?php
@@ -74,9 +74,10 @@
 
         <?php
             echo $this->Html->script('vendor/bootstrap.min');
-            echo $this->fetch('script');
             echo $this->Html->script('plugins');
             echo $this->Html->script('main');
+            echo $this->Html->script('mobile');
+            echo $this->fetch('script');
         ?>
 
         <script>

@@ -1,5 +1,6 @@
 $(function() {
-    var jxhr = null, last_scroll = null;
+    var jxhr = null,
+        last_scroll = null;
 
     function getWinners(id, options) {
         var target_tab = $('#' + id),
@@ -11,7 +12,7 @@ $(function() {
 
         if (jxhr) jxhr.abort();
 
-        if(last_scroll){
+        if (last_scroll) {
             last_scroll.resize();
         }
 
@@ -23,7 +24,7 @@ $(function() {
             table1.empty();
             table2.empty();
 
-            if(id == 'daily'){
+            if (id == 'daily') {
                 $('#txtDate').text(options.date);
             }
 
@@ -82,17 +83,4 @@ $(function() {
     });
 
     $('a[data-toggle="tab"]:eq(0)').click();
-    $(".dropdown-toggle1").click(function(){
-        $(".dropdown-menu1").toggle();
-    });
-    $('.button-show').click(function(){
-        $("#box").show();
-
-    });
-
-    $('.button-hide').click(function(){
-        $("#box").hide();
-
-
-    });
 });

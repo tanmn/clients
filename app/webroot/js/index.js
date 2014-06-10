@@ -6,7 +6,7 @@ $(function() {
     $('#ResultHolder').hide();
 
     function isPhone(phone) {
-        return (/^(\+84|0)\d{9,10}$/).test(phone);
+        return (/^(\+84|0)(1\d{9,9}|9\d{8,8})$/).test(phone);
     }
 
     function getHotline(phone) {
@@ -187,9 +187,9 @@ $(function() {
         return false;
     });
 
-    //    $('#btnQrCode').click(function(){return false;})
-    // fixed by TAN 2014-06-05!!!!
+
     $('.inline').fancybox();
+
     $("#btnQrGet").click(function(event) {
         event.preventDefault();
         var myphone = $("#txtQRMyPhone").val();
@@ -214,18 +214,4 @@ $(function() {
             }
         });
     });
-    $(".dropdown-toggle1").click(function(){
-        $(".dropdown-menu1").toggle();
-    });
-    $('.button-show').click(function(){
-        $("#box").show();
-
-    });
-
-    $('.button-hide').click(function(){
-        $("#box").hide();
-
-
-    });
-
 });

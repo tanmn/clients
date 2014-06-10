@@ -6,6 +6,11 @@ App::uses('AppModel', 'Model');
  */
 class OriginNumberInfo extends AppModel {
 
+/**
+ * Use database config
+ *
+ * @var string
+ */
     public $useDbConfig = 'viber';
 
 /**
@@ -13,13 +18,13 @@ class OriginNumberInfo extends AppModel {
  *
  * @var mixed False or table name
  */
-	public $useTable = 'OriginNumberInfo';
+    public $useTable = 'OriginNumberInfo';
 
 /**
  * Primary key field
  *
  * @var string
  */
-	public $primaryKey = 'Number';
+    public $primaryKey = 'Number';
 
 }

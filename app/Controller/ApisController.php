@@ -49,7 +49,7 @@ class ApisController extends AppController {
         $this->loadModel('MasterPoint');
 
         $phone = preg_replace('/[^\d]/', '', @$this->request->data['phone']);
-        $phone = preg_replace('/^(0|84)/', '+84', $phone);
+        $phone = preg_replace('/^(0|84|840)/', '+84', $phone);
 
         $result = $this->MasterPoint->getTopUsers(5, array('number' => $phone));
 

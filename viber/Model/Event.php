@@ -96,6 +96,14 @@ class Event extends AppModel {
             'order' => '',
             'limit' => '',
             'dependent' => false
+        ),
+        'User' => array(
+            'className' => 'OriginNumberInfo',
+            'foreignKey' => 'Number',
+            'conditions' => array(),
+            'order' => '',
+            'limit' => '',
+            'dependent' => false
         )
     );
 
