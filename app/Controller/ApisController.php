@@ -51,7 +51,7 @@ class ApisController extends AppController {
         $phone = preg_replace('/[^\d]/', '', @$this->request->data['phone']);
         $phone = preg_replace('/^(0|84|840)/', '+84', $phone);
 
-        $result = $this->MasterPoint->getTopUsers(5, array('number' => $phone));
+        $result = $this->MasterPoint->getTopUsers(5, array('MasterPoint.number' => $phone));
 
         if(empty($result)) $this->output = 0;
         else $this->output = $result[0]['MasterPoint']['points'];
@@ -120,6 +120,16 @@ class ApisController extends AppController {
                 }
                 $context = array(
                     'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-25', '2014-07-01')
+                );
+                break;
+
+            case 'week5':
+                if(time() < strtotime('2014-07-09 06:00:00')){
+                    $this->output = NULL;
+                    return;
+                }
+                $context = array(
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-07-02', '2014-07-08')
                 );
                 break;
 

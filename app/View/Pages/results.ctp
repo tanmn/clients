@@ -68,6 +68,10 @@ $this->end('script');
                 <p>Kết quả người chơi có số điểm cao tuần 4:</p>
                 <?php echo $this->Element('result_table'); ?>
             </div>
+            <div class="tab-pane" id="week5">
+                <p>Kết quả người chơi có số điểm cao tuần 5:</p>
+                <?php echo $this->Element('result_table'); ?>
+            </div>
             <div class="tab-pane" id="all">
                 <p>Kết quả người thắng chung cuộc:</p>
                 <?php echo $this->Element('result_table'); ?>
