@@ -41,7 +41,7 @@ class MasterUser extends AppModel {
                     $results[$key][$alias]['number'] = $this->formatPhone($object[$alias]['number']);
                 }
 
-                if(is_array($object) && !empty($object[$alias]['avatar'])){
+                if(is_array($object) && isset($object[$alias]['avatar'])){
                     $results[$key][$alias]['avatar'] = Router::url('/avatar/' . preg_replace('/^\+/', '', $object[$alias]['number']) . '/user.png', true);
                 }
             }

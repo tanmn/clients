@@ -9,7 +9,7 @@ class ApisController extends AppController {
     public $layout = 'ajax';
 
     public function beforeFilter($options = array()){
-        // if(!($this->request->is('post') || $this->request->is('ajax'))) return $this->redirect('/');
+        if(!($this->request->is('post') || $this->request->is('ajax'))) return $this->redirect('/');
     }
 
     public function beforeRender($options = array()){
@@ -39,8 +39,12 @@ class ApisController extends AppController {
     public function getStats(){
         $this->loadModel('MasterPoint');
 
-        $top_groups = $this->MasterPoint->getTopGroups(5);
-        $top_users = $this->MasterPoint->getTopUsers(5);
+        $top_groups = $this->MasterPoint->getTopGroups(5, array(
+            'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
+        ));
+        $top_users = $this->MasterPoint->getTopUsers(5, array(
+            'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
+        ));
 
         $this->output = array('groups' => $top_groups, 'users' => $top_users);
     }
@@ -51,7 +55,10 @@ class ApisController extends AppController {
         $phone = preg_replace('/[^\d]/', '', @$this->request->data['phone']);
         $phone = preg_replace('/^(0|84|840)/', '+84', $phone);
 
-        $result = $this->MasterPoint->getTopUsers(5, array('MasterPoint.number' => $phone));
+        $result = $this->MasterPoint->getTopUsers(5, array(
+            'MasterPoint.number' => $phone,
+            'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
+        ));
 
         if(empty($result)) $this->output = 0;
         else $this->output = $result[0]['MasterPoint']['points'];
@@ -81,6 +88,7 @@ class ApisController extends AppController {
                 $context = array(
                     'MasterPoint.report_date' => $date
                 );
+
                 break;
 
             case 'week1':
@@ -148,9 +156,30 @@ class ApisController extends AppController {
                 return;
         }
 
-        $result = $this->MasterPoint->getTopUsers(250, $context);
+        $users = $user = $group = $group_members = array();
 
-        $this->output = $result;
+        if($type == 'daily'){
+            $users = $this->MasterPoint->getTopUsers(250, $context);
+        }
+
+        $user = $this->MasterPoint->getTopUsers(1, $context);
+
+        if(!empty($user)){
+            $user = array_pop($user);
+        }
+
+        $validGroups = $this->MasterPoint->getValidGroups($context);
+
+        if(!empty($validGroups)){
+            $group = $this->MasterPoint->getTopGroups(1, array($context, 'MasterPoint.group_code' => $validGroups));
+
+            if(!empty($group)){
+                $group = array_pop($group);
+                $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
+            }
+        }
+
+        $this->output = compact('users', 'user', 'group', 'group_members');
     }
 
 
@@ -162,5 +191,12 @@ class ApisController extends AppController {
         }
 
         $this->output = $this->MasterPoint->getGroupUsers($group);
+    }
+
+    public function test(){
+        $this->loadModel('MasterPoint');
+        $this->output = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-04', '2014-06-10')
+                ));
     }
 }

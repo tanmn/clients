@@ -77,7 +77,8 @@ class MasterPoint extends AppModel {
 	);
 
     public $virtualFields = array(
-        'points' => 'SUM(IF(msg_type = "sticker", quantity * 3, quantity * 1))'
+        'points' => 'SUM(IF(msg_type = "sticker", quantity * 3, quantity * 1))',
+        'players' => 'COUNT(DISTINCT MasterPoint.number)'
     );
 
     public $belongsTo = array(
@@ -119,6 +120,26 @@ class MasterPoint extends AppModel {
         }
 
         return $results;
+    }
+
+
+    public function getValidGroups($conditions = array()){
+        $alias = $this->alias;
+
+        $results = $this->find(
+            'list',
+            array(
+                'fields' => array(
+                    $alias . '.group_code',
+                    $alias . '.players'
+                ),
+                'conditions' => $conditions,
+                'group' => $alias . '.group_code HAVING ' . $this->virtualFields['players'] . ' > 4',
+                'recursive' => -1
+            )
+        );
+
+        return array_keys($results);
     }
 
 
@@ -200,12 +221,16 @@ class MasterPoint extends AppModel {
         return array_values($dates);
     }
 
-    public function getGroupUsers($group_id = FALSE){
+    public function getGroupUsers($group_id = FALSE, $context = array()){
         $alias = $this->alias;
         $conditions = array();
 
         if(!empty($group_id)){
             $conditions[$alias . '.group_code'] = $group_id;
+        }
+
+        if(!empty($context)){
+            $conditions[] = $context;
         }
 
         $cache_name = md5(json_encode($conditions));

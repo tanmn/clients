@@ -20,7 +20,6 @@ $this->end('script');
         <li><a href="#week3" data-toggle="tab">Tuần 3</a></li>
         <li><a href="#week4" data-toggle="tab">Tuần 4</a></li>
         <li><a href="#week5" data-toggle="tab">Tuần 5</a></li>
-        <li><a href="#all" data-toggle="tab">Đặc biệt</a></li>
     </ul>
 
     <div id="TabContents" class="clearfix">
@@ -54,28 +53,29 @@ $this->end('script');
                 <?php echo $this->Element('result_table'); ?>
             </div>
             <div class="tab-pane" id="week1">
-                <p>Kết quả người chơi có số điểm cao tuần 1:</p>
-                <?php echo $this->Element('result_table'); ?>
+                <p>Kết quả người chơi có số điểm cao tuần 1:<br />
+                (Tính điểm từ 00h00 ngày 04/06/2014 đến 23h59 ngày 10/06/2014)</p>
+                <?php echo $this->Element('winner_table'); ?>
             </div>
             <div class="tab-pane" id="week2">
-                <p>Kết quả người chơi có số điểm cao tuần 2:</p>
-                <?php echo $this->Element('result_table'); ?>
+                <p>Kết quả người chơi có số điểm cao tuần 2:<br />
+                (Tính điểm từ 00h00 ngày 11/06/2014 đến 23h59 ngày 17/06/2014)</p>
+                <?php echo $this->Element('winner_table'); ?>
             </div>
             <div class="tab-pane" id="week3">
-                <p>Kết quả người chơi có số điểm cao tuần 3:</p>
-                <?php echo $this->Element('result_table'); ?>
+                <p>Kết quả người chơi có số điểm cao tuần 3:<br />
+                (Tính điểm từ 00h00 ngày 18/06/2014 đến 23h59 ngày 24/06/2014)</p>
+                <?php echo $this->Element('winner_table'); ?>
             </div>
             <div class="tab-pane" id="week4">
-                <p>Kết quả người chơi có số điểm cao tuần 4:</p>
-                <?php echo $this->Element('result_table'); ?>
+                <p>Kết quả người chơi có số điểm cao tuần 4:<br />
+                (Tính điểm từ 00h00 ngày 25/06/2014 đến 23h59 ngày 01/07/2014)</p>
+                <?php echo $this->Element('winner_table'); ?>
             </div>
             <div class="tab-pane" id="week5">
-                <p>Kết quả người chơi có số điểm cao tuần 5:</p>
-                <?php echo $this->Element('result_table'); ?>
-            </div>
-            <div class="tab-pane" id="all">
-                <p>Kết quả người thắng chung cuộc:</p>
-                <?php echo $this->Element('result_table'); ?>
+                <p>Kết quả người chơi có số điểm cao tuần 5:<br />
+                (Tính điểm từ 00h00 ngày 02/07/2014 đến 23h59 ngày 08/07/2014)</p>
+                <?php echo $this->Element('winner_table'); ?>
             </div>
         </div>
 
