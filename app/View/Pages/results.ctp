@@ -19,6 +19,7 @@ $this->end('script');
         <li><a href="#week2" data-toggle="tab">Tuần 2</a></li>
         <li><a href="#week3" data-toggle="tab">Tuần 3</a></li>
         <li><a href="#week4" data-toggle="tab">Tuần 4</a></li>
+        <li><a href="#week5" data-toggle="tab">Tuần 5</a></li>
         <li><a href="#all" data-toggle="tab">Đặc biệt</a></li>
     </ul>
 
