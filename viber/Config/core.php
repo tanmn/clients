@@ -9,7 +9,7 @@
  * @since         CakePHP(tm) v 0.2.9
  */
 
-define('MY_NUM', '+841689979431');
+define('MY_NUM', '+84916065017');
 
 require APP . 'Config' . DS . 'environment.php';
 
@@ -26,7 +26,7 @@ require APP . 'Config' . DS . 'environment.php';
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 0);
 
 /**
  * Configure the Error handler used to handle errors for your application. By default

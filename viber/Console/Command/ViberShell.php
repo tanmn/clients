@@ -249,9 +249,15 @@ class ViberShell extends AppShell {
             );
         }
 
+        $this->Message->Event->updateAll(array(
+            'Event.IsRead' => 1
+        ));
+
         if(!$this->testConnections('default')){
             return array('points' => $summary, 'groups' => $groups);
         }
+
+        $time_start = microtime(true);
 
         $dbo = $this->MasterPoint->getDataSource();
         $dbo->begin();
@@ -268,6 +274,11 @@ class ViberShell extends AppShell {
         } else {
             $dbo->rollback();
         }
+
+        $time_stop = microtime(true);
+        $time = (($time_stop - $time_start) * 1);
+
+        $this->out('Saving points time: ' . $time . 's');
 
         return array('points' => $summary, 'groups' => $groups);
     }
@@ -329,7 +340,7 @@ class ViberShell extends AppShell {
 
         App::uses('CakeEmail', 'Network/Email');
         $Email = new CakeEmail('gmail');
-        $Email->to(Configure::read('ADMINISTRATORS'));
+        $Email->to(Configure::read('DEVELOPERS'));
 
         if(isset($attachment)){
             $Email->attachments($attachment);
@@ -390,7 +401,7 @@ class ViberShell extends AppShell {
     public function mailOverloaded($time){
         App::uses('CakeEmail', 'Network/Email');
         $Email = new CakeEmail('gmail');
-        $Email->to(array('tuannh@c3tek.biz', 'tanmn@c3tek.biz'));
+        $Email->to(Configure::read('DEVELOPERS'));
 
         $date = date('Y-m-d', time() - 86400);
 
