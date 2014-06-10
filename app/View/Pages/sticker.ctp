@@ -25,7 +25,7 @@ $this->end('script');
 <ul>
 <li>
     <div class="stickimage"><img src="img/sticker/Symbol_69.png"></div>
-    <a href="img/sticker/Symbol_69.png" download>
+    <a href="img/sticker/Symbol_69.png" download="Symbol_69.png">
         <div class="downloadimage">Tải về</div>
     </a>
 </li>

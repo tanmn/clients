@@ -104,12 +104,12 @@
 .term strong {
     color: #7b519d;
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .pc{
         display: none;
     }
     .mobie{
-        display:list-item !important;
+        display:none;
     }
     .page-header .container #icon{
         display: none;
@@ -176,6 +176,9 @@
         z-index: 10;
         display: none;
     }
+    .page-header .container #box ul {
+        display: block;
+    }
     .container{
         width: 100% !important;
     }
@@ -189,6 +192,29 @@
         margin:0px;
         padding: 0px;
     }
+    .button-hide{
+        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border: none;
+        border-radius: 6px 6px 0 0;
+        width: 58px;
+        height: 57px;
+        float:right;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+
+    }
+    .button-show{
+        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border: none;
+        border-radius: 6px 6px 0 0;
+        width: 58px;
+        height: 57px;
+        float: left;
+        position: absolute;
+    }
+
+
 }
 @media only screen and (max-width:480px) {
     .page-header ul > li{

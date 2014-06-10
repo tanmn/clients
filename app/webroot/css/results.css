@@ -102,12 +102,20 @@ padding: 5px 12px;
 #FilterForm input[type=submit]:hover {
     background-color : #7dc8e5;
 }
-@media (max-width: 640px) {
+.button-menu .logo{ display: none}
+.button-menu input{
+    display: none;
+}
+@media (max-width: 768px) {
     .pc{
         display: none;
     }
+    .button-menu .logo{ display: block}
+    .button-menu input{
+        display: block;
+    }
     .mobie{
-        display:list-item !important;
+        display:none;
     }
     .page-header .container #icon{
         display: none;
@@ -171,7 +179,7 @@ padding: 5px 12px;
         text-align: left;
         background-color: #9900b3;
         z-index: 10;
-        display: none;
+        /*display: none;*/
     }
     .container{
         width: 100% !important;
@@ -188,6 +196,27 @@ padding: 5px 12px;
     }
     #Results{
         padding: 0px;
+    }
+    .button-hide{
+        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border: none;
+        border-radius: 6px 6px 0 0;
+        width: 58px;
+        height: 57px;
+        float:right;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+
+    }
+    .button-show{
+        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border: none;
+        border-radius: 6px 6px 0 0;
+        width: 58px;
+        height: 57px;
+        float: left;
+        position: absolute;
     }
 }
 @media only screen and (max-width:480px) {

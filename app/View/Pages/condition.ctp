@@ -55,7 +55,7 @@ $this->end('script');
         <strong>5.  	Cách theo dõi điểm:</strong><br/>
         -	Đăng nhập website Viber<br/>
         -	Nhập số điện thoại để theo dõi điểm tích lũy<br/>
-        -	Điểm số được tính mỗi ngày từ 00h00 – 23h59 và cập nhật lên website Viber lúc 8.00h. Bắt đầu tính điểm từ 00h00 ngày 05 tháng 06 năm 2014.
+        -	Điểm số được tính mỗi ngày từ 00h00 – 23h59 và cập nhật lên website Viber lúc 8.00h. Bắt đầu tính điểm từ 00h00 ngày 04 tháng 06 năm 2014.
 
     </li>
     <li>
@@ -78,6 +78,7 @@ $this->end('script');
         <br/>-	Tuần 5: Một chiếc Iphone 5s
         <br/>
         <br/><strong>Lưu ý 3:</strong> Mọi thắc mắc về chương trình vui lòng đặt câu hỏi trên trang fanpage <a href="http://www.facebook.com/vibervietnamofficial" target="_blank">Viber Việt Nam</a>
+        <br/>Mỗi số điện thoại và mỗi người chơi chỉ được nhận một giải thưởng tuần duy nhất
     </li>
     </ul>
 </p>
