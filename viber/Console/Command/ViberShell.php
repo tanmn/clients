@@ -370,7 +370,8 @@ class ViberShell extends AppShell {
 
         foreach ($data as $key => $value) {
             $index = $key + 1;
-            $message .= "{$index} ; {$value['MasterPoint']['number']} ; {$value['MasterPoint']['points']}\n";
+            $is_bot = ($value['MasterPoint']['points'] > 90000) ? ' (!!!MAY BE BOT!!!)' : '';
+            $message .= "{$index} ; {$value['MasterPoint']['number']} ; {$value['MasterPoint']['points']}{$is_bot}\n";
         }
 
         $message .= "\n";
