@@ -6,6 +6,8 @@ App::uses('AppModel', 'Model');
  */
 class MasterUser extends AppModel {
 
+    public $primaryKey = 'number';
+
 /**
  * Validation rules
  *
