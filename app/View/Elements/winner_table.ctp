@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="scroller hide">
+    <div class="scroller" style="display: none;">
         <div class="row-fluid clearfix">
             <div class="col-xs-6">
                 <table class="table">

@@ -27,9 +27,6 @@ $(function() {
         }, options || {}), function(json) {
             table1.empty();
             table2.empty();
-            topUser.hide();
-            topGroup.hide();
-            scroll_holder.hide();
 
             if (id == 'daily') {
                 $('#txtDate').text(options.date);
@@ -53,7 +50,9 @@ $(function() {
 
                 topUser.find('.title').text(txt_title);
                 topUser.find('.description').html(txt_desc);
-                topUser.fadeIn().show();
+                topUser.show();
+            } else {
+                topUser.hide();
             }
 
             if ('group' in json) {
@@ -63,31 +62,35 @@ $(function() {
 
                 topGroup.find('.title').text(txt_title);
                 topGroup.find('.description').html(txt_desc);
-                topGroup.fadeIn().show();
+                topGroup.show();
+            } else {
+                topGroup.hide();
             }
 
             var user_list = (id == 'daily' ? json.users : json.group_members);
 
-            target_tab.find('span.count').text(user_list.length);
-
-            for (var i = 0, l = user_list.length; i < l; i++) {
-                var pos = i % 2 == 0 ? table1 : table2,
-                    className = i < 10 ? 'winner' : '',
-                    data = user_list[i];
-
-                pos.append([
-                    '<tr class="' + className + '">',
-                    '<td>' + (i + 1) + '</td>',
-                    '<td>' + (data.MasterPoint.number || 'No Name') + '</td>',
-                    '<td>' + (data.MasterPoint.points || 0) + '</td>',
-                    '</tr>'
-                ].join(' '));
-
-                pos = null;
-            }
-
             if (user_list.length) {
                 scroll_holder.show();
+
+                target_tab.find('span.count').text(user_list.length);
+
+                for (var i = 0, l = user_list.length; i < l; i++) {
+                    var pos = i % 2 == 0 ? table1 : table2,
+                        className = i < 10 ? 'winner' : '',
+                        data = user_list[i];
+
+                    pos.append([
+                        '<tr class="' + className + '">',
+                        '<td>' + (i + 1) + '</td>',
+                        '<td>' + (data.MasterPoint.number || 'No Name') + '</td>',
+                        '<td>' + (data.MasterPoint.points || 0) + '</td>',
+                        '</tr>'
+                    ].join(' '));
+
+                    pos = null;
+                }
+            } else {
+                scroll_holder.hide();
             }
 
             setTimeout(function() {
