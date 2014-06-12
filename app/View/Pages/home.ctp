@@ -63,7 +63,7 @@ $this->end('script');
         );
 
         echo '<div class="form-inputs">';
-        echo $this->Form->input('myphone', array('id' => 'txtQRMyPhone', 'value' => ''));
+        echo $this->Form->input('myphone', array('id' => 'txtQRMyPhone', 'value' => '', 'placeholder' => '01234567890'));
         echo $this->Form->submit('Nhận mã QR', array('class' => 'btn btn-block', 'div' => 'form-group', 'id' => 'btnQrGet'));
         echo '</div>';
 
@@ -102,7 +102,7 @@ $this->end('script');
             );
 
             echo '<div class="form-inputs">';
-            echo $this->Form->input('phone', array('id' => 'txtPhone', 'value' => ''));
+            echo $this->Form->input('phone', array('id' => 'txtPhone', 'value' => '', 'placeholder' => '01234567890'));
             echo $this->Form->submit('Nhận mã tính điểm', array('class' => 'btn btn-block', 'div' => 'form-group', 'id' => 'btnGetHotline'));
             echo '</div>';
 
@@ -237,7 +237,7 @@ $this->end('script');
                 )
             );
 
-            echo $this->Form->input('phone', array('id' => 'txtTargetPhone', 'value' => ''));
+            echo $this->Form->input('phone', array('id' => 'txtTargetPhone', 'value' => '', 'placeholder' => '01234567890'));
             echo $this->Form->submit('Hiện số điểm hiện tại của bạn', array('class' => 'btn btn-block', 'div' => false, 'id' => 'btnGetPoints'));
             echo $this->Form->input('point', array('id' => 'txtPoints', 'readonly' => true));
 

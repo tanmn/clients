@@ -23,6 +23,7 @@
             echo $this->Html->css('bs-theme.min');
             echo $this->Html->css('main');
             echo $this->fetch('css');
+            echo $this->Html->css('responsive');
 
             echo $this->Html->script('vendor/modernizr-2.6.2-respond-1.1.0.min');
             echo $this->Html->script('vendor/jquery-1.10.1.min');

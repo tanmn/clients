@@ -1,20 +1,22 @@
 <div class="result-tables">
-    <div class="winner-thumb user">
-        <h2>Người chơi có số điểm cao nhất tuần</h2>
+    <div class="row-fluid clearfix top">
+        <div class="col-xs-6 winner-thumb user">
+            <h2>Người chơi có số điểm cao nhất tuần</h2>
 
-        <div class="detail clearfix">
-            <img />
-            <h3 class="title"></h3>
-            <div class="description"></div>
+            <div class="detail">
+                <img />
+                <h3 class="title"></h3>
+                <div class="description"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="winner-thumb group">
-        <h2>Group có số điểm cao nhất tuần</h2>
+        <div class="col-xs-6 winner-thumb group">
+            <h2>Group có số điểm cao nhất tuần</h2>
 
-        <div class="detail clearfix">
-            <h3 class="title"></h3>
-            <div class="description"></div>
+            <div class="detail">
+                <h3 class="title"></h3>
+                <div class="description"></div>
+            </div>
         </div>
     </div>
 

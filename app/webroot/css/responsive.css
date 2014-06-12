@@ -1,0 +1,209 @@
+
+.button-menu .logo{ display: none}
+.button-menu input{
+    display : none;
+}
+@media (max-width: 768px) {
+    .pc{
+        display : none;
+    }
+    .mobie{
+        display : none;
+    }
+    .button-menu .logo{ display: block}
+    .button-menu input{
+        display : block;
+    }
+    .page-header .container #icon{
+        display : none;
+    }
+    .page-header .container .logo{
+        line-height : 90px;
+        text-align  : center;
+    }
+    .page-header ul > li{
+        display      : block;
+        height       : 70px;
+        margin       : 0px;
+        padding-left : 60px;
+        line-height  : 70px;
+        border-top   : 1px solid #bd28ce;
+    }
+    .page-header ul > li img{
+        float      : left;
+        width      : 44px;
+        margin-top : 10px;
+        /*position: absolute;*/
+    }
+    .page-header ul > li > a{
+        float       : left;
+        margin-top  : 0px;
+        margin-left : 30px;
+        font-size   : 27px !important;
+    }
+    .page-header ul > li > a:hover{
+        background : none;
+    }
+    .page-header .dropdown-toggle1 {
+        position      : absolute;
+        top           : 0px;
+        z-index       : 10;
+        height        : 57px;
+        width         : 58px;
+        background    : no-repeat url(../img/mobie/icon-menu.png) scroll center center;
+        border        : none;
+        border-radius : 6px 6px 0 0;
+    }
+    .page-header .open .dropdown-toggle1{
+        right : 0px;
+    }
+    .page-header .container {
+        width   : 100% !important;
+        margin  : 0;
+        padding : 0;
+        border  : none;
+    }
+    .page-header .container ul {
+        position         : absolute;
+        top              : 0px;
+        left             : 0;
+        z-index          : 10;
+        width            : 80% !important;
+        margin           : 0;
+        padding          : 0;
+        background-color : #9900b3;
+        text-align       : left;
+        /*display: none;*/
+    }
+    .container{
+        width : 100% !important;
+    }
+    #events .content_event{
+        width : 100% !important;
+    }
+    #events .content_event img{
+        width : 100% !important;
+    }
+    .content-sticker ul{
+        margin  : 0px;
+        padding : 0px;
+    }
+    .col-xs-4{
+        width : 100%;
+    }
+    #Slogan img{
+        position : absolute;
+        right    : 0px;
+        width    : 250px;
+    }
+    #Prize img{
+        position : absolute;
+        top      : -60px;
+        right    : -70px;
+        width    : 150px;
+    }
+    .col-xs-6 {
+        width : 100%;
+    }
+    #ResultHolder .col-xs-6,.col-xs-offset-3{
+        margin  : 0px;
+        padding : 0px;
+    }
+    #ResultHolder ul.result-list > li,#ResultHolder ul.result-list > li .position{
+        margin  : 0px;
+        padding : 0px;
+    }
+    #ResultHolder ul.result-list > li .position{
+        font-size : 30px;
+    }
+    #ResultHolder ul.result-list > li span{
+        font-size : 18px;
+    }
+    #ResultHolder ul.result-list > li .points{
+        padding-right : 10px;
+    }
+    .button-hide{
+        position      : absolute;
+        float         : right;
+        top           : 0px;
+        right         : 0px;
+        height        : 57px;
+        width         : 58px;
+        background    : no-repeat url(../img/mobie/icon-menu.png) scroll center center;
+        border        : none;
+        border-radius : 6px 6px 0 0;
+    }
+    .button-show{
+        position      : absolute;
+        float         : left;
+        height        : 57px;
+        width         : 58px;
+        background    : no-repeat url(../img/mobie/icon-menu.png) scroll center center;
+        border        : none;
+        border-radius : 6px 6px 0 0;
+    }
+}
+@media only screen and (max-width:480px) {
+    .page-header ul > li{
+        display      : block;
+        height       : 70px;
+        margin       : 0px;
+        padding-left : 10px;
+        line-height  : 70px;
+        border-top   : 1px solid #bd28ce;
+    }
+    .page-header ul > li > a{
+        float       : left;
+        margin-top  : 0px;
+        margin-left : 20px;
+        font-size   : 20px !important;
+    }
+    .thele .title,#thele{
+        margin-left : 0px;
+    }
+    .content-sticker ul{
+        margin  : 0px;
+        padding : 0px;
+    }
+    .content-sticker ul li{
+        float : none;
+    }
+    .col-xs-4{
+        width : 100%;
+    }
+    #Slogan img{
+        position : absolute;
+        right    : 0px;
+        width    : 200px;
+    }
+    #Prize img{
+        position : absolute;
+        top      : -40px;
+        right    : -100px;
+        width    : 100px;
+    }
+    .col-xs-6 {
+        width : 100%;
+    }
+    #ResultHolder .col-xs-6,.col-xs-offset-3,#ResultForm{
+        margin  : 0px;
+        padding : 0px;
+    }
+    #ResultHolder ul.result-list > li,#ResultHolder ul.result-list > li .position,.form-inputs{
+        margin  : 0px;
+        padding : 0px;
+    }
+    #ResultHolder ul.result-list > li .position{
+        font-size : 30px;
+    }
+    #ResultHolder ul.result-list > li span{
+        padding-left : 5px;
+        font-size    : 18px;
+    }
+    #ResultHolder ul.result-list > li .points{
+        padding-right : 10px;
+    }
+    .col-xs-4 .thumb, .thumb-link, .thumb-link .play{
+        width : 100%;
+    }
+}

@@ -19,6 +19,8 @@ class ApisController extends AppController {
     }
 
     public function getHotline(){
+        $phone = @$this->request->data['phone'];
+
         $this->loadModel('MasterHotline');
 
         $this->output = $this->MasterHotline->find(
@@ -34,6 +36,17 @@ class ApisController extends AppController {
                 )
             )
         );
+
+        if(!empty($phone) && !empty($this->output)){
+            $phone = preg_replace('/[^\d]/', '', $phone);
+            $phone = preg_replace('/^(0|84|840)/', '+84', $phone);
+
+            $this->loadModel('HotlineRequest');
+            $this->HotlineRequest->save(array(
+                'hotline' => $this->output['MasterHotline']['hotline'],
+                'number' => $phone
+            ));
+        }
     }
 
     public function getStats(){
