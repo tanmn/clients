@@ -186,7 +186,7 @@ class MasterPoint extends AppModel {
                 'group' => array($alias . '.number'),
                 'order' => array($alias . '.points' => 'DESC'),
                 'limit' => $limit,
-                'contain' => array('MasterUser.name','MasterUser.address','MasterUser.device', 'MasterUser.avatar'),
+                'contain' => array('MasterUser.name', 'MasterUser.real_name', 'MasterUser.address', 'MasterUser.device', 'MasterUser.avatar'),
                 'cacheConfig' => 'apis',
                 'cache' => '_' . $cache_name
             )
