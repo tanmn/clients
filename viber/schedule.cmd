@@ -1,3 +1,2 @@
 @echo %DATE% %TIME% >> daily.log
-@.\users
-@.\Console\cake viber >> daily.log
+@.\Console\cake viber >> daily.log & users.cmd
