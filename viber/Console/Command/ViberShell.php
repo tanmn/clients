@@ -205,7 +205,7 @@ class ViberShell extends AppShell {
                 'report_date' => $date,
                 'hotline' => MY_NUM,
                 'msg_type' => 'normal',
-                'group_code' => $this->formatGroupId($item[0]['GROUP_ID']),
+                'group_code' => $item[0]['GROUP_ID'],
                 'number' => $this->formatNumber($item[0]['PHONE_NUM']),
                 'quantity' => $item[0]['NUM']
             );
@@ -218,7 +218,7 @@ class ViberShell extends AppShell {
                 'report_date' => $date,
                 'hotline' => MY_NUM,
                 'msg_type' => 'sticker',
-                'group_code' => $this->formatGroupId($item[0]['GROUP_ID']),
+                'group_code' => $item[0]['GROUP_ID'],
                 'number' => $this->formatNumber($item[0]['PHONE_NUM']),
                 'quantity' => $item[0]['NUM']
             );
@@ -262,8 +262,8 @@ class ViberShell extends AppShell {
         unset($raw_groups);
 
         // remap token
-        foreach($summary as $item){
-            $item['group_code'] = $group_tokens[$item['group_code']];
+        foreach($summary as $key => $item){
+            $summary[$key]['group_code'] = $group_tokens[$item['group_code']];
         }
 
         unset($group_tokens);

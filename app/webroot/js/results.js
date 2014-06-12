@@ -10,7 +10,7 @@ $(function() {
             table2 = target_tab.find('table:eq(1) tbody'),
             topUser = target_tab.find('.winner-thumb.user'),
             topGroup = target_tab.find('.winner-thumb.group'),
-            txt_title, txt_desc,txt_add,txt_device;
+            txt_title, txt_desc, txt_add, txt_device;
 
         if (!target_tab.length) return;
 
@@ -37,7 +37,7 @@ $(function() {
                 return false;
             }
 
-            if ('user' in json) {
+            if ('user' in json && 'MasterUser' in json.user) {
                 if (json.user.MasterUser.avatar) {
                     topUser.find('img').attr('src', json.user.MasterUser.avatar).show();
                 } else {
@@ -45,18 +45,20 @@ $(function() {
                 }
                 txt_add = json.user.MasterUser.address;
                 txt_device = json.user.MasterUser.device;
-                
-                txt_title = json.user.MasterUser.name || json.user.MasterPoint.number;
+
+                txt_title = json.user.MasterUser.real_name || json.user.MasterUser.name || json.user.MasterPoint.number;
                 txt_desc = 'Số điện thoại: ' + json.user.MasterPoint.number + '<br />';
                 txt_desc += 'Số điểm: ' + json.user.MasterPoint.points + '<br />';
 
 
-                if(json.user.MasterUser.address){
+                if (json.user.MasterUser.address) {
                     txt_desc += 'Địa chỉ: ' + json.user.MasterUser.address + '<br />';
                 }
-                if(json.user.MasterUser.device){
+
+                if (json.user.MasterUser.device) {
                     txt_desc += 'Device: ' + json.user.MasterUser.device + '<br />';
                 }
+
                 topUser.find('.title').text(txt_title);
                 topUser.find('.description').html(txt_desc);
                 topUser.show();
@@ -64,7 +66,7 @@ $(function() {
                 topUser.hide();
             }
 
-            if ('group' in json) {
+            if ('group' in json && 'MasterGroup' in json.group) {
                 txt_title = json.group.MasterGroup.group_name || 'Group';
                 txt_desc = 'Số thành viên: ' + (json.group_members.length || 0) + '<br />';
                 txt_desc += 'Số điểm: ' + json.group.MasterPoint.points + '<br />';
