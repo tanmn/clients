@@ -81,6 +81,7 @@ $this->end('script');
 
         <div id="Figure" class="text-center" class="clearfix">
             <?php echo $this->Html->image('microsite/STICKERS_dzooo3.png'); ?>
+            <p>Ban Tổ Chức xin thông báo : Tất cả các Groups có ít hơn 5 thành viên sẽ không được xem là hợp lệ.</p>
         </div>
     </div>
 </div>

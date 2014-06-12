@@ -10,7 +10,7 @@ $(function() {
             table2 = target_tab.find('table:eq(1) tbody'),
             topUser = target_tab.find('.winner-thumb.user'),
             topGroup = target_tab.find('.winner-thumb.group'),
-            txt_title, txt_desc;
+            txt_title, txt_desc,txt_add,txt_device;
 
         if (!target_tab.length) return;
 
@@ -43,11 +43,20 @@ $(function() {
                 } else {
                     topUser.find('img').hide();
                 }
-
+                txt_add = json.user.MasterUser.address;
+                txt_device = json.user.MasterUser.device;
+                
                 txt_title = json.user.MasterUser.name || json.user.MasterPoint.number;
                 txt_desc = 'Số điện thoại: ' + json.user.MasterPoint.number + '<br />';
                 txt_desc += 'Số điểm: ' + json.user.MasterPoint.points + '<br />';
 
+
+                if(json.user.MasterUser.address){
+                    txt_desc += 'Địa chỉ: ' + json.user.MasterUser.address + '<br />';
+                }
+                if(json.user.MasterUser.device){
+                    txt_desc += 'Device: ' + json.user.MasterUser.device + '<br />';
+                }
                 topUser.find('.title').text(txt_title);
                 topUser.find('.description').html(txt_desc);
                 topUser.show();

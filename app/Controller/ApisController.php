@@ -39,12 +39,8 @@ class ApisController extends AppController {
     public function getStats(){
         $this->loadModel('MasterPoint');
 
-        $top_groups = $this->MasterPoint->getTopGroups(5, array(
-            'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
-        ));
-        $top_users = $this->MasterPoint->getTopUsers(5, array(
-            'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
-        ));
+        $top_groups = $this->MasterPoint->getTopGroups(5);
+        $top_users = $this->MasterPoint->getTopUsers(5);
 
         $this->output = array('groups' => $top_groups, 'users' => $top_users);
     }
@@ -56,8 +52,7 @@ class ApisController extends AppController {
         $phone = preg_replace('/^(0|84|840)/', '+84', $phone);
 
         $result = $this->MasterPoint->getTopUsers(5, array(
-            'MasterPoint.number' => $phone,
-            'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
+            'MasterPoint.number' => $phone
         ));
 
         if(empty($result)) $this->output = 0;

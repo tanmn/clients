@@ -179,13 +179,14 @@ class MasterPoint extends AppModel {
             array(
                 'fields' => array(
                     $alias . '.number',
+
                     $alias . '.points'
                 ),
                 'conditions' => $conditions,
                 'group' => array($alias . '.number'),
                 'order' => array($alias . '.points' => 'DESC'),
                 'limit' => $limit,
-                'contain' => array('MasterUser.name', 'MasterUser.avatar'),
+                'contain' => array('MasterUser.name','MasterUser.address','MasterUser.device', 'MasterUser.avatar'),
                 'cacheConfig' => 'apis',
                 'cache' => '_' . $cache_name
             )
@@ -245,7 +246,7 @@ class MasterPoint extends AppModel {
                     'MasterUser.avatar'
                 ),
                 'conditions' => $conditions,
-                'contain' => array('MasterUser.name', 'MasterUser.avatar'),
+                'contain' => array('MasterUser.name','MasterUser.address','MasterUser.device', 'MasterUser.avatar'),
                 'cacheConfig' => 'apis',
                 'cache' => 'GroupUsers' . $cache_name
             )
