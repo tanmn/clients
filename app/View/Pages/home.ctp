@@ -44,6 +44,9 @@ $this->end('script');
     ); ?>
 
     <div  style="display:none" sclass="thumb" id="pop">
+      <h3 style="color:#fff;text-align:center;">
+                    Nhập số điện thoại:
+                </h3>
         <?php
         echo $this->Form->create(
             false,
@@ -217,7 +220,7 @@ $this->end('script');
     <div id="ViewPoints" class="row-fluid clearfix">
         <div class="col-xs-6 col-xs-offset-3 text-center">
             <h3>Nhập số điện thoại:</h3>
-            <h4>Nhập số điện thoại hoặc mã theo dõi của bạn:</h4>
+            <h4>Nhập số điện thoại để biết số điểm hiện tại của bạn:</h4>
 
             <?php
             echo $this->Form->create(

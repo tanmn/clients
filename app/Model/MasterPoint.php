@@ -77,7 +77,8 @@ class MasterPoint extends AppModel {
 	);
 
     public $virtualFields = array(
-        'points' => 'SUM(IF(msg_type = "sticker", quantity * 3, quantity * 1))'
+        'points' => 'SUM(IF(msg_type = "sticker", quantity * 3, quantity * 1))',
+        'players' => 'COUNT(DISTINCT MasterPoint.number)'
     );
 
     public $belongsTo = array(
@@ -122,6 +123,26 @@ class MasterPoint extends AppModel {
     }
 
 
+    public function getValidGroups($conditions = array()){
+        $alias = $this->alias;
+
+        $results = $this->find(
+            'list',
+            array(
+                'fields' => array(
+                    $alias . '.group_code',
+                    $alias . '.players'
+                ),
+                'conditions' => $conditions,
+                'group' => $alias . '.group_code HAVING ' . $this->virtualFields['players'] . ' > 4',
+                'recursive' => -1
+            )
+        );
+
+        return array_keys($results);
+    }
+
+
     public function getTopGroups($limit = 10, $conditions = array()){
         $alias = $this->alias;
 
@@ -158,12 +179,14 @@ class MasterPoint extends AppModel {
             array(
                 'fields' => array(
                     $alias . '.number',
+
                     $alias . '.points'
                 ),
                 'conditions' => $conditions,
                 'group' => array($alias . '.number'),
                 'order' => array($alias . '.points' => 'DESC'),
                 'limit' => $limit,
+                'contain' => array('MasterUser.name','MasterUser.address','MasterUser.device', 'MasterUser.avatar'),
                 'cacheConfig' => 'apis',
                 'cache' => '_' . $cache_name
             )
@@ -199,7 +222,52 @@ class MasterPoint extends AppModel {
         return array_values($dates);
     }
 
-    public function getGroupUsers($group_id = FALSE){
+    public function getGroupUsers($group_id = FALSE, $context = array()){
+        $alias = $this->alias;
+        $conditions = array();
 
+        if(!empty($group_id)){
+            $conditions[$alias . '.group_code'] = $group_id;
+        }
+
+        if(!empty($context)){
+            $conditions[] = $context;
+        }
+
+        $cache_name = md5(json_encode($conditions));
+
+        $users = $this->find(
+            'all',
+            array(
+                'fields' => array(
+                    // 'DISTINCT ' . $alias . '.number',
+                    // $alias . '.group_code'
+                    'MasterUser.name',
+                    'MasterUser.avatar'
+                ),
+                'conditions' => $conditions,
+                'contain' => array('MasterUser.name','MasterUser.address','MasterUser.device', 'MasterUser.avatar'),
+                'cacheConfig' => 'apis',
+                'cache' => 'GroupUsers' . $cache_name
+            )
+        );
+
+        $groups = array();
+
+        foreach($users as $user){
+            $gr_code = $user[$alias]['group_code'];
+
+            if(!isset($groups[$gr_code])) $groups[$gr_code] = array();
+
+            $groups[$gr_code][] = $user;
+        }
+
+        unset($users);
+
+        if(count($groups) == 1){
+            $groups = array_pop($groups);
+        }
+
+        return $groups;
     }
 }

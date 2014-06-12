@@ -1,3 +1,4 @@
+
 #Results {
     padding : 0 50px;
 }
@@ -50,35 +51,32 @@
 .tab-pane p{
     font-weight : bold;
     color       : #7b509c;
-
 }
 .scroller{
-    max-height: 475px;
+    max-height : 475px;
 }
 th{
     font-weight : bold;
     text-align  : center;
 }
 tr.winner td{
-    font-size   : 105%;
-    color       : #7b509c;
+    font-size : 105%;
+    color     : #7b509c;
 }
 .nicescroll-rails{
-    width: 7px!important;
-    border: 1px #472d71 solid;
+    width  : 7px!important;
+    border : 1px #472d71 solid;
 }
 .nicescroll-rails > div{
-    border-radius: 0!important;
-    border: none!important;
+    border        : none!important;
+    border-radius : 0!important;
 }
-
 #FilterForm{
-    margin: 20px 0px 30px;
+    margin : 20px 0px 10px;
 }
-
 #FilterForm select{
-    height: 35px;
-padding: 5px 12px;
+    height             : 35px;
+    padding            : 5px 12px;
     font-family        : 'viberfontlight';
     font-size          : 18px;
     border             : 1px #684e7f solid;
@@ -86,172 +84,220 @@ padding: 5px 12px;
     box-shadow         : inset 0 2px 5px rgba(0, 0, 0, .3);
     -webkit-box-shadow : inset 0 2px 5px rgba(0, 0, 0, .3);
 }
-
 #FilterForm input[type=submit] {
     background-color   : #aae1f7;
+    font-family        : 'viberfontlight';
+    font-size          : 18px;
     color              : #004a80;
     line-height        : 20px;
     border-color       : #7dc8e5;
     border-radius      : 2px;
     box-shadow         : 0 1px 2px #684e7f;
     -webkit-box-shadow : 0 1px 2px #684e7f;
-    font-family        : 'viberfontlight';
-    font-size          : 18px;
 }
-
 #FilterForm input[type=submit]:hover {
     background-color : #7dc8e5;
 }
+.top{
+    margin-bottom : 30px;
+    text-align    : left;
+}
+.winner-thumb{
+    display : none;
+}
+.result-tables .user,.result-tables .group{
+    width: 50%;
+    float: left;
+    text-align: left;
+    margin-bottom: 20px;
+
+}
+.result-tables .user .detail img{
+    float: left;
+    margin-right: 10px;
+
+}
+.result-tables .scroller{
+    clear: both;
+}
+.winner-thumb img{
+    height           : 100px;
+    width            : 100px;
+    margin-bottom    : 15px;
+    background-color : #7b509c;
+    border           : none;
+}
+.top .winner-thumb img{
+    display          : inline-block;
+    float            : left;
+    height           : 90px;
+    width            : 90px;
+    margin-right     : 15px;
+}
+.winner-thumb h2{
+    font-size   : 22px;
+    font-weight : bold;
+    color       : #7b509c;
+}
+.winner-thumb h3{
+    margin : 0 0 10px 0;
+}
+.winner-thumb .detail{
+    padding : 0 10px;
+}
 .button-menu .logo{ display: none}
 .button-menu input{
-    display: none;
+    display : none;
 }
 @media (max-width: 768px) {
     .pc{
-        display: none;
+        display : none;
     }
     .button-menu .logo{ display: block}
     .button-menu input{
-        display: block;
+        display : block;
     }
     .mobie{
-        display:none;
+        display : none;
+    }
+    .result-tables .user,.result-tables .group{
+        width: 100%;
+        float: left;
+        text-align: left;
+
     }
     .page-header .container #icon{
-        display: none;
+        display : none;
     }
     .page-header .container .logo{
-        text-align: center;
-        line-height: 90px;
+        line-height : 90px;
+        text-align  : center;
     }
     .page-header ul > li{
-        display: block;
-        border-top: 1px solid #bd28ce;
-        margin: 0px;
-        height: 70px;
-        line-height: 70px;
-        padding-left: 60px;
+        display      : block;
+        height       : 70px;
+        margin       : 0px;
+        padding-left : 60px;
+        line-height  : 70px;
+        border-top   : 1px solid #bd28ce;
     }
     .page-header ul > li img{
-        margin-top: 10px;
-        float: left;
-        width: 44px;
+        float      : left;
+        width      : 44px;
+        margin-top : 10px;
         /*position: absolute;*/
     }
     .page-header ul > li > a{
-        font-size: 30px !important;
-        margin-left: 35px;
-        float: left;
-        margin-top: 0px;
-        z-index: 20;
+        float       : left;
+        z-index     : 20;
+        margin-top  : 0px;
+        margin-left : 35px;
+        font-size   : 30px !important;
     }
     .page-header ul > li > a:hover{
-        background: none;
+        background : none;
     }
     .page-header .dropdown-toggle1{
-        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
-        border: none;
-        border-radius: 6px 6px 0 0;
-        width: 58px;
-        height: 57px;
-        z-index: 5;
-        position: absolute;
-        top:0px;
-
-
+        position      : absolute;
+        top           : 0px;
+        z-index       : 5;
+        height        : 57px;
+        width         : 58px;
+        background    : no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border        : none;
+        border-radius : 6px 6px 0 0;
     }
     .page-header .open .dropdown-toggle1{
-        right: 0px;
+        right : 0px;
     }
     .page-header .container {
-        border: none;
-        margin: 0;
-        padding: 0;
-        width: 100% !important;
+        width   : 100% !important;
+        margin  : 0;
+        padding : 0;
+        border  : none;
     }
     .page-header .container ul {
-        left: 0;
-        position: absolute;
-        top: 0px;
-        width: 80% !important;
-        margin: 0;
-        padding: 0;
-        text-align: left;
-        background-color: #9900b3;
-        z-index: 10;
+        position         : absolute;
+        top              : 0px;
+        left             : 0;
+        z-index          : 10;
+        width            : 80% !important;
+        margin           : 0;
+        padding          : 0;
+        background-color : #9900b3;
+        text-align       : left;
         /*display: none;*/
     }
     .container{
-        width: 100% !important;
+        width : 100% !important;
     }
     #events .content_event{
-        width: 100% !important;
+        width : 100% !important;
     }
     #events .content_event img{
-        width: 100% !important;
+        width : 100% !important;
     }
     .content-sticker ul{
-        margin:0px;
-        padding: 0px;
+        margin  : 0px;
+        padding : 0px;
     }
     #Results{
-        padding: 0px;
+        padding : 0px;
     }
     .button-hide{
-        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
-        border: none;
-        border-radius: 6px 6px 0 0;
-        width: 58px;
-        height: 57px;
-        float:right;
-        position: absolute;
-        right: 0px;
-        top: 0px;
-
+        position      : absolute;
+        float         : right;
+        top           : 0px;
+        right         : 0px;
+        height        : 57px;
+        width         : 58px;
+        background    : no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border        : none;
+        border-radius : 6px 6px 0 0;
     }
     .button-show{
-        background: no-repeat url(/img/mobie/icon-menu.png) scroll center center;
-        border: none;
-        border-radius: 6px 6px 0 0;
-        width: 58px;
-        height: 57px;
-        float: left;
-        position: absolute;
+        position      : absolute;
+        float         : left;
+        height        : 57px;
+        width         : 58px;
+        background    : no-repeat url(/img/mobie/icon-menu.png) scroll center center;
+        border        : none;
+        border-radius : 6px 6px 0 0;
     }
 }
 @media only screen and (max-width:480px) {
     .page-header ul > li{
-        display: block;
-        border-top: 1px solid #bd28ce;
-        margin: 0px;
-        height: 70px;
-        line-height: 70px;
-        padding-left: 10px;
+        display      : block;
+        height       : 70px;
+        margin       : 0px;
+        padding-left : 10px;
+        line-height  : 70px;
+        border-top   : 1px solid #bd28ce;
     }
     .page-header ul > li > a{
-        font-size: 20px !important;
-        margin-left: 25px;
-        float: left;
-        margin-top: 0px;
-        z-index: 20;
+        float       : left;
+        z-index     : 20;
+        margin-top  : 0px;
+        margin-left : 25px;
+        font-size   : 20px !important;
     }
     .thele .title,#thele{
-        margin-left: 0px;
+        margin-left : 0px;
     }
     .content-sticker ul{
-        margin:0px;
-        padding: 0px;
+        margin  : 0px;
+        padding : 0px;
     }
     .content-sticker ul li{
-        float: none;
+        float : none;
     }
     #Results{
-        padding: 0px;
+        padding : 0px;
     }
     .col-xs-6{
-        width: 100%;
+        width : 100%;
     }
     .col-xs-4 .thumb, .thumb-link, .thumb-link .play{
-        width: 100%;
+        width : 100%;
     }
 }

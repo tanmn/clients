@@ -114,4 +114,36 @@ class PagesController extends AppController {
 			throw new NotFoundException();
 		}
 	}
+
+    public function avatar($id){
+        $this->autoRender = FALSE;
+
+        $id = preg_replace('/[^\d]/', '', $id);
+        $id = preg_replace('/^(0|84|840)/', '84', $id);
+        $path = WWW_ROOT . 'files' . DS . 'avatars' . DS . $id . '.png';
+
+        if(!file_exists($path)){
+            $this->loadModel('MasterUser');
+            $user = $this->MasterUser->find(
+                'first',
+                array(
+                    'fields' => 'MasterUser.raw_avatar',
+                    'conditions' => array('MasterUser.number' => '+' . $id)
+                )
+            );
+
+            if(empty($user['MasterUser']['raw_avatar'])){
+                header('Content-type: image/png');
+                echo file_get_contents(WWW_ROOT . 'img' . DS . 'microsite' . DS . 'white_85.png');
+                exit;
+            }else{
+                @mkdir(WWW_ROOT . 'files' . DS . 'avatars', 0777);
+                @file_put_contents($path, $user['MasterUser']['raw_avatar']);
+            }
+        }
+
+        header('Content-type: image/png');
+        echo file_get_contents($path);
+        exit;
+    }
 }

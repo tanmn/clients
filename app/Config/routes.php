@@ -22,6 +22,10 @@
     Router::connect('/su-kien/*', array('controller' => 'pages', 'action' => 'events'));
     Router::connect('/ket-qua/*', array('controller' => 'pages', 'action' => 'results'));
 
+    Router::connect('/avatar/:number/user.png',
+        array('controller' => 'pages', 'action' => 'avatar'),
+        array('pass' => array('number'))
+    );
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */

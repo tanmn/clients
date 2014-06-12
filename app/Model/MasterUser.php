@@ -25,4 +25,25 @@ class MasterUser extends AppModel {
             ),
         ),
     );
+
+
+    public $virtualFields = array(
+        'raw_avatar' => 'avatar'
+    );
+
+
+    public function afterFind($results, $primary = false) {
+        $alias = $this->alias;
+
+        if(is_array($results)){
+            foreach ($results as $key => $object) {
+                if(is_array($object) && !empty($object[$alias]['number'])){
+                    $results[$key][$alias]['number'] = $this->formatPhone($object[$alias]['number']);
+                    $results[$key][$alias]['avatar'] = Router::url('/avatar/' . preg_replace('/^\+/', '', $object[$alias]['number']) . '/user.png', true);
+                }
+            }
+        }
+
+        return $results;
+    }
 }

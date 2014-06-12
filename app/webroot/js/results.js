@@ -4,9 +4,13 @@ $(function() {
 
     function getWinners(id, options) {
         var target_tab = $('#' + id),
-            scroller = target_tab.find('.scroller').getNiceScroll(),
+            scroll_holder = target_tab.find('.scroller'),
+            scroller = scroll_holder.getNiceScroll(),
             table1 = target_tab.find('table:eq(0) tbody'),
-            table2 = target_tab.find('table:eq(1) tbody');
+            table2 = target_tab.find('table:eq(1) tbody'),
+            topUser = target_tab.find('.winner-thumb.user'),
+            topGroup = target_tab.find('.winner-thumb.group'),
+            txt_title, txt_desc,txt_add,txt_device;
 
         if (!target_tab.length) return;
 
@@ -28,25 +32,74 @@ $(function() {
                 $('#txtDate').text(options.date);
             }
 
-            if (!(json && json.length)) {
+            if (!json) {
                 scroller.resize();
                 return false;
             }
 
-            for (var i = 0, l = json.length; i < l; i++) {
-                var pos = i % 2 == 0 ? table1 : table2,
-                    className = i < 10 ? 'winner' : '',
-                    data = json[i];
+            if ('user' in json) {
+                if (json.user.MasterUser.avatar) {
+                    topUser.find('img').attr('src', json.user.MasterUser.avatar).show();
+                } else {
+                    topUser.find('img').hide();
+                }
+                txt_add = json.user.MasterUser.address;
+                txt_device = json.user.MasterUser.device;
+                
+                txt_title = json.user.MasterUser.name || json.user.MasterPoint.number;
+                txt_desc = 'Số điện thoại: ' + json.user.MasterPoint.number + '<br />';
+                txt_desc += 'Số điểm: ' + json.user.MasterPoint.points + '<br />';
 
-                pos.append([
-                    '<tr class="' + className + '">',
-                    '<td>' + (i + 1) + '</td>',
-                    '<td>' + (data.MasterPoint.number || 'No Name') + '</td>',
-                    '<td>' + (data.MasterPoint.points || 0) + '</td>',
-                    '</tr>'
-                ].join(' '));
 
-                pos = null;
+                if(json.user.MasterUser.address){
+                    txt_desc += 'Địa chỉ: ' + json.user.MasterUser.address + '<br />';
+                }
+                if(json.user.MasterUser.device){
+                    txt_desc += 'Device: ' + json.user.MasterUser.device + '<br />';
+                }
+                topUser.find('.title').text(txt_title);
+                topUser.find('.description').html(txt_desc);
+                topUser.show();
+            } else {
+                topUser.hide();
+            }
+
+            if ('group' in json) {
+                txt_title = json.group.MasterGroup.group_name || 'Group';
+                txt_desc = 'Số thành viên: ' + (json.group_members.length || 0) + '<br />';
+                txt_desc += 'Số điểm: ' + json.group.MasterPoint.points + '<br />';
+
+                topGroup.find('.title').text(txt_title);
+                topGroup.find('.description').html(txt_desc);
+                topGroup.show();
+            } else {
+                topGroup.hide();
+            }
+
+            var user_list = (id == 'daily' ? json.users : json.group_members);
+
+            if (user_list.length) {
+                scroll_holder.show();
+
+                target_tab.find('span.count').text(user_list.length);
+
+                for (var i = 0, l = user_list.length; i < l; i++) {
+                    var pos = i % 2 == 0 ? table1 : table2,
+                        className = i < 10 ? 'winner' : '',
+                        data = user_list[i];
+
+                    pos.append([
+                        '<tr class="' + className + '">',
+                        '<td>' + (i + 1) + '</td>',
+                        '<td>' + (data.MasterPoint.number || 'No Name') + '</td>',
+                        '<td>' + (data.MasterPoint.points || 0) + '</td>',
+                        '</tr>'
+                    ].join(' '));
+
+                    pos = null;
+                }
+            } else {
+                scroll_holder.hide();
             }
 
             setTimeout(function() {

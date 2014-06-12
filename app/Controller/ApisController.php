@@ -51,7 +51,9 @@ class ApisController extends AppController {
         $phone = preg_replace('/[^\d]/', '', @$this->request->data['phone']);
         $phone = preg_replace('/^(0|84|840)/', '+84', $phone);
 
-        $result = $this->MasterPoint->getTopUsers(5, array('number' => $phone));
+        $result = $this->MasterPoint->getTopUsers(5, array(
+            'MasterPoint.number' => $phone
+        ));
 
         if(empty($result)) $this->output = 0;
         else $this->output = $result[0]['MasterPoint']['points'];
@@ -60,7 +62,7 @@ class ApisController extends AppController {
     public function getTopUsers(){
         $this->loadModel('MasterPoint');
 
-        $type = $this->request->data['type'];
+        $type = @$this->request->data['type'];
         $context = array();
 
         switch($type){
@@ -81,6 +83,7 @@ class ApisController extends AppController {
                 $context = array(
                     'MasterPoint.report_date' => $date
                 );
+
                 break;
 
             case 'week1':
@@ -123,6 +126,16 @@ class ApisController extends AppController {
                 );
                 break;
 
+            case 'week5':
+                if(time() < strtotime('2014-07-09 06:00:00')){
+                    $this->output = NULL;
+                    return;
+                }
+                $context = array(
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-07-02', '2014-07-08')
+                );
+                break;
+
             case 'all':
                 if(time() < strtotime('2014-07-14 04:00:00')){
                     $this->output = NULL;
@@ -138,8 +151,47 @@ class ApisController extends AppController {
                 return;
         }
 
-        $result = $this->MasterPoint->getTopUsers(250, $context);
+        $users = $user = $group = $group_members = array();
 
-        $this->output = $result;
+        if($type == 'daily'){
+            $users = $this->MasterPoint->getTopUsers(250, $context);
+        }
+
+        $user = $this->MasterPoint->getTopUsers(1, $context);
+
+        if(!empty($user)){
+            $user = array_pop($user);
+        }
+
+        $validGroups = $this->MasterPoint->getValidGroups($context);
+
+        if(!empty($validGroups)){
+            $group = $this->MasterPoint->getTopGroups(1, array($context, 'MasterPoint.group_code' => $validGroups));
+
+            if(!empty($group)){
+                $group = array_pop($group);
+                $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
+            }
+        }
+
+        $this->output = compact('users', 'user', 'group', 'group_members');
+    }
+
+
+    public function getGroupUser($group){
+        $this->loadModel('MasterPoint');
+
+        if(isset($this->request->data['group_code'])){
+            $group = $this->request->data['group_code'];
+        }
+
+        $this->output = $this->MasterPoint->getGroupUsers($group);
+    }
+
+    public function test(){
+        $this->loadModel('MasterPoint');
+        $this->output = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-04', '2014-06-10')
+                ));
     }
 }
