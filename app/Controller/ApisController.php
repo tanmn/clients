@@ -163,7 +163,9 @@ class ApisController extends AppController {
             $user = array_pop($user);
         }
 
-        $validGroups = $this->MasterPoint->getValidGroups($context);
+        $validGroups = $this->MasterPoint->getValidGroups(array(
+            'MasterPoint.report_date <' => date('Y-m-d')
+        ));
 
         if(!empty($validGroups)){
             $group = $this->MasterPoint->getTopGroups(1, array($context, 'MasterPoint.group_code' => $validGroups));
