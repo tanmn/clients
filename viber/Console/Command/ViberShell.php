@@ -40,7 +40,7 @@ class ViberShell extends AppShell {
 
         $this->out('Processing ' . $this->getCount() . ' messages...');
 
-        $time_start = microtime(true);
+        $time_start = microtime(TRUE);
 
         if($this->command == 'today'){
             $output = $this->process(date('Y-m-d'));
@@ -51,7 +51,7 @@ class ViberShell extends AppShell {
         }
 
 
-        $time_stop = microtime(true);
+        $time_stop = microtime(TRUE);
         $time = (($time_stop - $time_start) * 1);
 
         @file_put_contents(DATA, serialize($output));
@@ -79,7 +79,7 @@ class ViberShell extends AppShell {
         try {
             $connected = ConnectionManager::getDataSource($name);
         } catch (Exception $connectionError) {
-            $connected = false;
+            $connected = FALSE;
             $errorMsg = $connectionError->getMessage();
 
             if (method_exists($connectionError, 'getAttributes')){
@@ -91,10 +91,10 @@ class ViberShell extends AppShell {
             }
 
             $this->errors[] = $errorMsg;
-            return false;
+            return FALSE;
         }
 
-        return true;
+        return TRUE;
     }
 
 
@@ -210,7 +210,7 @@ class ViberShell extends AppShell {
                 'quantity' => $item[0]['NUM']
             );
 
-            $group_ids[$item[0]['GROUP_ID']] = true;
+            $group_ids[$item[0]['GROUP_ID']] = TRUE;
         }
 
         foreach ($sticker_data as $item) {
@@ -223,15 +223,16 @@ class ViberShell extends AppShell {
                 'quantity' => $item[0]['NUM']
             );
 
-            $group_ids[$item[0]['GROUP_ID']] = true;
+            $group_ids[$item[0]['GROUP_ID']] = TRUE;
         }
 
-        $groups = $this->Message->Event->ChatInfo->find(
-            'list',
+        $raw_groups = $this->Message->Event->ChatInfo->find(
+            'all',
             array(
                 'fields' => array(
                     'ChatInfo.ChatID',
-                    'ChatInfo.Name'
+                    'ChatInfo.Name',
+                    'ChatInfo.Token'
                 ),
                 'conditions' => array(
                     'ChatInfo.ChatID' => array_keys($group_ids)
@@ -241,29 +242,48 @@ class ViberShell extends AppShell {
 
         unset($group_ids);
 
-        foreach($groups as $group_code => $group_name){
+        $groups = array();
+        $group_tokens = array();
+
+        foreach($raw_groups as $group){
+            $group_code = $group['ChatInfo']['ChatID'];
+            $group_name = $group['ChatInfo']['Name'];
+            $group_token = $group['ChatInfo']['Token'];
+
             $groups[$group_code] = array(
-                'group_code' => $this->formatGroupId($group_code),
+                'group_code' => $group_token,
                 'hotline' => MY_NUM,
                 'group_name' => empty($group_name) ? 'NONAME' : $group_name
             );
+
+            $group_tokens[$group_code] = $group_token;
         }
 
-        $this->Message->Event->updateAll(array(
-            'Event.IsRead' => 1
-        ));
+        unset($raw_groups);
+
+        // remap token
+        foreach($summary as $item){
+            $item['group_code'] = $group_tokens[$item['group_code']];
+        }
+
+        unset($group_tokens);
+
+        // $this->Message->Event->updateAll(array(
+        //     'Event.IsRead' => 1
+        // ));
 
         if(!$this->testConnections('default')){
             return array('points' => $summary, 'groups' => $groups);
         }
 
-        $time_start = microtime(true);
+        $time_start = microtime(TRUE);
 
         $dbo = $this->MasterPoint->getDataSource();
         $dbo->begin();
 
         $this->MasterPoint->deleteAll(array(
-            'report_date' => $date
+            'report_date' => $date,
+            'virtual_flag' => FALSE
         ));
 
         if(!empty($groups))
@@ -275,7 +295,7 @@ class ViberShell extends AppShell {
             $dbo->rollback();
         }
 
-        $time_stop = microtime(true);
+        $time_stop = microtime(TRUE);
         $time = (($time_stop - $time_start) * 1);
 
         $this->out('Saving points time: ' . $time . 's');
