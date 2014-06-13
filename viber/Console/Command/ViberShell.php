@@ -120,7 +120,6 @@ class ViberShell extends AppShell {
             $context['date(TimeStamp, \'unixepoch\', \'localtime\')'] = $date;
         }
 
-
         try{
             return $this->Message->find('count', array(
                 'conditions' => $context,
@@ -268,9 +267,9 @@ class ViberShell extends AppShell {
 
         unset($group_tokens);
 
-        // $this->Message->Event->updateAll(array(
-        //     'Event.IsRead' => 1
-        // ));
+        $this->Message->Event->updateAll(array(
+            'Event.IsRead' => 1
+        ));
 
         if(!$this->testConnections('default')){
             return array('points' => $summary, 'groups' => $groups);
