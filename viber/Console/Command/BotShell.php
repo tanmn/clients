@@ -9,7 +9,7 @@ Copyright (c) 2014 by AppSeeds (http://appseeds.shinsenter.com).  All Rights Res
 App::uses('AppShell', 'Console/Command');
 
 set_time_limit(0);
-Configure::write('debug', 2);
+Configure::write('debug', 0);
 
 
 class BotShell extends AppShell {
@@ -57,14 +57,15 @@ class BotShell extends AppShell {
     }
 
     public function randomPoints($type){
-        $target_points = rand($this->my_speed[0], $this->my_speed[1]);
+		$ratio = date('H') < 10 ? 0.5 : 1;
+        $target_points = rand($this->my_speed[0], $this->my_speed[1]) * $ratio;
 
         switch($type){
             case 'sticker':
                 return round($target_points / 3);
 
             default:
-                return $target_points;
+                return round($target_points);
         }
     }
 
