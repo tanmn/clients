@@ -18,4 +18,13 @@ App::uses('Shell', 'Console');
  */
 class AppShell extends Shell {
 
+    protected function formatNumber($number){
+        return preg_replace('/^0/', '+84', $number);
+    }
+
+
+
+    protected function formatGroupId($group_code){
+        return preg_replace('/^.*(\d{6,6})$/', '$1', MY_NUM) . '' . $group_code;
+    }
 }

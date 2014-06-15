@@ -73,10 +73,4 @@ class TestShell extends AppShell {
 
         $this->out('Done~');
     }
-
-
-
-    protected function formatGroupId($group_code){
-        return preg_replace('/^.*(\d{6,6})$/', '$1', MY_NUM) . '' . $group_code;
-    }
 }

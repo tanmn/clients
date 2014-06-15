@@ -304,18 +304,6 @@ class ViberShell extends AppShell {
 
 
 
-    protected function formatNumber($number){
-        return preg_replace('/^0/', '+84', $number);
-    }
-
-
-
-    protected function formatGroupId($group_code){
-        return preg_replace('/^.*(\d{6,6})$/', '$1', MY_NUM) . '' . $group_code;
-    }
-
-
-
     protected function getTop250(){
         $date = date('Y-m-d', time() - 86400);
 

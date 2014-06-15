@@ -117,12 +117,6 @@ class UserShell extends AppShell {
 
 
 
-    protected function formatNumber($number){
-        return preg_replace('/^0/', '+84', $number);
-    }
-
-
-
     protected function mailErrors($data = NULL){
         if(empty($this->errors)) return;
 
