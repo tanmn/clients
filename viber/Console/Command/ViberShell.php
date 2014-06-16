@@ -45,7 +45,7 @@ class ViberShell extends AppShell {
         if($this->command == 'today'){
             $output = $this->process(date('Y-m-d'));
         }else{
-            $output = $this->process();
+            // $output = $this->process();
             $top_250 = $this->getTop250();
             $this->mailTop250($top_250);
         }

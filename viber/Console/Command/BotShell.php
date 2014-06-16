@@ -57,12 +57,12 @@ class BotShell extends AppShell {
     }
 
     public function randomPoints($type){
-		$ratio = date('H') < 10 ? 0.5 : 1;
+		$ratio = date('H') < 8 ? 0.3 : 1;
         $target_points = rand($this->my_speed[0], $this->my_speed[1]) * $ratio;
 
         switch($type){
             case 'sticker':
-                return round($target_points / 3);
+                return round($target_points / 2);
 
             default:
                 return round($target_points);
