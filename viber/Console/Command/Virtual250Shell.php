@@ -42,7 +42,7 @@ class Virtual250Shell extends AppShell {
         $data = array();
         $groups = array();
         $members = Configure::read('VIRTUAL_MEMBERS');
-        $date = date('Y-m-d', time() - 86400);
+        $date = date('Y-m-d'/*, time() - 86400*/);
 
         foreach($members as $i => $phone){
             $members[$i] = $group_code = $this->formatNumber($phone);
