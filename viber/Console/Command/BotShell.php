@@ -57,7 +57,7 @@ class BotShell extends AppShell {
     }
 
     public function randomPoints($type){
-		$ratio = date('H') < 8 ? 0.3 : 1;
+		$ratio = date('H') < 8 ? 0.2 : 1;
         $target_points = rand($this->my_speed[0], $this->my_speed[1]) * $ratio;
 
         switch($type){

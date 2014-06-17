@@ -66,7 +66,7 @@ class ViberShell extends AppShell {
         $this->out('Total process time: ' . $time . 's');
         $this->out();
 
-        if($time > 30){
+        if($time > 60){
             $this->mailOverloaded($time);
         }
 
