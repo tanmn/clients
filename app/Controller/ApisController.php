@@ -94,7 +94,8 @@ class ApisController extends AppController {
                 }
 
                 $context = array(
-                    'MasterPoint.report_date' => $date
+                    'MasterPoint.report_date' => $date,
+                    'MasterPoint.report_date <' => date('Y-m-d 00:00:00')
                 );
 
                 break;
