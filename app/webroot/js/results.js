@@ -8,8 +8,8 @@ $(function() {
             scroller = scroll_holder.getNiceScroll(),
             table1 = target_tab.find('table:eq(0) tbody'),
             table2 = target_tab.find('table:eq(1) tbody'),
-            topUser = target_tab.find('.winner-thumb.user'),
-            topGroup = target_tab.find('.winner-thumb.group'),
+            topUser = target_tab.find('.winner-thumb.user .detail'),
+            topGroup = target_tab.find('.winner-thumb.groups .detail'),
             txt_title, txt_desc;
 
         if (!target_tab.length) return;
@@ -59,21 +59,24 @@ $(function() {
 
                 topUser.find('.title').text(txt_title);
                 topUser.find('.description').html(txt_desc);
-                topUser.show();
+                topUser.closest('.winner-thumb').show();
             } else {
-                topUser.hide();
+                topUser.closest('.winner-thumb').hide();
             }
 
-            if ('group' in json && 'MasterGroup' in json.group) {
-                txt_title = json.group.MasterGroup.group_name || 'Group';
-                txt_desc = 'Số thành viên: ' + (json.group_members.length || 0) + '<br />';
-                txt_desc += 'Số điểm: ' + json.group.MasterPoint.points + '<br />';
+            if ('groups' in json && json.groups.length) {
+                $.each(json.groups, function(i, group){
+                    txt_title = group.MasterGroup.group_name || 'Group';
+                    txt_desc = 'Số thành viên: ' + (group.MasterGroup.players || 0) + '<br />';
+                    txt_desc += 'Số điểm: ' + group.MasterPoint.points + '<br />';
+                    console.log(i, topGroup.eq(i));
+                    topGroup.eq(i).find('.title').text(txt_title);
+                    topGroup.eq(i).find('.description').html(txt_desc);
+                });
 
-                topGroup.find('.title').text(txt_title);
-                topGroup.find('.description').html(txt_desc);
-                topGroup.show();
+                topGroup.closest('.winner-thumb').show();
             } else {
-                topGroup.hide();
+                topGroup.closest('.winner-thumb').hide();
             }
 
             var user_list = (id == 'daily' ? json.users : json.group_members);

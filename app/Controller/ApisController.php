@@ -182,15 +182,15 @@ class ApisController extends AppController {
         ));
 
         if(!empty($validGroups)){
-            $group = $this->MasterPoint->getTopGroups(1, array($context, 'MasterPoint.group_code' => $validGroups));
+            $groups = $this->MasterPoint->getTopGroups($type == 'week1' ? 1 : 2, array($context, 'MasterPoint.group_code' => array_keys($validGroups)));
 
-            if(!empty($group)){
-                $group = array_pop($group);
-                $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
+            foreach($groups as &$group){
+                $group['MasterGroup']['players'] = $validGroups[$group['MasterGroup']['group_code']];
+                // $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
             }
         }
 
-        $this->output = compact('users', 'user', 'group', 'group_members');
+        $this->output = compact('users', 'user', 'groups', 'group_members');
     }
 
 
@@ -206,69 +206,8 @@ class ApisController extends AppController {
 
     public function test(){
         $this->loadModel('MasterPoint');
-
-        $context = array(
-            'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
-        );
-
-        $users = $user = $group = $group_members = array();
-
-        $users = $this->MasterPoint->getTopUsers(250, $context);
-
-        $user = $this->MasterPoint->getTopUsers(1, $context);
-
-        if(!empty($user)){
-            $user = array_pop($user);
-        }
-
-        $validGroups = $this->MasterPoint->getValidGroups(array(
-            'MasterPoint.report_date <' => date('Y-m-d')
-        ));
-
-        if(!empty($validGroups)){
-            $group = $this->MasterPoint->getTopGroups(1, array($context, 'MasterPoint.group_code' => $validGroups));
-
-            if(!empty($group)){
-                $group = array_pop($group);
-                $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
-            }
-        }
-
-        $csv = TMP . 'report.csv';
-        $fo = fopen($csv, 'w');
-
-        fputcsv($fo, $this->printHeader());
-
-        foreach($users as $i => $user){
-            fputcsv($fo, $this->printUser($i, $user));
-        }
-
-        fclose($fo);
-    }
-
-    protected function printUser($index, $user){
-        return array(
-            $index,
-            '\'' . $user['MasterPoint']['number'],
-            $user['MasterPoint']['virtual_flag'] ? 'BOT' : '',
-            $user['MasterPoint']['points'],
-            $user['MasterUser']['name'],
-            $user['MasterUser']['real_name'],
-            $user['MasterUser']['device'],
-            $user['MasterUser']['address']
-        );
-    }
-
-    protected function printHeader(){
-        return array(
-            '#',
-            'Phone',
-            'Is Bot',
-            'Points',
-            'Viber Name',
-            'Real Name',
-            'Device',
-            'Address'
-        );
+        $this->output = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-04', '2014-06-10')
+                ));
     }
 }

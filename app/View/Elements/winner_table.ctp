@@ -10,12 +10,18 @@
             </div>
         </div>
 
-        <div class="col-xs-6 winner-thumb group">
+        <div class="col-xs-6 winner-thumb groups">
             <h2>Group có số điểm cao nhất tuần</h2>
 
-            <div class="detail">
-                <h3 class="title"></h3>
-                <div class="description"></div>
+            <div class="row-fluid clearfix">
+                <div class="detail col-xs-6">
+                    <h3 class="title"></h3>
+                    <div class="description"></div>
+                </div>
+                <div class="detail col-xs-6">
+                    <h3 class="title"></h3>
+                    <div class="description"></div>
+                </div>
             </div>
         </div>
     </div>

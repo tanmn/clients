@@ -10,12 +10,14 @@
             </div>
         </div>
 
-        <div class="col-xs-6 winner-thumb group">
+        <div class="col-xs-6 winner-thumb groups">
             <h2>Group có số điểm cao nhất</h2>
 
-            <div class="detail">
-                <h3 class="title"></h3>
-                <div class="description"></div>
+            <div class="row-fluid clearfix">
+                <div class="detail">
+                    <h3 class="title"></h3>
+                    <div class="description"></div>
+                </div>
             </div>
         </div>
     </div>
