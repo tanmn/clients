@@ -281,8 +281,9 @@ class ViberShell extends AppShell {
         $dbo->begin();
 
         $this->MasterPoint->deleteAll(array(
-            'report_date' => $date,
-            'virtual_flag' => FALSE
+			'MasterPoint.hotline' => MY_NUM,
+            'MasterPoint.report_date' => $date,
+            'MasterPoint.virtual_flag' => 0
         ));
 
         if(!empty($groups))
