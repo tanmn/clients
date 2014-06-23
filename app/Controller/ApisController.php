@@ -94,7 +94,8 @@ class ApisController extends AppController {
                 }
 
                 $context = array(
-                    'MasterPoint.report_date' => $date
+                    'MasterPoint.report_date' => $date,
+                    'MasterPoint.report_date <' => date('Y-m-d 00:00:00')
                 );
 
                 break;
@@ -181,15 +182,15 @@ class ApisController extends AppController {
         ));
 
         if(!empty($validGroups)){
-            $group = $this->MasterPoint->getTopGroups(1, array($context, 'MasterPoint.group_code' => $validGroups));
+            $groups = $this->MasterPoint->getTopGroups($type == 'week1' ? 1 : 2, array($context, 'MasterPoint.group_code' => array_keys($validGroups)));
 
-            if(!empty($group)){
-                $group = array_pop($group);
-                $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
+            foreach($groups as &$group){
+                $group['MasterGroup']['players'] = $validGroups[$group['MasterGroup']['group_code']];
+                // $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
             }
         }
 
-        $this->output = compact('users', 'user', 'group', 'group_members');
+        $this->output = compact('users', 'user', 'groups', 'group_members');
     }
 
 

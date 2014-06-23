@@ -139,7 +139,7 @@ class MasterPoint extends AppModel {
             )
         );
 
-        return array_keys($results);
+        return $results;
     }
 
 
