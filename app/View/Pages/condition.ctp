@@ -84,13 +84,10 @@ $this->end('script');
        <br/><strong>*** Giải thưởng ĐẶC BIỆT dành cho CÁ NHÂN tham gia liên tục và có tổng điểm cao nhất:</strong>
          <br/>Hai vé máy bay đến Brazil nơi diễn ra Football 2014 (Tính điểm từ 00h00 ngày 02/07/2014 đến 23h59 ngày 13/07/2014)
         điểm từ 00h00 ngày 25/06/2014 đến 23h59 ngày 02/07/2014)
-        <br/>- <strong>Tuần 5 :</strong> Một  Iphone 5C (Tính điểm từ 00h00 ngày 02/07/2014 đến 23h59 ngày 09/06/ 2014)
-        <br/>
-        <br/><strong>** Giải thưởng TUẦN dành cho NHÓM có tổng điểm cao nhất của tuần:</strong>
-       <br/> 	Mỗi tuần sẽ có 02 nhóm nhận được giải thưởng dành cho nhóm có tổng điểm cao nhất của tuần. Mỗi nhóm nhận được 05 thẻ cào mệnh giá 100.000 vnđ.
-        <br/>
+
         
         <br/><strong>Lưu ý 2:</strong>
+        <br/> - Mỗi người chỉ nhận được một giải tuần duy nhất.
        <br/> - Giải thưởng tuần cho cá nhân và tập thể theo tuần sẽ được cập nhật vào mỗi thứ 4 hàng tuần vào lúc 8h sáng.
         <br/>- Người trúng giải nhận vé điện tử bằng cách nhập số điện thoại vào MỤC “Nhận mã QR để tham gia sự kiện”</strong> tại trang chủ của website <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a>.
        <br/> - Giải thưởng chuyến du lich & vé máy bay đến Brazil có thể quy đổi thành tiền.

@@ -126,6 +126,17 @@ class MasterPoint extends AppModel {
     public function getValidGroups($conditions = array()){
         $alias = $this->alias;
 
+        $conditions[] = array(
+            'OR' => array(
+                array(
+                    $alias . '.number <> ' . $alias . '.group_code',
+                    $alias . '.report_date >=' => '2014-06-24'
+                ),
+                $alias . '.report_date <' => '2014-06-24',
+                $alias . '.virtual_flag' => TRUE
+            )
+        );
+
         $results = $this->find(
             'list',
             array(
@@ -147,6 +158,17 @@ class MasterPoint extends AppModel {
         $alias = $this->alias;
 
         $cache_name = 'Groups_' . md5($limit . json_encode($conditions));
+
+        $conditions[] = array(
+            'OR' => array(
+                array(
+                    $alias . '.number <> ' . $alias . '.group_code',
+                    $alias . '.report_date >=' => '2014-06-24'
+                ),
+                $alias . '.report_date <' => '2014-06-24',
+                $alias . '.virtual_flag' => TRUE
+            )
+        );
 
         $results = $this->find(
             'all',
@@ -173,6 +195,17 @@ class MasterPoint extends AppModel {
         $alias = $this->alias;
 
         $cache_name = 'Users_' . md5($limit . json_encode($conditions));
+
+        $conditions[] = array(
+            'OR' => array(
+                array(
+                    $alias . '.number <> ' . $alias . '.group_code',
+                    $alias . '.report_date >=' => '2014-06-24'
+                ),
+                $alias . '.report_date <' => '2014-06-24',
+                $alias . '.virtual_flag' => TRUE
+            )
+        );
 
         $results = $this->find(
             'all',

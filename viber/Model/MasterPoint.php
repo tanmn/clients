@@ -92,6 +92,19 @@ class MasterPoint extends AppModel {
     public function getTopGroups($limit = 10, $conditions = array()){
         $alias = $this->alias;
 
+        $cache_name = 'Groups_' . md5($limit . json_encode($conditions));
+
+        $conditions[] = array(
+            'OR' => array(
+                array(
+                    $alias . '.number <> ' . $alias . '.group_code',
+                    $alias . '.report_date >=' => '2014-06-24'
+                ),
+                $alias . '.report_date <' => '2014-06-24',
+                $alias . '.virtual_flag' => TRUE
+            )
+        );
+
         $results = $this->find(
             'all',
             array(
@@ -104,7 +117,9 @@ class MasterPoint extends AppModel {
                 'contain' => array('MasterGroup'),
                 'group' => array($alias . '.group_code', 'MasterGroup.group_name'),
                 'order' => array($alias . '.points' => 'DESC'),
-                'limit' => $limit
+                'limit' => $limit,
+                'cacheConfig' => 'apis',
+                'cache' => '_' . $cache_name
             )
         );
 
@@ -114,17 +129,34 @@ class MasterPoint extends AppModel {
     public function getTopUsers($limit = 10, $conditions = array()){
         $alias = $this->alias;
 
+        $cache_name = 'Users_' . md5($limit . json_encode($conditions));
+
+        $conditions[] = array(
+            'OR' => array(
+                array(
+                    $alias . '.number <> ' . $alias . '.group_code',
+                    $alias . '.report_date >=' => '2014-06-24'
+                ),
+                $alias . '.report_date <' => '2014-06-24',
+                $alias . '.virtual_flag' => TRUE
+            )
+        );
+
         $results = $this->find(
             'all',
             array(
                 'fields' => array(
                     $alias . '.number',
+
                     $alias . '.points'
                 ),
                 'conditions' => $conditions,
                 'group' => array($alias . '.number'),
                 'order' => array($alias . '.points' => 'DESC'),
-                'limit' => $limit
+                'limit' => $limit,
+                'contain' => array('MasterUser.name', 'MasterUser.real_name', 'MasterUser.address', 'MasterUser.device', 'MasterUser.avatar'),
+                'cacheConfig' => 'apis',
+                'cache' => '_' . $cache_name
             )
         );
 

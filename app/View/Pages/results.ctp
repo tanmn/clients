@@ -54,34 +54,46 @@ $this->end('script');
             </div>
             <div class="tab-pane" id="week1">
                 <p>Kết quả người chơi có số điểm cao tuần 1:<br />
-                (Tính điểm từ 00h00 ngày 04/06/2014 đến 23h59 ngày 10/06/2014)</p>
+                (Tính điểm từ 00h00 ngày 04/06/2014 đến 23h59 ngày 10/06/2014)<br/>
+				GIẢI THƯỞNG TUẦN 01<br/>
+				Một iphone 5C </p>
+				
                 <?php echo $this->Element('winner_table'); ?>
             </div>
             <div class="tab-pane" id="week2">
                 <p>Kết quả người chơi có số điểm cao tuần 2:<br />
-                (Tính điểm từ 00h00 ngày 11/06/2014 đến 23h59 ngày 17/06/2014)</p>
+                (Tính điểm từ 00h00 ngày 11/06/2014 đến 23h59 ngày 17/06/2014)<br/>
+				GIẢI THƯỞNG TUẦN 02<br/>
+				Một chuyến du lịch trong nước bao gồm vé máy bay và hai đêm khách sạn</p>
                 <?php echo $this->Element('winner_table'); ?>
             </div>
             <div class="tab-pane" id="week3">
                 <p>Kết quả người chơi có số điểm cao tuần 3:<br />
-                (Tính điểm từ 00h00 ngày 18/06/2014 đến 23h59 ngày 24/06/2014)</p>
+                (Tính điểm từ 00h00 ngày 18/06/2014 đến 23h59 ngày 24/06/2014)<br/>
+				GIẢI THƯỞNG TUẦN 03<br/> 
+				Một ipad mini </p>
                 <?php echo $this->Element('winner_table'); ?>
             </div>
             <div class="tab-pane" id="week4">
                 <p>Kết quả người chơi có số điểm cao tuần 4:<br />
-                (Tính điểm từ 00h00 ngày 25/06/2014 đến 23h59 ngày 01/07/2014)</p>
+                (Tính điểm từ 00h00 ngày 25/06/2014 đến 23h59 ngày 01/07/2014)<br/>
+				GIẢI THƯỞNG TUẦN 04<br/> 
+				Một chuyến du lịch Singapore dành cho hai người bao gồm vé máy bay và hai đêm khách sạn </p>
                 <?php echo $this->Element('winner_table'); ?>
             </div>
             <div class="tab-pane" id="week5">
                 <p>Kết quả người chơi có số điểm cao tuần 5:<br />
-                (Tính điểm từ 00h00 ngày 02/07/2014 đến 23h59 ngày 08/07/2014)</p>
+                (Tính điểm từ 00h00 ngày 02/07/2014 đến 23h59 ngày 08/07/2014)<br/>
+				GIẢI THƯỞNG TUẦN 05<br/> 
+				Một Iphone 5s </p>
                 <?php echo $this->Element('winner_table'); ?>
             </div>
         </div>
 
         <div id="Figure" class="text-center" class="clearfix">
             <?php echo $this->Html->image('microsite/STICKERS_dzooo3.png'); ?>
-            <p>Ban Tổ Chức xin thông báo : Tất cả các Groups có ít hơn 5 thành viên sẽ không được xem là hợp lệ.</p>
+            <p style="padding:10px;">BTC xin thông báo : Để đảm bảo tính công bằng cho cuộc thi, những số điện thoại tham gia có dấu hiệu vi phạm thể lệ được phát hiện qua hệ thống quản lý của Viber sẽ bị block và loại khỏi cuộc chơi mà không cần báo trước. Toàn bộ số điểm ghi được bằng sai phạm sẽ không được tính.
+            </p>
         </div>
     </div>
 </div>
