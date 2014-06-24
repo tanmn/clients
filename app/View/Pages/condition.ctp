@@ -39,7 +39,7 @@ $this->end('script');
         <strong>3.     Cách thức tham gia:</strong><br/>
        Người tham gia chương trình “Nhắn Viber, đi Brazil” sử dụng ứng dụng Viber trên điện thoại hoặc máy tính để bắt đầu tham gia chương trình (nếu bạn chưa cài đặt Viber, bạn vui lòng cài đặt để bắt đầu tham gia)
 
-       <br/> * Bước 1: ĐĂNG KÝ nhận mã tính điểm (Số điện thoại )
+       <br/> * Bước 1: ĐĂNG KÝ nhận mã tính điểm (Số điện thoại).
        <br/> Bằng cách truy cập website <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a>,nhập số điện thoại cá nhân để nhận  mã tính điểm (số điện thoaị).
         <br/>** Bước 2 : TẠO NHÓM tham gia chương trình
         <br/>Tạo nhóm ít nhất gồm 5 thành viên và thêm mã tính điểm này vào nhóm.
@@ -51,7 +51,7 @@ $this->end('script');
     </li>
     <li>
         <strong>4.     Điều kiện chấm giải</strong><br/>
-        Điểm chung cuộc chính là tổng điểm từ số lượng các tin nhắn và sticker người tham gia chương trình  <strong>“ Nhắn Viber, đi Brazil” </strong> đã gửi đi trong suốt chương trình.  <strong>Giải thưởng đặc biệt dành cho hai cá nhân tham gia liện tục và có tổng điểm cuối cùng cao nhất </strong>.
+        Điểm chung cuộc chính là tổng điểm từ số lượng các tin nhắn và sticker người tham gia chương trình  <strong>“ Nhắn Viber, đi Brazil” </strong> đã gửi đi trong suốt chương trình.  <strong> Một giải thưởng đặc biệt sẽ dành cho cá nhân tham gia liện tục và có tổng điểm cuối cùng cao nhất. </strong>.
         <br/>-  <strong>Một tin nhắn hay hình ảnh </strong> được gửi đi sẽ được tính là <strong> 1 điểm </strong>
         <br/>-  <strong>Một sticker </strong> được gửi đi sẽ được tính là  <strong>3 điểm </strong>
     </li>
@@ -91,8 +91,8 @@ $this->end('script');
        <br/> - Giải thưởng tuần cho cá nhân và tập thể theo tuần sẽ được cập nhật vào mỗi thứ 4 hàng tuần vào lúc 8h sáng.
         <br/>- Người trúng giải nhận vé điện tử bằng cách nhập số điện thoại vào MỤC “Nhận mã QR để tham gia sự kiện”</strong> tại trang chủ của website <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a>.
        <br/> - Giải thưởng chuyến du lich & vé máy bay đến Brazil có thể quy đổi thành tiền.
-        <br/>- Giải thưởng đặc biệt dành cho 2 cá nhân được thông báo tại sự kiện ngày 14/07.
-        <br/>- Ba ngày trước sự kiện,20 ngườitham gia có số điểm cao nhất sẽ được thông báotrực tiếp từ BTC qua số điện thoại đã được đăng ký. Đây là top những người có cơ hội dành giải đặc biệt và họ phải có mặt tại sự kiện để nhận giải. Tất cả những người thắng cuộc sẽ được mời đến sự kiện để tham gia lễ trao giải.
+        <br/>- Giải thưởng đặc biệt được thông báo tại sự kiện ngày 14/07.
+        <br/>- Ba ngày trước sự kiện, 20 người tham gia có số điểm cao nhất sẽ được thông báotrực tiếp từ BTC qua số điện thoại đã được đăng ký. Đây là top những người có cơ hội dành giải đặc biệt và họ phải có mặt tại sự kiện để nhận giải. Tất cả những người thắng cuộc sẽ được mời đến sự kiện để tham gia lễ trao giải.
         <br/>- Mọi thắc mắc về chương trình vui lòng đặt câu hỏi trên trang <a href="https://www.facebook.com/ViberVietnamOfficial" target="_blank">Fanpage Viber Việt Nam</a>.
         <br/>- Mỗi số điện thoại tương ứng với người tham dự chương trình <strong>“Nhắn Viber, chỉ được nhận một giải thưởng tuần duy nhất"</strong>.
 
