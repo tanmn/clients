@@ -39,7 +39,7 @@ $(function() {
 
             if ('user' in json && 'MasterUser' in json.user) {
                 if (json.user.MasterUser.avatar) {
-                    topUser.find('img').attr('src', json.user.MasterUser.avatar).show();
+                    topUser.find('img').attr('src', json.user.MasterUser.avatar + '?c' + (new Date() - 0)).show();
                 } else {
                     topUser.find('img').hide();
                 }

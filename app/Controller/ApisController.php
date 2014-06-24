@@ -125,21 +125,21 @@ class ApisController extends AppController {
     public function test(){
         $this->loadModel('MasterPoint');
         $this->request->data['date'] = '2014/06/23';
-        $context = $this->getContext('week2');
+        $context = $this->getContext('week3');
 
         if($context === NULL){
             $this->output = NULL;
             return;
         }
 
-        $members = $this->MasterPoint->getTopUsersForReport(5, $context);
+        $members = $this->MasterPoint->getTopUsersForReport(250, $context);
         $groups = array();
         $group_members = array();
 
         $validGroups = $this->MasterPoint->getValidGroups();
 
         if(!empty($validGroups)){
-            $groups = $this->MasterPoint->getTopGroups(5, $context + array('MasterPoint.group_code' => array_keys($validGroups)));
+            $groups = $this->MasterPoint->getTopGroups(10, $context + array('MasterPoint.group_code' => array_keys($validGroups)));
             $group_ids = array();
 
             foreach($groups as $i => $group){
@@ -154,7 +154,7 @@ class ApisController extends AppController {
         $csv_member = array();
 
         // members
-        $csv_data[] = array('TOP MEMBERS');
+        $csv_data[] = array('TOP ' . count($members) . ' MEMBERS');
         $csv_data[] = array('#', 'Phone', 'Is Bot', 'Points', 'Viber Name', 'Read Name', 'Device', 'Address');
 
         foreach($members as $i => $mem){
@@ -174,7 +174,7 @@ class ApisController extends AppController {
         $csv_data[] = array();
 
         // groups
-        $csv_data[] = array('TOP GROUPS');
+        $csv_data[] = array('TOP ' . count($groups) . ' VALID GROUPS');
         $csv_data[] = array('#', 'Group Name', 'Group ID', 'Points', 'Members');
 
         foreach($groups as $i => $group){

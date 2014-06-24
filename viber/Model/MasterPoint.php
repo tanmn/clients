@@ -96,7 +96,7 @@ class MasterPoint extends AppModel {
 
         $conditions[] = array(
             'OR' => array(
-                $alias . '.number <> ' . $alias . '.group_code'
+                $alias . '.number <> ' . $alias . '.group_code',
                 $alias . '.virtual_flag' => TRUE
             )
         );
@@ -129,7 +129,7 @@ class MasterPoint extends AppModel {
 
         $conditions[] = array(
             'OR' => array(
-                $alias . '.number <> ' . $alias . '.group_code'
+                $alias . '.number <> ' . $alias . '.group_code',
                 $alias . '.virtual_flag' => TRUE
             )
         );
