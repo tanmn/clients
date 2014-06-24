@@ -78,7 +78,8 @@ class MasterPoint extends AppModel {
 
     public $virtualFields = array(
         'points' => 'SUM(IF(msg_type = "sticker", quantity * 3, quantity * 1))',
-        'players' => 'COUNT(DISTINCT MasterPoint.number)'
+        'players' => 'COUNT(DISTINCT MasterPoint.number)',
+        'raw_number' => 'MasterPoint.number'
     );
 
     public $belongsTo = array(
@@ -126,17 +127,6 @@ class MasterPoint extends AppModel {
     public function getValidGroups($conditions = array()){
         $alias = $this->alias;
 
-        $conditions[] = array(
-            'OR' => array(
-                array(
-                    $alias . '.number <> ' . $alias . '.group_code',
-                    $alias . '.report_date >=' => '2014-06-24'
-                ),
-                $alias . '.report_date <' => '2014-06-24',
-                $alias . '.virtual_flag' => TRUE
-            )
-        );
-
         $results = $this->find(
             'list',
             array(
@@ -174,13 +164,13 @@ class MasterPoint extends AppModel {
             'all',
             array(
                 'fields' => array(
-                    // $alias . '.group_code',
+                    $alias . '.group_code',
                     'MasterGroup.group_name',
                     $alias . '.points'
                 ),
                 'conditions' => $conditions,
                 'contain' => array('MasterGroup'),
-                'group' => array($alias . '.group_code', 'MasterGroup.group_name'),
+                'group' => array($alias . '.group_code'),
                 'order' => array($alias . '.points' => 'DESC'),
                 'limit' => $limit,
                 'cacheConfig' => 'apis',
@@ -222,6 +212,40 @@ class MasterPoint extends AppModel {
                 'contain' => array('MasterUser.name', 'MasterUser.real_name', 'MasterUser.address', 'MasterUser.device', 'MasterUser.avatar'),
                 'cacheConfig' => 'apis',
                 'cache' => '_' . $cache_name
+            )
+        );
+
+        return $results;
+    }
+
+    public function getTopUsersForReport($limit = 10, $conditions = array()){
+        $alias = $this->alias;
+
+        $conditions[] = array(
+            'OR' => array(
+                array(
+                    $alias . '.number <> ' . $alias . '.group_code',
+                    $alias . '.report_date >=' => '2014-06-24'
+                ),
+                $alias . '.report_date <' => '2014-06-24',
+                $alias . '.virtual_flag' => TRUE
+            )
+        );
+
+        $results = $this->find(
+            'all',
+            array(
+                'fields' => array(
+                    $alias . '.number',
+                    $alias . '.virtual_flag',
+                    $alias . '.raw_number',
+                    $alias . '.points'
+                ),
+                'conditions' => $conditions,
+                'group' => array($alias . '.number'),
+                'order' => array($alias . '.points' => 'DESC'),
+                'limit' => $limit,
+                'contain' => array('MasterUser.name', 'MasterUser.real_name', 'MasterUser.address', 'MasterUser.device', 'MasterUser.avatar'),
             )
         );
 
@@ -273,15 +297,13 @@ class MasterPoint extends AppModel {
             'all',
             array(
                 'fields' => array(
-                    // 'DISTINCT ' . $alias . '.number',
-                    // $alias . '.group_code'
-                    'MasterUser.name',
-                    'MasterUser.avatar'
+                    'DISTINCT ' . $alias . '.number',
+                    $alias . '.group_code',
+                    $alias . '.virtual_flag',
+                    $alias . '.raw_number',
                 ),
                 'conditions' => $conditions,
-                'contain' => array('MasterUser.name','MasterUser.address','MasterUser.device', 'MasterUser.avatar'),
-                'cacheConfig' => 'apis',
-                'cache' => 'GroupUsers' . $cache_name
+                'contain' => array('MasterUser.name', 'MasterUser.real_name', 'MasterUser.address', 'MasterUser.device', 'MasterUser.avatar'),
             )
         );
 

@@ -9,7 +9,7 @@ class ApisController extends AppController {
     public $layout = 'ajax';
 
     public function beforeFilter($options = array()){
-        if(!($this->request->is('post') || $this->request->is('ajax'))) return $this->redirect('/');
+        if(!(Configure::read('debug') || $this->request->is('post') || $this->request->is('ajax'))) return $this->redirect('/');
     }
 
     public function beforeRender($options = array()){
@@ -76,6 +76,153 @@ class ApisController extends AppController {
         $this->loadModel('MasterPoint');
 
         $type = @$this->request->data['type'];
+        $context = $this->getContext($type);
+
+        if($context === NULL){
+            $this->output = NULL;
+            return;
+        }
+
+        $users = $user = $group = $group_members = array();
+
+        if($type == 'daily'){
+            $users = $this->MasterPoint->getTopUsers(250, $context);
+        }
+
+        $user = $this->MasterPoint->getTopUsers(1, $context);
+
+        if(!empty($user)){
+            $user = array_pop($user);
+        }
+
+        $validGroups = $this->MasterPoint->getValidGroups(array(
+            'MasterPoint.report_date <' => date('Y-m-d')
+        ));
+
+        if(!empty($validGroups)){
+            $groups = $this->MasterPoint->getTopGroups($type == 'week1' ? 1 : 2, array($context, 'MasterPoint.group_code' => array_keys($validGroups)));
+
+            foreach($groups as $i => $group){
+                $groups[$i]['MasterGroup']['players'] = $validGroups[$group['MasterGroup']['group_code']];
+                // $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
+            }
+        }
+
+        $this->output = compact('users', 'user', 'groups', 'group_members');
+    }
+
+
+    public function getGroupUser($group){
+        $this->loadModel('MasterPoint');
+
+        if(isset($this->request->data['group_code'])){
+            $group = $this->request->data['group_code'];
+        }
+
+        $this->output = $this->MasterPoint->getGroupUsers($group);
+    }
+
+    public function test(){
+        $this->loadModel('MasterPoint');
+        $this->request->data['date'] = '2014/06/23';
+        $context = $this->getContext('week2');
+
+        if($context === NULL){
+            $this->output = NULL;
+            return;
+        }
+
+        $members = $this->MasterPoint->getTopUsersForReport(5, $context);
+        $groups = array();
+        $group_members = array();
+
+        $validGroups = $this->MasterPoint->getValidGroups();
+
+        if(!empty($validGroups)){
+            $groups = $this->MasterPoint->getTopGroups(5, $context + array('MasterPoint.group_code' => array_keys($validGroups)));
+            $group_ids = array();
+
+            foreach($groups as $i => $group){
+                $groups[$i]['MasterGroup']['players'] = $validGroups[$group['MasterGroup']['group_code']];
+                $groups[$i]['members'] = $this->MasterPoint->getGroupUsers($group['MasterGroup']['group_code']);
+            }
+
+            $group_members[$group['MasterGroup']['group_code']] = $groups[$i]['members'];
+        }
+
+        $csv_data = array();
+        $csv_member = array();
+
+        // members
+        $csv_data[] = array('TOP MEMBERS');
+        $csv_data[] = array('#', 'Phone', 'Is Bot', 'Points', 'Viber Name', 'Read Name', 'Device', 'Address');
+
+        foreach($members as $i => $mem){
+            $csv_data[] = array(
+                $i + 1,
+                "'" . $mem['MasterPoint']['raw_number'],
+                $mem['MasterPoint']['virtual_flag'] ? 'YES' : 'NO',
+                $mem['MasterPoint']['points'],
+                $mem['MasterUser']['name'],
+                $mem['MasterUser']['real_name'],
+                $mem['MasterUser']['device'],
+                $mem['MasterUser']['address']
+            );
+        }
+
+        $csv_data[] = array();
+        $csv_data[] = array();
+
+        // groups
+        $csv_data[] = array('TOP GROUPS');
+        $csv_data[] = array('#', 'Group Name', 'Group ID', 'Points', 'Members');
+
+        foreach($groups as $i => $group){
+            $csv_data[] = array(
+                $i + 1,
+                $group['MasterGroup']['group_name'],
+                "'" . $group['MasterGroup']['group_code'],
+                $group['MasterPoint']['points'],
+                $group['MasterGroup']['players']
+            );
+
+            $csv_member[] = array('Member of ' . $group['MasterGroup']['group_name'] . ' [' . $group['MasterGroup']['group_code'] . ']');
+            $csv_member[] = array('#', 'Phone', 'Is Bot', 'Viber Name', 'Read Name', 'Device', 'Address');
+            foreach($group['members'] as $i => $mem){
+                $csv_member[] = array(
+                    $i + 1,
+                    "'" . $mem['MasterPoint']['raw_number'],
+                    $mem['MasterPoint']['virtual_flag'] ? 'YES' : 'NO',
+                    $mem['MasterUser']['name'],
+                    $mem['MasterUser']['real_name'],
+                    $mem['MasterUser']['device'],
+                    $mem['MasterUser']['address']
+                );
+            }
+            $csv_member[] = array();
+        }
+
+        $csv_data[] = array();
+        $csv_data[] = array();
+
+        foreach($csv_member as $line){
+            $csv_data[] = $line;
+        }
+
+        // $csv_data[] = $group_members;
+        $filename = 'test.csv';
+        // force download
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+
+        // disposition / encoding on response body
+        header("Content-Disposition: attachment;filename={$filename}");
+        header("Content-Transfer-Encoding: binary");
+        echo $this->array2csv($csv_data); exit;
+    }
+
+    protected function getContext($type = ''){
         $context = array();
 
         switch($type){
@@ -102,7 +249,7 @@ class ApisController extends AppController {
 
             case 'week1':
                 if(time() < strtotime('2014-06-11 06:00:00')){
-                    $this->output = NULL;
+                    $context = NULL;
                     return;
                 }
                 $context = array(
@@ -112,7 +259,7 @@ class ApisController extends AppController {
 
             case 'week2':
                 if(time() < strtotime('2014-06-18 06:00:00')){
-                    $this->output = NULL;
+                    $context = NULL;
                     return;
                 }
                 $context = array(
@@ -122,7 +269,7 @@ class ApisController extends AppController {
 
             case 'week3':
                 if(time() < strtotime('2014-06-25 06:00:00')){
-                    $this->output = NULL;
+                    $context = NULL;
                     return;
                 }
                 $context = array(
@@ -132,7 +279,7 @@ class ApisController extends AppController {
 
             case 'week4':
                 if(time() < strtotime('2014-07-02 06:00:00')){
-                    $this->output = NULL;
+                    $context = NULL;
                     return;
                 }
                 $context = array(
@@ -142,7 +289,7 @@ class ApisController extends AppController {
 
             case 'week5':
                 if(time() < strtotime('2014-07-09 06:00:00')){
-                    $this->output = NULL;
+                    $context = NULL;
                     return;
                 }
                 $context = array(
@@ -152,7 +299,7 @@ class ApisController extends AppController {
 
             case 'all':
                 if(time() < strtotime('2014-07-14 04:00:00')){
-                    $this->output = NULL;
+                    $context = NULL;
                     return;
                 }
                 $context = array(
@@ -161,53 +308,25 @@ class ApisController extends AppController {
                 break;
 
             default:
-                $this->output = NULL;
+                $context = NULL;
                 return;
         }
 
-        $users = $user = $group = $group_members = array();
-
-        if($type == 'daily'){
-            $users = $this->MasterPoint->getTopUsers(250, $context);
-        }
-
-        $user = $this->MasterPoint->getTopUsers(1, $context);
-
-        if(!empty($user)){
-            $user = array_pop($user);
-        }
-
-        $validGroups = $this->MasterPoint->getValidGroups(array(
-            'MasterPoint.report_date <' => date('Y-m-d')
-        ));
-
-        if(!empty($validGroups)){
-            $groups = $this->MasterPoint->getTopGroups($type == 'week1' ? 1 : 2, array($context, 'MasterPoint.group_code' => array_keys($validGroups)));
-
-            foreach($groups as &$group){
-                $group['MasterGroup']['players'] = $validGroups[$group['MasterGroup']['group_code']];
-                // $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
-            }
-        }
-
-        $this->output = compact('users', 'user', 'groups', 'group_members');
+        return $context;
     }
 
-
-    public function getGroupUser($group){
-        $this->loadModel('MasterPoint');
-
-        if(isset($this->request->data['group_code'])){
-            $group = $this->request->data['group_code'];
-        }
-
-        $this->output = $this->MasterPoint->getGroupUsers($group);
-    }
-
-    public function test(){
-        $this->loadModel('MasterPoint');
-        $this->output = $this->MasterPoint->getValidGroups(array(
-                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-04', '2014-06-10')
-                ));
+    protected function array2csv(array &$array)
+    {
+       if (count($array) == 0) {
+         return null;
+       }
+       ob_start();
+       $df = fopen("php://output", 'w');
+       fputcsv($df, array_keys(reset($array)));
+       foreach ($array as $row) {
+          fputcsv($df, $row);
+       }
+       fclose($df);
+       return ob_get_clean();
     }
 }
