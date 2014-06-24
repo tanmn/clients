@@ -96,11 +96,7 @@ class MasterPoint extends AppModel {
 
         $conditions[] = array(
             'OR' => array(
-                array(
-                    $alias . '.number <> ' . $alias . '.group_code',
-                    $alias . '.report_date >=' => '2014-06-24'
-                ),
-                $alias . '.report_date <' => '2014-06-24',
+                $alias . '.number <> ' . $alias . '.group_code'
                 $alias . '.virtual_flag' => TRUE
             )
         );
@@ -133,11 +129,7 @@ class MasterPoint extends AppModel {
 
         $conditions[] = array(
             'OR' => array(
-                array(
-                    $alias . '.number <> ' . $alias . '.group_code',
-                    $alias . '.report_date >=' => '2014-06-24'
-                ),
-                $alias . '.report_date <' => '2014-06-24',
+                $alias . '.number <> ' . $alias . '.group_code'
                 $alias . '.virtual_flag' => TRUE
             )
         );
