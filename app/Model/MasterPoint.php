@@ -98,6 +98,14 @@ class MasterPoint extends AppModel {
             'order' => '',
             'limit' => '',
             'dependent' => false
+        ),
+        'MasterHotline' => array(
+            'className' => 'MasterHotline',
+            'foreignKey' => 'hotline',
+            'conditions' => array(),
+            'order' => '',
+            'limit' => '',
+            'dependent' => false
         )
     );
 
@@ -126,6 +134,8 @@ class MasterPoint extends AppModel {
 
     public function getValidGroups($conditions = array()){
         $alias = $this->alias;
+
+        $conditions[$alias . '.number <>'] = $this->MasterHotline->find('list');
 
         $results = $this->find(
             'list',

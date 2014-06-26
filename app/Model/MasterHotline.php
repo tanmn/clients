@@ -6,6 +6,8 @@ App::uses('AppModel', 'Model');
  */
 class MasterHotline extends AppModel {
 
+    public $displayField = 'hotline';
+
 /**
  * Validation rules
  *

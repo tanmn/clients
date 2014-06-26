@@ -87,6 +87,38 @@ class ApisController extends AppController {
 
         if($type == 'daily'){
             $users = $this->MasterPoint->getTopUsers(250, $context);
+
+            if($context['MasterPoint.report_date'] < '2014-06-25'){
+                $validGroups = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.group_code' => array(
+                        '4659650366756059435',
+                        '4659641814431663653',
+                        '4659643492723923473',
+                        '4661076854936320247',
+                        '4641349279408765951',
+                        '4641629212038307940',
+                        '4618436731399643146'
+                    )
+                ));
+            }else{
+                $validGroups = $this->MasterPoint->getValidGroups();
+            }
+        }else{
+            if(in_array($type, array('week1', 'week2', 'week3'))){
+                $validGroups = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.group_code' => array(
+                        '4659650366756059435',
+                        '4659641814431663653',
+                        '4659643492723923473',
+                        '4661076854936320247',
+                        '4641349279408765951',
+                        '4641629212038307940',
+                        '4618436731399643146'
+                    )
+                ));
+            }else{
+                $validGroups = $this->MasterPoint->getValidGroups();
+            }
         }
 
         $user = $this->MasterPoint->getTopUsers(1, $context);
@@ -95,12 +127,8 @@ class ApisController extends AppController {
             $user = array_pop($user);
         }
 
-        $validGroups = $this->MasterPoint->getValidGroups(array(
-            'MasterPoint.report_date <' => date('Y-m-d')
-        ));
-
         if(!empty($validGroups)){
-            $groups = $this->MasterPoint->getTopGroups($type == 'week1' ? 1 : 2, array($context, 'MasterPoint.group_code' => array_keys($validGroups)));
+            $groups = $this->MasterPoint->getTopGroups($type == 'week1' || $type == 'daily' ? 1 : 2, array($context, 'MasterPoint.group_code' => array_keys($validGroups)));
 
             foreach($groups as $i => $group){
                 $groups[$i]['MasterGroup']['players'] = $validGroups[$group['MasterGroup']['group_code']];
@@ -124,8 +152,9 @@ class ApisController extends AppController {
 
     public function test(){
         $this->loadModel('MasterPoint');
+        $type = 'week3';
         $this->request->data['date'] = '2014/06/23';
-        $context = $this->getContext('week3');
+        $context = $this->getContext($type);
 
         if($context === NULL){
             $this->output = NULL;
@@ -136,7 +165,39 @@ class ApisController extends AppController {
         $groups = array();
         $group_members = array();
 
-        $validGroups = $this->MasterPoint->getValidGroups();
+        if($type == 'daily'){
+            if($context['MasterPoint.report_date'] < '2014-06-25'){
+                $validGroups = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.group_code' => array(
+                        '4659650366756059435',
+                        '4659641814431663653',
+                        '4659643492723923473',
+                        '4661076854936320247',
+                        '4641349279408765951',
+                        '4641629212038307940',
+                        '4618436731399643146'
+                    )
+                ));
+            }else{
+                $validGroups = $this->MasterPoint->getValidGroups();
+            }
+        }else{
+            if(in_array($type, array('week1', 'week2', 'week3'))){
+                $validGroups = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.group_code' => array(
+                        '4659650366756059435',
+                        '4659641814431663653',
+                        '4659643492723923473',
+                        '4661076854936320247',
+                        '4641349279408765951',
+                        '4641629212038307940',
+                        '4618436731399643146'
+                    )
+                ));
+            }else{
+                $validGroups = $this->MasterPoint->getValidGroups();
+            }
+        }
 
         if(!empty($validGroups)){
             $groups = $this->MasterPoint->getTopGroups(10, $context + array('MasterPoint.group_code' => array_keys($validGroups)));
