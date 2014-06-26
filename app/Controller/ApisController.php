@@ -303,7 +303,7 @@ class ApisController extends AppController {
                     return;
                 }
                 $context = array(
-                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-04', '2014-07-01')
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-04', '2014-07-08')
                 );
                 break;
 
