@@ -148,7 +148,7 @@ class UserShell extends AppShell {
 
         App::uses('CakeEmail', 'Network/Email');
         $Email = new CakeEmail('gmail');
-        $Email->to(Configure::read('ADMINISTRATORS'));
+        $Email->to(Configure::read('DEVELOPERS'));
 
         if(isset($attachment)){
             $Email->attachments($attachment);
