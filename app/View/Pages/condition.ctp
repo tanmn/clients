@@ -28,7 +28,7 @@ $this->end('script');
     <ul>
     <li>
         <strong>1.     Đối tượng tham gia:</strong><br/>
-         -	Chương trình dành cho mọi người tại Việt Nam đã, đang và sẽ sử dụng ứng dụng Viber
+         -	Chương trình dành cho mọi người tại Việt Nam đã, đang và sẽ sử dụng ứng dụng Viber.
         <br/>-	Thành viên Ban Tổ Chức và các đơn vị hợp tác sẽ không được tham gia chương trình này.
     </li>
     <li>
@@ -37,62 +37,61 @@ $this->end('script');
     </li>
     <li>
         <strong>3.     Cách thức tham gia:</strong><br/>
-       Người tham gia chương trình “Nhắn Viber, đi Brazil” sử dụng ứng dụng Viber trên điện thoại hoặc máy tính để bắt đầu tham gia chương trình (nếu bạn chưa cài đặt Viber, bạn vui lòng cài đặt để bắt đầu tham gia)
+       Người tham gia chương trình “Nhắn Viber, đi Brazil” sử dụng ứng dụng Viber trên điện thoại hoặc máy tính để bắt đầu tham gia chương trình (nếu bạn chưa cài đặt Viber, bạn vui lòng cài đặt để bắt đầu tham gia).
 
        <br/> * Bước 1: ĐĂNG KÝ nhận mã tính điểm (Số điện thoại).
-       <br/> Bằng cách truy cập website <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a>,nhập số điện thoại cá nhân để nhận  mã tính điểm (số điện thoaị).
-        <br/>** Bước 2 : TẠO NHÓM tham gia chương trình
+       <br/> Bằng cách truy cập website <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a>, nhập số điện thoại cá nhân để nhận  mã tính điểm(số điện thoaị).
+        <br/>** Bước 2: TẠO NHÓM tham gia chương trình
         <br/>Tạo nhóm ít nhất gồm 5 thành viên và thêm mã tính điểm này vào nhóm.
         
         <br/>*** Bước 3: Kích hoạt nhóm bằng tin nhắn <strong>“Nhắn Viber đi Brazil”</strong>. Tiếp tục nhắn tin và gửi sticker để tích lũy điểm hàng ngày và săn giải thưởng.
-       <br/> Lưu ý 1: Nếu không thêm mã tính điểm (số điện thoại do website cung cấp), thì nhóm coi như không hợp lệ. Nhóm càng có nhiều thành viên, nhắn tin và gửi sticker càng được nhiều điểm, cơ hội nhận giải.
+       <br/> Lưu ý 1: Nếu không thêm mã tính điểm (số điện thoại do website cung cấp), thì nhóm coi như không hợp lệ. Nhóm càng có nhiều thành viên, nhắn tin và gửi sticker càng được nhiều điểm, cơ hội nhận giải càng cao.
 
 
     </li>
     <li>
-        <strong>4.     Điều kiện chấm giải</strong><br/>
-        Điểm chung cuộc chính là tổng điểm từ số lượng các tin nhắn và sticker người tham gia chương trình  <strong>“ Nhắn Viber, đi Brazil” </strong> đã gửi đi trong suốt chương trình.  <strong> Một giải thưởng đặc biệt sẽ dành cho cá nhân tham gia liện tục và có tổng điểm cuối cùng cao nhất. </strong>.
-        <br/>-  <strong>Một tin nhắn hay hình ảnh </strong> được gửi đi sẽ được tính là <strong> 1 điểm </strong>
-        <br/>-  <strong>Một sticker </strong> được gửi đi sẽ được tính là  <strong>3 điểm </strong>
+        <strong>4.     Điều kiện chấm giải: </strong><br/>
+        Điểm chung cuộc chính là tổng điểm từ số lượng các tin nhắn và sticker người tham gia chương trình  <strong>“Nhắn Viber, đi Brazil” </strong> đã gửi đi trong suốt chương trình.  <strong> Một giải thưởng đặc biệt sẽ dành cho cá nhân tham gia liện tục và có tổng điểm cuối cùng cao nhất. </strong>
+        <br/>-  <strong>Một tin nhắn hay hình ảnh </strong> được gửi đi sẽ được tính là <strong> 1 điểm. </strong>
+        <br/>-  <strong>Một sticker </strong> được gửi đi sẽ được tính là  <strong>3 điểm. </strong>
     </li>
     <li>
         <strong>5.  	Cách theo dõi điểm:</strong><br/>
       - Truy cập vào website <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a>
-      <br/> - Nhập số điện thoại cá nhân đểtheo dõi điểm tích lũy. Điểm tích lũy là tổng điểm người chơi đạt được trong quá trình tham gia.
+      <br/> - Nhập số điện thoại cá nhân để theo dõi điểm tích lũy. Điểm tích lũy là tổng điểm người chơi đạt được trong quá trình tham gia.
 
-      <br/> - Điểm số được tính mỗi ngày từ 00h00 – 23h59 và cập nhật lên websitewww.vibergotobrazil.comlúc 8h00 mỗi ngày cho đến hết chương trình.
+      <br/> - Điểm số được tính mỗi ngày từ 00h00 – 23h59 và cập nhật lên website <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a> lúc 8h00 mỗi ngày cho đến hết chương trình.
 
     </li>
     <li>
-        <strong>6.     Cơ cấu Giải thưởng</strong><br/>
-       <strong>*Giải thưởng  NGÀY dành cho CÁ NHÂN có tổng điểm cao nhất :</strong>
+        <strong>6.     Cơ cấu Giải thưởng:</strong><br/>
+       <strong>*Giải thưởng  NGÀY dành cho CÁ NHÂN có tổng điểm cao nhất: </strong>
        <br/>   Thẻ cào mệnh giá 100.000 VNĐ  dành cho 10 người cao điểm nhất mỗi ngày.
          <br/>250 vé điện tử dành cho 250 người cao điểm nhất mỗi ngày.
     <br/>
-       <br/><strong>**Giải thưởng TUẦN dành cho CÁ NHÂN có tổng điểm cao nhất :</strong>
-      <br/> <strong>Tuần 1:</strong> Một iphone 5C (Tính điểm từ 00h00 ngày 04/06/2014 đến 23h59 ngày 10/06/2014)
+       <br/><strong>**Giải thưởng TUẦN dành cho CÁ NHÂN có tổng điểm cao nhất:</strong>
+      <br/> <strong>Tuần 1:</strong> Một iphone 5C (Tính điểm từ 00h00 ngày 04/06/2014 đến 23h59 ngày 10/06/2014).
 
-       <br/><strong>Tuần 2:</strong> Một chuyến du lịch trong nước bao gồm vé máy bay và hai đêm khách sạn (Tính điểm từ 00h00 ngày 11/06/2014 đến 23h59 ngày 17/06/2014)
+       <br/><strong>Tuần 2:</strong> Một chuyến du lịch trong nước bao gồm vé máy bay và hai đêm khách sạn (Tính điểm từ 00h00 ngày 11/06/2014 đến 23h59 ngày 17/06/2014).
 
-      <br/> <strong>Tuần 3:</strong> Một  ipad mini (Tính điểm từ 00h00 ngày 18/06/2014 đến 23h59 ngày 25/06/2014)
-       <br/><strong>Tuần 4:</strong> Một chuyến du lịch Singapore dành cho hai người  bao gồm vé máy bay và hai đêm khách sạn (Tính điểm từ 00h00 ngày 25/06/2014 đến 23h59 ngày 02/07/2014).
-       <br/><strong>Tuần 5:</strong> Một  Iphone 5s (Tính điểm từ 00h00 ngày 02/07/2014 đến 23h59 ngày 09/06/ 2014)
+      <br/> <strong>Tuần 3:</strong> Một  ipad mini (Tính điểm từ 00h00 ngày 18/06/2014 đến 23h59 ngày 25/06/2014).
+       <br/><strong>Tuần 4:</strong> Một giải bao gồm 2 vé máy bay Thái Lan(Tính điểm từ 00h00 ngày 25/06/2014 đến 23h59 ngày 02/07/2014).
+       <br/><strong>Tuần 5:</strong> Một  Iphone 5s (Tính điểm từ 00h00 ngày 02/07/2014 đến 23h59 ngày 09/06/ 2014).
 
        <br/><strong>** Giải thưởng TUẦN dành cho NHÓM có tổng điểm cao nhất của tuần:</strong>
-        <br/>Mỗi tuần sẽ có 02 nhóm nhận được giải thưởng dành cho nhóm có tổng điểm cao nhất của tuần.Mỗi nhóm nhận được 05 thẻ cào mệnh giá 100.000 vnđ.
+        <br/>Mỗi tuần sẽ có 02 nhóm nhận được giải thưởng dành cho nhóm có tổng điểm cao nhất của tuần.Mỗi nhóm nhận được 05 thẻ cào mệnh giá 100.000 VND.
 
        <br/><strong>*** Giải thưởng ĐẶC BIỆT dành cho CÁ NHÂN tham gia liên tục và có tổng điểm cao nhất:</strong>
-         <br/>Hai vé máy bay đến Brazil nơi diễn ra Football 2014 (Tính điểm từ 00h00 ngày 02/07/2014 đến 23h59 ngày 13/07/2014)
-        điểm từ 00h00 ngày 25/06/2014 đến 23h59 ngày 02/07/2014)
+         <br/>Hai vé máy bay đến Brazil nơi diễn ra Football 2014 (Tính điểm từ 00h00 ngày 04/06/2014 đến 23h59 ngày 13/07/2014).
 
         
         <br/><strong>Lưu ý 2:</strong>
         <br/> - Mỗi người chỉ nhận được một giải tuần duy nhất.
        <br/> - Giải thưởng tuần cho cá nhân và tập thể theo tuần sẽ được cập nhật vào mỗi thứ 4 hàng tuần vào lúc 8h sáng.
-        <br/>- Người trúng giải nhận vé điện tử bằng cách nhập số điện thoại vào MỤC “Nhận mã QR để tham gia sự kiện”</strong> tại trang chủ của website <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a>.
+        <br/>- Người trúng giải nhận vé điện tử bằng cách nhập số điện thoại vào MỤC “Nhận mã QR để tham gia sự kiện”</strong> tại trang chủ của website: <a href="www.vibergotobrazil.com">www.vibergotobrazil.com</a>.
        <br/> - Giải thưởng chuyến du lich & vé máy bay đến Brazil có thể quy đổi thành tiền.
         <br/>- Giải thưởng đặc biệt được thông báo tại sự kiện ngày 14/07.
-        <br/>- Ba ngày trước sự kiện, 20 người tham gia có số điểm cao nhất sẽ được thông báotrực tiếp từ BTC qua số điện thoại đã được đăng ký. Đây là top những người có cơ hội dành giải đặc biệt và họ phải có mặt tại sự kiện để nhận giải. Tất cả những người thắng cuộc sẽ được mời đến sự kiện để tham gia lễ trao giải.
+        <br/>- Ba ngày trước sự kiện, 20 người tham gia có số điểm cao nhất sẽ được thông báo trực tiếp từ BTC qua số điện thoại đã được đăng ký. Đây là top những người có cơ hội dành giải đặc biệt và họ phải có mặt tại sự kiện để nhận giải. Tất cả những người thắng cuộc sẽ được mời đến sự kiện để tham gia lễ trao giải.
         <br/>- Mọi thắc mắc về chương trình vui lòng đặt câu hỏi trên trang <a href="https://www.facebook.com/ViberVietnamOfficial" target="_blank">Fanpage Viber Việt Nam</a>.
         <br/>- Mỗi số điện thoại tương ứng với người tham dự chương trình <strong>“Nhắn Viber, chỉ được nhận một giải thưởng tuần duy nhất"</strong>.
 

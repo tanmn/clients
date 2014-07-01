@@ -144,7 +144,7 @@ class ApisController extends AppController {
 
     public function test(){
         $this->loadModel('MasterPoint');
-        $type = 'week3';
+        $type = 'week4';
         $this->request->data['date'] = '2014/06/23';
         $context = $this->getContext($type);
 
@@ -308,7 +308,8 @@ class ApisController extends AppController {
                     return;
                 }
                 $context = array(
-                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17')
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17'),
+                    'MasterPoint.number <>' => array('+841682448494')
                 );
                 break;
 
@@ -318,17 +319,19 @@ class ApisController extends AppController {
                     return;
                 }
                 $context = array(
-                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-18', '2014-06-24')
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-18', '2014-06-24'),
+                    'MasterPoint.number <>' => array('+841682448494', '+84918112919')
                 );
                 break;
 
             case 'week4':
-                if(time() < strtotime('2014-07-02 06:00:00')){
+                if(time() < strtotime('2014-07-02 23:00:00')){
                     $context = NULL;
                     return;
                 }
                 $context = array(
-                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-25', '2014-07-01')
+                    'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-25', '2014-07-01'),
+                    'MasterPoint.number <>' => array('+841682448494', '+84918112919', '+84988777822')
                 );
                 break;
 
