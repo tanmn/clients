@@ -135,7 +135,7 @@ class MasterPoint extends AppModel {
     public function getValidGroups($conditions = array()){
         $alias = $this->alias;
 
-        $conditions[$alias . '.number <>'] = $this->MasterHotline->find('list');
+        // $conditions[$alias . '.number <>'] = $this->MasterHotline->find('list');
 
         $results = $this->find(
             'list',

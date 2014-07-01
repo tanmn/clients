@@ -90,15 +90,11 @@ class ApisController extends AppController {
 
             if($context['MasterPoint.report_date'] < '2014-06-25'){
                 $validGroups = $this->MasterPoint->getValidGroups(array(
-                    'MasterPoint.group_code' => array(
-                        '4659650366756059435',
-                        '4659641814431663653',
-                        '4659643492723923473',
-                        '4661076854936320247',
-                        '4641349279408765951',
-                        '4641629212038307940',
-                        '4618436731399643146'
-                    )
+                    'MasterPoint.group_code' => Configure::read('GROUP_SECTIONS.2014-06-25')
+                ));
+            }else if($context['MasterPoint.report_date'] < '2014-07-01'){
+                $validGroups = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.group_code' => Configure::read('GROUP_SECTIONS.2014-07-01')
                 ));
             }else{
                 $validGroups = $this->MasterPoint->getValidGroups();
@@ -106,15 +102,11 @@ class ApisController extends AppController {
         }else{
             if(in_array($type, array('week1', 'week2', 'week3'))){
                 $validGroups = $this->MasterPoint->getValidGroups(array(
-                    'MasterPoint.group_code' => array(
-                        '4659650366756059435',
-                        '4659641814431663653',
-                        '4659643492723923473',
-                        '4661076854936320247',
-                        '4641349279408765951',
-                        '4641629212038307940',
-                        '4618436731399643146'
-                    )
+                    'MasterPoint.group_code' => Configure::read('GROUP_SECTIONS.2014-06-25')
+                ));
+            }else if($type == 'week4'){
+                $validGroups = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.group_code' => Configure::read('GROUP_SECTIONS.2014-07-01')
                 ));
             }else{
                 $validGroups = $this->MasterPoint->getValidGroups();
@@ -136,7 +128,7 @@ class ApisController extends AppController {
             }
         }
 
-        $this->output = compact('users', 'user', 'groups', 'group_members');
+        $this->output = compact('users', 'user', 'groups', 'group_members', 'validGroups');
     }
 
 
@@ -168,15 +160,11 @@ class ApisController extends AppController {
         if($type == 'daily'){
             if($context['MasterPoint.report_date'] < '2014-06-25'){
                 $validGroups = $this->MasterPoint->getValidGroups(array(
-                    'MasterPoint.group_code' => array(
-                        '4659650366756059435',
-                        '4659641814431663653',
-                        '4659643492723923473',
-                        '4661076854936320247',
-                        '4641349279408765951',
-                        '4641629212038307940',
-                        '4618436731399643146'
-                    )
+                    'MasterPoint.group_code' => Configure::read('GROUP_SECTIONS.2014-06-25')
+                ));
+            }else if($context['MasterPoint.report_date'] < '2014-07-01'){
+                $validGroups = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.group_code' => Configure::read('GROUP_SECTIONS.2014-07-01')
                 ));
             }else{
                 $validGroups = $this->MasterPoint->getValidGroups();
@@ -184,15 +172,11 @@ class ApisController extends AppController {
         }else{
             if(in_array($type, array('week1', 'week2', 'week3'))){
                 $validGroups = $this->MasterPoint->getValidGroups(array(
-                    'MasterPoint.group_code' => array(
-                        '4659650366756059435',
-                        '4659641814431663653',
-                        '4659643492723923473',
-                        '4661076854936320247',
-                        '4641349279408765951',
-                        '4641629212038307940',
-                        '4618436731399643146'
-                    )
+                    'MasterPoint.group_code' => Configure::read('GROUP_SECTIONS.2014-06-25')
+                ));
+            }else if($type == 'week4'){
+                $validGroups = $this->MasterPoint->getValidGroups(array(
+                    'MasterPoint.group_code' => Configure::read('GROUP_SECTIONS.2014-07-01')
                 ));
             }else{
                 $validGroups = $this->MasterPoint->getValidGroups();
