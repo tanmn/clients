@@ -1,0 +1,75 @@
+2014-05-31 05:46:40 Debug: 
+From: c30916065017@gmail.com
+To: tuannh@c3tek.biz, tanmn@c3tek.biz
+X-Mailer: CakePHP Email
+Date: Sat, 31 May 2014 05:46:39 +0000
+Message-ID: <53896cbfbf2843829f912313be3609b4@Nimaru.local>
+Subject: [VIBER APP] Error report
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+The app meets errors when trying collect data.
+
+-------ERROR DETAILS-------
+Database connection "Mysql" is missing, or could not be created.
+-------ERROR DETAILS--------
+
+Proceeded data:
+[{"report_date":"2014-05-31","hotline":"+841689979431","msg_type":"normal","group_code":"1","number":"+84909815430","quantity":"28"},{"report_date":"2014-05-31","hotline":"+841689979431","msg_type":"normal","group_code":"30","number":"+84909680557","quantity":"18"},{"report_date":"2014-05-31","hotline":"+841689979431","msg_type":"sticker","group_code":"1","number":"+84909815430","quantity":"5"}]
+----------------------------
+This message was sent automatically from client +841689979431 at 2014-05-31 05:46:33.
+
+
+2014-05-31 17:44:53 Debug: 
+From: "+841689979431" <c30916065017@gmail.com>
+To: tanmn@c3tek.biz
+X-Mailer: CakePHP Email
+Date: Sat, 31 May 2014 17:44:52 +0000
+Message-ID: <538a151489644f4084850e7fbe3609b4@Nimaru.local>
+Subject: [VIBER APP] Error report from hotline +841689979431
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="1a5fbb232718529fa4069ddf774fca8e"
+Content-Transfer-Encoding: 8bit
+--1a5fbb232718529fa4069ddf774fca8e
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The app meets errors when trying collect data.
+
+-------ERROR DETAILS-------
+
+Database connection "Mysql" is missing, or could not be created.
+
+-------ERROR DETAILS--------
+
+Proceeded data:
+Please view attached file below this email.
+----------------------------
+This message was sent automatically from client +841689979431 at 2014-05-31 17:44:48.
+
+
+--1a5fbb232718529fa4069ddf774fca8e
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="proceeded_data20140531.174448.log"
+
+YTo0OntpOjA7YTo2OntzOjExOiJyZXBvcnRfZGF0ZSI7czoxMDoiMjAxNC0wNS0zMSI7czo3OiJo
+b3RsaW5lIjtzOjEzOiIrODQxNjg5OTc5NDMxIjtzOjg6Im1zZ190eXBlIjtzOjY6Im5vcm1hbCI7
+czoxMDoiZ3JvdXBfY29kZSI7czo3OiI5Nzk0MzExIjtzOjY6Im51bWJlciI7czoxMjoiKzg0OTA5
+ODE1NDMwIjtzOjg6InF1YW50aXR5IjtzOjM6IjE4MiI7fWk6MTthOjY6e3M6MTE6InJlcG9ydF9k
+YXRlIjtzOjEwOiIyMDE0LTA1LTMxIjtzOjc6ImhvdGxpbmUiO3M6MTM6Iis4NDE2ODk5Nzk0MzEi
+O3M6ODoibXNnX3R5cGUiO3M6Njoibm9ybWFsIjtzOjEwOiJncm91cF9jb2RlIjtzOjg6Ijk3OTQz
+MTI0IjtzOjY6Im51bWJlciI7czoxMzoiKzg0MTIyNTk5Mjc2NCI7czo4OiJxdWFudGl0eSI7czox
+OiIxIjt9aToyO2E6Njp7czoxMToicmVwb3J0X2RhdGUiO3M6MTA6IjIwMTQtMDUtMzEiO3M6Nzoi
+aG90bGluZSI7czoxMzoiKzg0MTY4OTk3OTQzMSI7czo4OiJtc2dfdHlwZSI7czo2OiJub3JtYWwi
+O3M6MTA6Imdyb3VwX2NvZGUiO3M6ODoiOTc5NDMxMzAiO3M6NjoibnVtYmVyIjtzOjEyOiIrODQ5
+MDk2ODA1NTciO3M6ODoicXVhbnRpdHkiO3M6MjoiMjIiO31pOjM7YTo2OntzOjExOiJyZXBvcnRf
+ZGF0ZSI7czoxMDoiMjAxNC0wNS0zMSI7czo3OiJob3RsaW5lIjtzOjEzOiIrODQxNjg5OTc5NDMx
+IjtzOjg6Im1zZ190eXBlIjtzOjc6InN0aWNrZXIiO3M6MTA6Imdyb3VwX2NvZGUiO3M6NzoiOTc5
+NDMxMSI7czo2OiJudW1iZXIiO3M6MTI6Iis4NDkwOTgxNTQzMCI7czo4OiJxdWFudGl0eSI7czox
+OiI1Ijt9fQ==
+
+
+
+--1a5fbb232718529fa4069ddf774fca8e--
+
