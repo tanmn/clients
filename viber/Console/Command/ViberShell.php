@@ -249,7 +249,7 @@ class ViberShell extends AppShell
                 'ChatInfo.ChatID' => array_keys($group_ids)
             ),
             'contain' => array(
-                'ChatRelation.Number'
+                'ChatRelation' => array('fields' => array('Number'))
             )
         ));
 
