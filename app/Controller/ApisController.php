@@ -123,7 +123,7 @@ class ApisController extends AppController {
             $groups = $this->MasterPoint->getTopGroups($type == 'week1' || $type == 'daily' ? 1 : 2, array($context, 'MasterPoint.group_code' => array_keys($validGroups)));
 
             foreach($groups as $i => $group){
-                $groups[$i]['MasterGroup']['players'] = $validGroups[$group['MasterGroup']['group_code']];
+                $groups[$i]['MasterGroup']['players'] = $validGroups[$group['MasterPoint']['group_code']];
                 // $group_members = $this->MasterPoint->getTopUsers(1000, array($context, 'MasterPoint.group_code' => $group['MasterGroup']['group_code']));
             }
         }
@@ -267,6 +267,108 @@ class ApisController extends AppController {
         echo $this->array2csv($csv_data); exit;
     }
 
+    public function test2($exclude_bots = FALSE){
+        set_time_limit(0);
+        ini_set('memory_limit', '256M');
+
+        $this->loadModel('MasterPoint');
+        $default_context = array();
+
+        if(empty($exclude_bots)){
+            $default_context['MasterPoint.virtual_flag'] = 0;
+        }
+
+        $date = strtotime('2014-06-04');
+        $end_date = strtotime('2014-07-09');
+        $csv_data = array();
+
+        while ($date <= $end_date) {
+            $report_date = date('Y-m-d', $date);
+            $date = $date + 86400;
+            $context = Set::merge($default_context, array('MasterPoint.report_date' => $report_date));
+            $members = $this->MasterPoint->getTopUsersForReport(10, $context);
+
+            // members
+            $csv_data[] = array('Top ' . count($members) . ' members of ' . $report_date);
+            $csv_data[] = array('#', 'Phone', 'Is Bot', 'Points', 'Viber Name', 'Read Name', 'Device', 'Address');
+
+            foreach($members as $i => $mem){
+                $csv_data[] = array(
+                    $i + 1,
+                    "'" . $mem['MasterPoint']['raw_number'],
+                    $mem['MasterPoint']['virtual_flag'] ? 'YES' : 'NO',
+                    $mem['MasterPoint']['points'],
+                    $mem['MasterUser']['name'],
+                    $mem['MasterUser']['real_name'],
+                    $mem['MasterUser']['device'],
+                    $mem['MasterUser']['address']
+                );
+            }
+
+            unset($context);
+            unset($members);
+
+            $csv_data[] = array();
+            $csv_data[] = array();
+        }
+
+        $filename = 'test.csv';
+
+        // force download
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+
+        // disposition / encoding on response body
+        header("Content-Disposition: attachment;filename={$filename}");
+        header("Content-Transfer-Encoding: binary");
+        echo $this->array2csv($csv_data); exit;
+    }
+
+    public function test3($exclude_bots = FALSE){
+        set_time_limit(0);
+        ini_set('memory_limit', '256M');
+
+        $this->loadModel('MasterPoint');
+        $context = array('MasterPoint.report_date <' => '2014-07-10');
+
+        if(empty($exclude_bots)){
+            $context['MasterPoint.virtual_flag'] = 0;
+        }
+
+        $csv_data = array();
+        $members = $this->MasterPoint->getTopUsersForReport(30, $context);
+
+        // members
+        $csv_data[] = array('Top ' . count($members) . ' members');
+        $csv_data[] = array('#', 'Phone', 'Is Bot', 'Points', 'Viber Name', 'Read Name', 'Device', 'Address');
+
+        foreach($members as $i => $mem){
+            $csv_data[] = array(
+                $i + 1,
+                "'" . $mem['MasterPoint']['raw_number'],
+                $mem['MasterPoint']['virtual_flag'] ? 'YES' : 'NO',
+                $mem['MasterPoint']['points'],
+                $mem['MasterUser']['name'],
+                $mem['MasterUser']['real_name'],
+                $mem['MasterUser']['device'],
+                $mem['MasterUser']['address']
+            );
+        }
+
+        $filename = 'topall.csv';
+
+        // force download
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+
+        // disposition / encoding on response body
+        header("Content-Disposition: attachment;filename={$filename}");
+        header("Content-Transfer-Encoding: binary");
+        echo $this->array2csv($csv_data); exit;
+    }
+
     protected function getContext($type = ''){
         $context = array();
 
@@ -309,7 +411,7 @@ class ApisController extends AppController {
                 }
                 $context = array(
                     'MasterPoint.report_date BETWEEN ? AND ?' => array('2014-06-11', '2014-06-17'),
-                    'MasterPoint.number <>' => array('+841682448494')
+                    // 'MasterPoint.number <>' => array('+841682448494')
                 );
                 break;
 
