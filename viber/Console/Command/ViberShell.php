@@ -27,7 +27,11 @@ class ViberShell extends AppShell
 
     public function main()
     {
-        $this->today();
+        if(!empty($this->args[0]) && strtotime($this->args[0]) !== FALSE){
+            $this->date($this->args[0]);
+        }else{
+            $this->today();
+        }
     }
 
     public function today(){
@@ -41,6 +45,14 @@ class ViberShell extends AppShell
     public function yesterday(){
         $target_date = date('Y-m-d', strtotime('yesterday'));
         $this->out('Yesterday ' . $target_date);
+        $this->hr();
+
+        $this->process($target_date);
+    }
+
+    protected function date($target_date = NULL){
+        $target_date = date('Y-m-d', strtotime($target_date));
+        $this->out('Date ' . $target_date);
         $this->hr();
 
         $this->process($target_date);
