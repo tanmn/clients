@@ -24,7 +24,7 @@ define('INCLUDE_MY_NUM', TRUE);
 
 
 // Includes private messages when collect Viber PC data
-define('INCLUDE_PRIVATE', FALSE);
+define('INCLUDE_PRIVATE', TRUE);
 
 /*
 |--------------------------------------------------------------------------

@@ -17,6 +17,7 @@ Configure::write('debug', 2);
 class ViberShell extends AppShell
 {
     public $uses = array('Event', 'ChatInfo', 'ChatRelation', 'MasterLog');
+    public $groups;
 
     protected function _welcome()
     {
@@ -24,6 +25,8 @@ class ViberShell extends AppShell
         $this->out('VIBER PROCESS by C3TEK (c3tek.biz)');
         $this->hr();
         $this->out(date('Y-m-d H:i:s'));
+
+        $this->groups = FALSE;
     }
 
     public function main()
@@ -37,7 +40,30 @@ class ViberShell extends AppShell
 
     public function all()
     {
-        $this->process();
+        $this->out();
+        $this->out('Proceeding data of all time');
+
+        $date_range = $this->Event->find('first', array(
+            'fields' => array(
+                'MIN(Event.Timestamp) as date_from',
+                'MAX(Event.Timestamp) as date_to',
+            )
+        ));
+
+        if(!empty($date_range[0]['date_from']) && !empty($date_range[0]['date_to'])){
+            $from = $date_range[0]['date_from'];
+            $to = $date_range[0]['date_to'];
+
+            unset($date_range);
+
+            while($from < $to){
+                $target_date = date('Y-m-d', $from);
+                $this->process($target_date);
+                $from += 86400;
+            }
+        }else{
+            $this->err('Nothing to do.');
+        }
     }
 
     public function today()
@@ -105,48 +131,40 @@ class ViberShell extends AppShell
         return $users;
     }
 
-    protected function process($target_date = FALSE)
+    protected function process($target_date)
     {
         $time_start = microtime(TRUE);
 
-        $groups = $this->groups();
-        $users = $this->users();
-
-        unset($users);
-
-        $this->out();
-
-        if ($target_date) {
-            $target_date = date('Y-m-d', strtotime($target_date));
-            $this->out('The target day is ' . $target_date);
-        } else {
-            $this->out('Proceeding data of all time');
+        if(!$this->groups){
+            $this->groups = $this->groups();
+            $this->users();
         }
 
+        $this->out();
+        $target_date = date('Y-m-d', strtotime($target_date));
+        $this->out('The target day is ' . $target_date);
         $this->hr();
 
         $master_logs = array();
 
-        if ($target_date) {
-            foreach ($groups as $group) {
-                if ($group['ChatInfo']['Private'])
-                    continue;
+        foreach ($this->groups as $group) {
+            if ($group['ChatInfo']['Private'])
+                continue;
 
-                $group_id = $group['ChatInfo']['Token'];
+            $group_id = $group['ChatInfo']['Token'];
 
-                foreach ($group['ChatRelation'] as $phone) {
-                    $key = "{$target_date}-{$group_id}-{$phone['Number']}-message";
+            foreach ($group['ChatRelation'] as $phone) {
+                $key = "{$target_date}-{$group_id}-{$phone['Number']}-message";
 
-                    $master_logs[$key] = array(
-                        'agent' => MY_NUM,
-                        'group_code' => $group_id,
-                        'number' => $phone['Number'],
-                        'report_date' => $target_date,
-                        'msg_type' => 'message',
-                        'quantity' => 0,
-                        'is_virtual' => 0
-                    );
-                }
+                $master_logs[$key] = array(
+                    'agent' => MY_NUM,
+                    'group_code' => $group_id,
+                    'number' => $phone['Number'],
+                    'report_date' => $target_date,
+                    'msg_type' => 'message',
+                    'quantity' => 0,
+                    'is_virtual' => 0
+                );
             }
         }
 
