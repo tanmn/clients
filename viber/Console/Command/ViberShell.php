@@ -205,8 +205,8 @@ class ViberShell extends AppShell
 
         if ($this->MasterLog->saveMany($master_logs)) {
             $db->commit();
-            $this->out(CakeNumber::format($total_messages) . ' message(s) has been proceeded successfully.');
-            $this->out(CakeNumber::format(count($master_logs)) . ' row(s) has been added to application database.');
+            $this->out(CakeNumber::format($total_messages) . ' message(s) were proceeded successfully.');
+            $this->out(CakeNumber::format(count($master_logs)) . ' row(s) were added to application database.');
         } else {
             $db->rollback();
             $this->err('Could not update users.');
