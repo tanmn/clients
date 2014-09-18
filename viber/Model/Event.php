@@ -5,80 +5,10 @@ App::uses('AppModel', 'Model');
  *
  */
 class Event extends AppModel {
-
     public $useDbConfig = 'viber';
-
-/**
- * Use table
- *
- * @var mixed False or table name
- */
 	public $useTable = 'Events';
-
-/**
- * Primary key field
- *
- * @var string
- */
 	public $primaryKey = 'EventID';
 
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'TimeStamp' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'Direction' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'Type' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'Token' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'IsRead' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
 
     public $belongsTo = array(
         'ChatInfo' => array(
@@ -107,48 +37,59 @@ class Event extends AppModel {
         )
     );
 
-    // public function afterFind($results, $primary = false) {
-    //     foreach($results as $index => $data){
-    //         if(isset($data['Event']['TimeStamp'])){
-    //             $results[$index]['Event']['TimeStamp'] = date('Y-m-d H:i:s', $data['Event']['TimeStamp']);
-    //         }
-    //     }
-    //
-    //     return $results;
-    // }
 
-    public function fetchGroupData($conditions = array(), $date = NULL, $group_only = TRUE)
+    public function fetchGroupData($conditions = array(), $date = NULL)
     {
-        $context = array(
-            'Event.Direction' => 0
-        );
+        $date_field = 'date(Event.TimeStamp, \'unixepoch\', \'localtime\')';
+        $context = array();
+
+        if (!INCLUDE_MY_NUM) {
+            $context[] = 'Event.Direction = 0';
+        }
+
+        if (!INCLUDE_PRIVATE) {
+            $context[] = "ChatInfo.Token NOT LIKE '+%'";
+        }
+
+        if ($date) {
+            $context[] = array(
+                $date_field => $date
+            );
+        }
 
         $mes_type = "(CASE
             WHEN Message.StickerID <> 0 THEN 'sticker'
             WHEN Message.PttID <> '' THEN 'voice'
-            WHEN Message.ThumbnailPath <> '' THEN 'photo'
-            ELSE 'message' END)";
+            WHEN Message.ThumbnailPath <> '' THEN 'media'
+            ELSE 'message'
+            END)";
 
-        if ($date)
-        {
-            $context['date(Event.TimeStamp, \'unixepoch\', \'localtime\')'] = $date;
-        }
+        $mes_number = "(CASE
+            WHEN Event.Direction = 0
+            THEN Event.Number ELSE '" . MY_NUM . "'
+            END)";
 
-        if($group_only)
-        {
-            $context[] = 'ChatInfo.Token <> Event.Number';
-        }
+        $mes_date = 'date(Event.TimeStamp, \'unixepoch\', \'localtime\')';
+
+        // $mes_direction = "(CASE
+        //     WHEN Event.Direction = 0 THEN 'received'
+        //     ELSE 'sent'
+        //     END)";
 
         return $this->find('all', array(
             'fields' => array(
-                $mes_type . ' as msg_type',
-                'Event.Number as number',
                 'ChatInfo.Token as group_code',
+                $mes_number . ' as number',
+                $mes_date . ' as report_date',
+                // $mes_direction . ' as direction',
+                $mes_type . ' as msg_type',
                 'COUNT(Message.EventID) as quantity'
             ),
             'group' => array(
                 'ChatInfo.Token',
-                'Event.Number',
+                $mes_number,
+                $mes_date,
+                // $mes_direction,
                 $mes_type
             ),
             'contain' => array(
@@ -156,15 +97,13 @@ class Event extends AppModel {
                 'ChatInfo'
             ),
             'conditions' => array(
-                // "Message.PttID <> ''",
                 $context,
                 $conditions
             ),
             'order' => array(
                 'Event.ChatID' => 'ASC',
                 'Event.Number' => 'ASC'
-            ),
-            // 'limit' => 10
+            )
         ));
     }
 }

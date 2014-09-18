@@ -21,8 +21,23 @@ class ChatInfo extends AppModel {
         )
     );
 
+    public $virtualFields = array(
+        'Name' => "(CASE
+            WHEN ChatInfo.Token LIKE '+%' THEN ''
+            ELSE ChatInfo.Name
+            END)",
+        'Private' => "(CASE
+            WHEN ChatInfo.Token LIKE '+%' THEN 1
+            ELSE 0
+            END)"
+    );
+
     public function fetchGroups($group_ids = array()){
         $conditions = array();
+
+        if (!INCLUDE_PRIVATE) {
+            $conditions['ChatInfo.Private'] = 0;
+        }
 
         if(!empty($group_ids)){
             $conditions['ChatInfo.ChatID'] = $group_ids;
@@ -32,15 +47,12 @@ class ChatInfo extends AppModel {
             'fields' => array(
                 'ChatInfo.ChatID',
                 'ChatInfo.Name',
-                'ChatInfo.Token'
+                'ChatInfo.Token',
+                'ChatInfo.Private',
             ),
             'conditions' => $conditions,
-            'contain' => array(
-                'ChatRelation' => array(
-                    'fields' => array('Number'),
-                    'Info' => array('fields' => 'ClientName')
-                )
-            )
+            'order' => 'ChatInfo.Private, ChatInfo.Token ASC',
+            'contain' => array('ChatRelation' => array('fields' => 'Number'))
         ));
     }
 }

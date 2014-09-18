@@ -10,8 +10,19 @@ class OriginNumberInfo extends AppModel {
     public $useTable = 'OriginNumberInfo';
     public $primaryKey = 'Number';
 
+    public $belongsTo = array(
+        'PhoneNumber' => array(
+            'className' => 'PhoneNumber',
+            'foreignKey' => 'Number',
+            'conditions' => array(),
+            'order' => '',
+            'limit' => '',
+            'dependent' => false
+        )
+    );
+
     public function fetchUsers($user_ids = array()){
-        $conditions = array();
+        $conditions = array('PhoneNumber.IsViberNumber' => 1);
 
         if(!empty($user_ids)){
             $conditions['OriginNumberInfo.Number'] = $user_ids;
@@ -23,8 +34,8 @@ class OriginNumberInfo extends AppModel {
                 'OriginNumberInfo.ClientName',
                 'OriginNumberInfo.AvatarPath'
             ),
-            'conditions' => $conditions
+            'conditions' => $conditions,
+            'contain' => array('PhoneNumber')
         ));
     }
-
 }

@@ -1,0 +1,1 @@
+@.\Console\cake report >> report_logs.log

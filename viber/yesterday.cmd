@@ -1,0 +1,1 @@
+@.\Console\cake viber yesterday >> executing_logs.log

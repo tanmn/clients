@@ -9,7 +9,8 @@
  * @since         CakePHP(tm) v 0.2.9
  */
 
-require APP . 'Config' . DS . 'environment.php';
+require APP . 'settings.php';
+require APP . 'Config' . DS . 'settings.php';
 
 $MY_NUM = str_replace('+', '', MY_NUM);
 $VIBER_PATH = 'ViberPC' . DS . $MY_NUM . DS . 'viber.db';
