@@ -17,6 +17,7 @@ $SYSTEM_PATH = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? WINDOWS_USER_PATH 
 
 define('ENV_HOME', $SYSTEM_PATH . DS . $VIBER_PATH);
 define('DATA', TMP . 'DATA');
+define('LOCALDB', APP . 'data.db');
 
 unset($MY_NUM, $VIBER_PATH, $SYSTEM_PATH);
 

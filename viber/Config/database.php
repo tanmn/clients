@@ -48,6 +48,7 @@
  * For Postgres : http://www.postgresql.org/docs/9.2/static/sql-set.html
  * For Sql Server : http://msdn.microsoft.com/en-us/library/ms190356.aspx
  */
+
 class DATABASE_CONFIG {
     // Viber DB
 	public $viber = array(
@@ -58,15 +59,12 @@ class DATABASE_CONFIG {
         'encoding' => 'utf8',
 	);
 
-    // Microsite DB
-	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => '118.69.171.21',
-		'login' => 'faceinter_viber',
-		'password' => 'viber',
-		'database' => 'faceinter_viber',
-		'prefix' => '',
-		'encoding' => 'utf8',
-	);
+    // Log DB
+    public $default = array(
+        'datasource' => 'Database/Sqlite',
+        'persistent' => false,
+        'database' => LOCALDB,
+        'prefix' => '',
+        'encoding' => 'utf8',
+    );
 }

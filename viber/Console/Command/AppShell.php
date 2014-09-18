@@ -27,4 +27,77 @@ class AppShell extends Shell
     {
         return preg_replace('/^.*(\d{6,6})$/', '$1', MY_NUM) . '' . $group_code;
     }
+
+    protected $errors = array();
+
+    protected function mailErrors($data = NULL)
+    {
+        if (empty($this->errors))
+            return;
+
+        $message = 'Dear administrators,';
+        $message .= "\n\n";
+        $message .= 'The app meets errors when trying collect data.';
+        $message .= "\n\n";
+        $message .= " ➡️ " . implode("\n ➡️ ", $this->errors);
+        $message .= "\n\n";
+
+        if (!empty($data))
+        {
+            $message .= "Proceeded data:\nPlease view attached file below this email.";
+            $message .= "\n";
+
+            $attachment = APP . 'webroot' . DS . 'files' . DS . 'proceeded_data_' . date('Ymd.His') . '.bak';
+            @file_put_contents($attachment, serialize($data));
+        }
+
+        $message .= ' ※ This message was sent automatically from the agent ' . MY_NUM . ' at ' . date('Y-m-d H:i:s') . '.';
+
+        $this->out('ERROR!!!');
+
+        App::uses('CakeEmail', 'Network/Email');
+        $Email = new CakeEmail('gmail');
+        $Email->to(Configure::read('DEVELOPERS'));
+
+        if (isset($attachment))
+        {
+            $Email->attachments($attachment);
+        }
+
+        $Email->subject('[VIBER APP] Error report from the agent ' . MY_NUM);
+
+        try
+        {
+            $Email->send($message);
+        }
+        catch (Exception $e)
+        {
+            $this->out('Mail not sent: ' . $e->getMessage());
+        }
+    }
+
+    public function mailOverloaded($time)
+    {
+        $message = 'Dear administrators,';
+        $message .= "\n\n";
+        $message .= 'It seems process has been taking to long to respond. Time detected: ' . $time . 's.';
+        $message .= ' ※ This message was sent automatically from the agent ' . MY_NUM . ' at ' . date('Y-m-d H:i:s') . '.';
+
+        $this->out('ERROR!!!');
+
+        App::uses('CakeEmail', 'Network/Email');
+        $Email = new CakeEmail('gmail');
+        $Email->to(Configure::read('DEVELOPERS'));
+
+        $Email->subject('[VIBER APP] Timeout warning from the agent' . MY_NUM);
+
+        try
+        {
+            $Email->send($message);
+        }
+        catch (Exception $e)
+        {
+            $this->out('Mail not sent: ' . $e->getMessage());
+        }
+    }
 }

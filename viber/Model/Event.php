@@ -107,15 +107,64 @@ class Event extends AppModel {
         )
     );
 
-    public function afterFind($results, $primary = false) {
-        $alias = $this->alias;
+    // public function afterFind($results, $primary = false) {
+    //     foreach($results as $index => $data){
+    //         if(isset($data['Event']['TimeStamp'])){
+    //             $results[$index]['Event']['TimeStamp'] = date('Y-m-d H:i:s', $data['Event']['TimeStamp']);
+    //         }
+    //     }
+    //
+    //     return $results;
+    // }
 
-        foreach($results as $index => $data){
-            if(isset($data[$alias]['TimeStamp'])){
-                $results[$index][$alias]['TimeStamp'] = date('Y-m-d H:i:s', $data[$alias]['TimeStamp']);
-            }
+    public function fetchGroupData($conditions = array(), $date = NULL, $group_only = TRUE)
+    {
+        $context = array(
+            'Event.Direction' => 0
+        );
+
+        $mes_type = "(CASE
+            WHEN Message.StickerID <> 0 THEN 'sticker'
+            WHEN Message.PttID <> '' THEN 'voice'
+            WHEN Message.ThumbnailPath <> '' THEN 'photo'
+            ELSE 'message' END)";
+
+        if ($date)
+        {
+            $context['date(Event.TimeStamp, \'unixepoch\', \'localtime\')'] = $date;
         }
 
-        return $results;
+        if($group_only)
+        {
+            $context[] = 'ChatInfo.Token <> Event.Number';
+        }
+
+        return $this->find('all', array(
+            'fields' => array(
+                $mes_type . ' as msg_type',
+                'Event.Number as number',
+                'ChatInfo.Token as group_code',
+                'COUNT(Message.EventID) as quantity'
+            ),
+            'group' => array(
+                'ChatInfo.Token',
+                'Event.Number',
+                $mes_type
+            ),
+            'contain' => array(
+                'Message',
+                'ChatInfo'
+            ),
+            'conditions' => array(
+                // "Message.PttID <> ''",
+                $context,
+                $conditions
+            ),
+            'order' => array(
+                'Event.ChatID' => 'ASC',
+                'Event.Number' => 'ASC'
+            ),
+            // 'limit' => 10
+        ));
     }
 }
