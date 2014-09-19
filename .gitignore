@@ -1,5 +1,6 @@
 # User specific & automatically generated files #
 #################################################
+/viber/*.db
 /viber/webroot/files
 /viber/tmp
 /lib/Cake/Console/Templates/skel/tmp/
