@@ -31,6 +31,11 @@ class ViberShell extends AppShell
             $this->mailErrors();
             $this->error('Cannot connect to Viber.');
         }
+
+        if(!$this->testConnections('default')){
+            $this->mailErrors();
+            $this->error('Cannot connect to application database.');
+        }
     }
 
     public function main()

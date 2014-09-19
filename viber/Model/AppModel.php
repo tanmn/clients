@@ -12,6 +12,6 @@ App::uses('Model', 'Model');
 class AppModel extends Model
 {
     public $cacheQueries = TRUE;
-    public $recursive = 1;
+    public $recursive = -1;
     public $actsAs = array('Containable');
 }

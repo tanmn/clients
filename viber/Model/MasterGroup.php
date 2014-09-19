@@ -12,4 +12,17 @@ App::uses('AppModel', 'Model');
 class MasterGroup extends AppModel
 {
     public $primaryKey = 'group_code';
+
+    public function getWhitelist()
+    {
+        return $this->find(
+            'list',
+            array(
+                'fields' => array('MasterGroup.group_code', 'MasterGroup.group_code'),
+                'conditions' => array(
+                    'MasterGroup.is_whitelist' => 1
+                )
+            )
+        );
+    }
 }

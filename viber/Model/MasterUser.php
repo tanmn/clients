@@ -12,4 +12,13 @@ App::uses('AppModel', 'Model');
 class MasterUser extends AppModel
 {
     public $primaryKey = 'number';
+
+        public function __construct($id = false, $table = null, $ds = null)
+        {
+            parent::__construct($id, $table, $ds);
+
+            $this->virtualFields = array(
+                'is_agent' => "(CASE WHEN MasterUser.number = '" . MY_NUM . "' THEN 1 ELSE 0 END)"
+            );
+        }
 }

@@ -12,7 +12,13 @@ App::uses('AppModel', 'Model');
 class ViberModel extends AppModel
 {
     public $useDbConfig = 'viber';
-    public $cacheQueries = TRUE;
-    public $recursive = 1;
-    public $actsAs = array('Containable');
+    public $cacheQueries = false;
+
+    public function beforeSave($options = array()) {
+        return false;
+    }
+
+    public function beforeDelete($cascade = true) {
+        return false;
+    }
 }

@@ -49,6 +49,26 @@ class AppShell extends Shell
         return true;
     }
 
+    protected function sql($source = 'default'){
+        $db = ConnectionManager::getDataSource($source);
+        $logs = $db->getLog();
+
+        $this->out();
+        $this->out('SQL logs');
+        $this->out();
+        $this->hr();
+
+        if(!empty($logs['log'])){
+            foreach($logs['log'] as $i => $log){
+                $this->out("{$i}. ---- Took {$log['took']}ms");
+                $this->out($log['query']);
+                $this->out();
+            }
+        }
+
+        $this->out();
+    }
+
     protected $errors = array();
 
     protected function mailErrors($data = NULL)
