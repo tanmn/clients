@@ -11,12 +11,11 @@ App::uses('CakeNumber', 'Utility');
 App::uses('AppShell', 'Console/Command');
 
 set_time_limit(0);
-ini_set('memory_limit', '256M');
-Configure::write('debug', 2);
+ini_set('memory_limit', -1);
 
 class ViberShell extends AppShell
 {
-    public $uses = array('Event', 'ChatInfo', 'ChatRelation', 'MasterLog');
+    public $uses = array('ViberEvent', 'ViberGroup', 'ViberGroupInfo', 'MasterLog');
     public $groups;
 
     protected function _welcome()
@@ -24,9 +23,14 @@ class ViberShell extends AppShell
         $this->out();
         $this->out('VIBER PROCESS by C3TEK (c3tek.biz)');
         $this->hr();
-        $this->out(date('Y-m-d H:i:s'));
+        $this->out('Now is ' . date('Y-m-d H:i:s') . ' - Agent number is ' . MY_NUM);
 
         $this->groups = FALSE;
+
+        if(!$this->testConnections('viber')){
+            $this->mailErrors();
+            $this->error('Cannot connect to Viber.');
+        }
     }
 
     public function main()
@@ -43,25 +47,25 @@ class ViberShell extends AppShell
         $this->out();
         $this->out('Proceeding data of all time');
 
-        $date_range = $this->Event->find('first', array(
+        $date_range = $this->ViberEvent->find('first', array(
             'fields' => array(
-                'MIN(Event.Timestamp) as date_from',
-                'MAX(Event.Timestamp) as date_to',
+                'MIN(ViberEvent.Timestamp) as date_from',
+                'MAX(ViberEvent.Timestamp) as date_to'
             )
         ));
 
-        if(!empty($date_range[0]['date_from']) && !empty($date_range[0]['date_to'])){
+        if (!empty($date_range[0]['date_from']) && !empty($date_range[0]['date_to'])) {
             $from = $date_range[0]['date_from'];
-            $to = $date_range[0]['date_to'];
+            $to   = $date_range[0]['date_to'];
 
             unset($date_range);
 
-            while($from < $to){
+            while ($from < $to) {
                 $target_date = date('Y-m-d', $from);
                 $this->process($target_date);
                 $from += 86400;
             }
-        }else{
+        } else {
             $this->err('Nothing to do.');
         }
     }
@@ -82,15 +86,15 @@ class ViberShell extends AppShell
         $this->out('Update groups');
         $this->hr();
 
-        $groups = $this->ChatInfo->fetchGroups();
+        $groups = $this->ViberGroup->fetchGroups();
 
         $master_groups = array();
 
         foreach ($groups as $group) {
             $master_groups[] = array(
-                'group_code' => $group['ChatInfo']['Token'],
-                'group_name' => $group['ChatInfo']['Name'],
-                'is_private' => $group['ChatInfo']['Private'],
+                'group_code' => $group['ViberGroup']['Token'],
+                'group_name' => $group['ViberGroup']['Name'],
+                'is_private' => $group['ViberGroup']['Private'],
                 'agent' => MY_NUM
             );
         }
@@ -110,15 +114,15 @@ class ViberShell extends AppShell
         $this->out('Update users');
         $this->hr();
 
-        $users = $this->ChatRelation->fetchUsers();
+        $users = $this->ViberGroupInfo->fetchUsers();
 
         $master_users = array();
 
         foreach ($users as $user) {
             $master_users[] = array(
-                'number' => $user['ChatRelation']['Number'],
-                'is_viber' => empty($user['Info']['PhoneNumber']['IsViberNumber']) ? 0 : 1,
-                'viber_name' => $user['Info']['ClientName']
+                'number' => $this->formatNumber($user['ViberGroupInfo']['Number']),
+                'is_viber' => empty($user['ViberNumber']['ViberNumberInfo']['IsViberNumber']) ? 0 : 1,
+                'viber_name' => $user['ViberNumber']['ClientName']
             );
         }
 
@@ -135,7 +139,7 @@ class ViberShell extends AppShell
     {
         $time_start = microtime(TRUE);
 
-        if(!$this->groups){
+        if (!$this->groups) {
             $this->groups = $this->groups();
             $this->users();
         }
@@ -148,29 +152,31 @@ class ViberShell extends AppShell
         $master_logs = array();
 
         foreach ($this->groups as $group) {
-            if ($group['ChatInfo']['Private'])
+            if ($group['ViberGroup']['Private'])
                 continue;
 
-            $group_id = $group['ChatInfo']['Token'];
+            $group_id = $group['ViberGroup']['Token'];
 
-            foreach ($group['ChatRelation'] as $phone) {
+            foreach ($group['ViberGroupInfo'] as $phone) {
                 $key = "{$target_date}-{$group_id}-{$phone['Number']}-message";
 
                 $master_logs[$key] = array(
                     'agent' => MY_NUM,
                     'group_code' => $group_id,
-                    'number' => $phone['Number'],
+                    'number' => $this->formatNumber($phone['Number']),
                     'report_date' => $target_date,
                     'msg_type' => 'message',
                     'quantity' => 0,
                     'is_virtual' => 0
                 );
             }
+
+            unset($group, $group_id, $phone, $key);
         }
 
-        unset($groups, $group, $group_id, $phone, $key);
+        unset($groups);
 
-        $data = $this->Event->fetchGroupData(array(), $target_date);
+        $data = $this->ViberEvent->fetchGroupData(array(), $target_date);
         $total_messages = 0;
 
         foreach ($data as $item) {
@@ -179,7 +185,7 @@ class ViberShell extends AppShell
             $log = array(
                 'agent' => MY_NUM,
                 'group_code' => $item[0]['group_code'],
-                'number' => $item[0]['number'],
+                'number' => $this->formatNumber($item[0]['number']),
                 'report_date' => $item[0]['report_date'],
                 'msg_type' => $item[0]['msg_type'],
                 'quantity' => $item[0]['quantity'],
@@ -191,9 +197,11 @@ class ViberShell extends AppShell
             } else {
                 $master_logs[$key] = $log;
             }
+
+            unset($item, $key, $log);
         }
 
-        unset($data, $item, $key, $log);
+        unset($data);
 
         ksort($master_logs);
         $master_logs = array_values($master_logs);
@@ -209,17 +217,19 @@ class ViberShell extends AppShell
             $this->out(CakeNumber::format(count($master_logs)) . ' row(s) were added to application database.');
         } else {
             $db->rollback();
-            $this->err('Could not update users.');
+            $this->err('Could not update data to application database.');
         }
 
         $time_stop = microtime(TRUE);
-        $time = (($time_stop - $time_start) * 1);
+        $time      = (($time_stop - $time_start) * 1);
 
         $this->out();
         $this->out('Total process time: ' . $time . 's');
         if (function_exists('memory_get_usage'))
             $this->out('Total memory used: ' . CakeNumber::toReadableSize(memory_get_usage()));
         $this->out();
+
+        unset($master_logs, $time_start, $time_stop, $time, $db, $total_messages);
     }
 
     protected function cleanupMasterLogs($target_date = FALSE)

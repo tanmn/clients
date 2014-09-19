@@ -1,34 +1,38 @@
 <?php
-App::uses('AppModel', 'Model');
-/**
- * Event Model
- *
- */
-class Event extends AppModel {
-    public $useDbConfig = 'viber';
-	public $useTable = 'Events';
-	public $primaryKey = 'EventID';
 
+/*
+
+Copyright (c) 2014 by C3TEK (c3tek.biz). All Rights Reserved.
+Distributed 2014 by AppSeeds (http://appseeds.net/)
+
+*/
+
+App::uses('ViberModel', 'Model');
+
+class ViberEvent extends ViberModel
+{
+    public $useTable = 'Events';
+    public $primaryKey = 'EventID';
 
     public $belongsTo = array(
-        'ChatInfo' => array(
-            'className' => 'ChatInfo',
+        'ViberGroup' => array(
+            'className' => 'ViberGroup',
             'foreignKey' => 'ChatID',
             'conditions' => array(),
             'order' => '',
             'limit' => '',
             'dependent' => false
         ),
-        'Message' => array(
-            'className' => 'Message',
+        'ViberMessage' => array(
+            'className' => 'ViberMessage',
             'foreignKey' => 'EventID',
             'conditions' => array(),
             'order' => '',
             'limit' => '',
             'dependent' => false
         ),
-        'User' => array(
-            'className' => 'OriginNumberInfo',
+        'ViberNumber' => array(
+            'className' => 'ViberNumber',
             'foreignKey' => 'Number',
             'conditions' => array(),
             'order' => '',
@@ -37,18 +41,17 @@ class Event extends AppModel {
         )
     );
 
-
     public function fetchGroupData($conditions = array(), $date = NULL)
     {
-        $date_field = 'date(Event.TimeStamp, \'unixepoch\', \'localtime\')';
-        $context = array();
+        $date_field = 'date(ViberEvent.TimeStamp, \'unixepoch\', \'localtime\')';
+        $context    = array();
 
         if (!INCLUDE_MY_NUM) {
-            $context[] = 'Event.Direction = 0';
+            $context[] = 'ViberEvent.Direction = 0';
         }
 
         if (!INCLUDE_PRIVATE) {
-            $context[] = "ChatInfo.Token NOT LIKE '+%'";
+            $context[] = "ViberGroup.Token NOT LIKE '+%'";
         }
 
         if ($date) {
@@ -58,51 +61,51 @@ class Event extends AppModel {
         }
 
         $mes_type = "(CASE
-            WHEN Message.StickerID <> 0 THEN 'sticker'
-            WHEN Message.PttID <> '' THEN 'voice'
-            WHEN Message.ThumbnailPath <> '' THEN 'media'
+            WHEN ViberMessage.StickerID <> 0 THEN 'sticker'
+            WHEN ViberMessage.PttID <> '' THEN 'voice'
+            WHEN ViberMessage.ThumbnailPath <> '' THEN 'media'
             ELSE 'message'
-            END)";
+        END)";
 
         $mes_number = "(CASE
-            WHEN Event.Direction = 0
-            THEN Event.Number ELSE '" . MY_NUM . "'
-            END)";
+            WHEN ViberEvent.Direction = 0
+            THEN ViberEvent.Number ELSE '" . MY_NUM . "'
+        END)";
 
-        $mes_date = 'date(Event.TimeStamp, \'unixepoch\', \'localtime\')';
+        $mes_date = 'date(ViberEvent.TimeStamp, \'unixepoch\', \'localtime\')';
 
         // $mes_direction = "(CASE
-        //     WHEN Event.Direction = 0 THEN 'received'
+        //     WHEN ViberEvent.Direction = 0 THEN 'received'
         //     ELSE 'sent'
         //     END)";
 
         return $this->find('all', array(
             'fields' => array(
-                'ChatInfo.Token as group_code',
+                'ViberGroup.Token as group_code',
                 $mes_number . ' as number',
                 $mes_date . ' as report_date',
                 // $mes_direction . ' as direction',
                 $mes_type . ' as msg_type',
-                'COUNT(Message.EventID) as quantity'
+                'COUNT(ViberMessage.EventID) as quantity'
             ),
             'group' => array(
-                'ChatInfo.Token',
+                'ViberGroup.Token',
                 $mes_number,
                 $mes_date,
                 // $mes_direction,
                 $mes_type
             ),
             'contain' => array(
-                'Message',
-                'ChatInfo'
+                'ViberMessage',
+                'ViberGroup'
             ),
             'conditions' => array(
                 $context,
                 $conditions
             ),
             'order' => array(
-                'Event.ChatID' => 'ASC',
-                'Event.Number' => 'ASC'
+                'ViberEvent.ChatID' => 'ASC',
+                'ViberEvent.Number' => 'ASC'
             )
         ));
     }

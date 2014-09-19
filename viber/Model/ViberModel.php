@@ -7,10 +7,11 @@ Distributed 2014 by AppSeeds (http://appseeds.net/)
 
 */
 
-App::uses('Model', 'Model');
+App::uses('AppModel', 'Model');
 
-class AppModel extends Model
+class ViberModel extends AppModel
 {
+    public $useDbConfig = 'viber';
     public $cacheQueries = TRUE;
     public $recursive = 1;
     public $actsAs = array('Containable');

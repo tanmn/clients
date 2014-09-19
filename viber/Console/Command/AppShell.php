@@ -23,9 +23,30 @@ class AppShell extends Shell
         return preg_replace('/^0/', '+84', $number);
     }
 
-    protected function formatGroupId($group_code)
+    protected function testConnections($name)
     {
-        return preg_replace('/^.*(\d{6,6})$/', '$1', MY_NUM) . '' . $group_code;
+        App::uses('ConnectionManager', 'Model');
+
+        try {
+            $connected = ConnectionManager::getDataSource($name);
+        }
+        catch (Exception $connectionError) {
+            $connected = false;
+            $errorMsg = $connectionError->getMessage();
+
+            if (method_exists($connectionError, 'getAttributes')) {
+                $attributes = $connectionError->getAttributes();
+
+                if (isset($errorMsg['message'])) {
+                    $errorMsg .= "\n → " . $attributes['message'];
+                }
+            }
+
+            $this->errors[] = $errorMsg;
+            return false;
+        }
+
+        return true;
     }
 
     protected $errors = array();
@@ -39,11 +60,10 @@ class AppShell extends Shell
         $message .= "\n\n";
         $message .= 'The app meets errors when trying collect data.';
         $message .= "\n\n";
-        $message .= " ➡️ " . implode("\n ➡️ ", $this->errors);
+        $message .= " → " . implode("\n → ", $this->errors);
         $message .= "\n\n";
 
-        if (!empty($data))
-        {
+        if (!empty($data)) {
             $message .= "Proceeded data:\nPlease view attached file below this email.";
             $message .= "\n";
 
@@ -53,25 +73,22 @@ class AppShell extends Shell
 
         $message .= ' ※ This message was sent automatically from the agent ' . MY_NUM . ' at ' . date('Y-m-d H:i:s') . '.';
 
-        $this->out('ERROR!!!');
+        $this->out('ERROR!!! Sending email to developers...');
 
         App::uses('CakeEmail', 'Network/Email');
         $Email = new CakeEmail('gmail');
         $Email->to(Configure::read('DEVELOPERS'));
 
-        if (isset($attachment))
-        {
+        if (isset($attachment)) {
             $Email->attachments($attachment);
         }
 
         $Email->subject('[VIBER APP] Error report from the agent ' . MY_NUM);
 
-        try
-        {
+        try {
             $Email->send($message);
         }
-        catch (Exception $e)
-        {
+        catch (Exception $e) {
             $this->out('Mail not sent: ' . $e->getMessage());
         }
     }
@@ -83,20 +100,18 @@ class AppShell extends Shell
         $message .= 'It seems process has been taking to long to respond. Time detected: ' . $time . 's.';
         $message .= ' ※ This message was sent automatically from the agent ' . MY_NUM . ' at ' . date('Y-m-d H:i:s') . '.';
 
-        $this->out('ERROR!!!');
+        $this->out('ERROR!!! Sending email to developers...');
 
         App::uses('CakeEmail', 'Network/Email');
         $Email = new CakeEmail('gmail');
         $Email->to(Configure::read('DEVELOPERS'));
 
-        $Email->subject('[VIBER APP] Timeout warning from the agent' . MY_NUM);
+        $Email->subject('[VIBER APP] Timeout warning from the agent ' . MY_NUM);
 
-        try
-        {
+        try {
             $Email->send($message);
         }
-        catch (Exception $e)
-        {
+        catch (Exception $e) {
             $this->out('Mail not sent: ' . $e->getMessage());
         }
     }

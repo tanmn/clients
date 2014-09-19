@@ -1,18 +1,22 @@
 <?php
-App::uses('AppModel', 'Model');
-/**
- * Message Model
- *
- */
-class Message extends AppModel {
 
-    public $useDbConfig = 'viber';
+/*
+
+Copyright (c) 2014 by C3TEK (c3tek.biz). All Rights Reserved.
+Distributed 2014 by AppSeeds (http://appseeds.net/)
+
+*/
+
+App::uses('ViberModel', 'Model');
+
+class ViberMessage extends ViberModel
+{
 	public $useTable = 'Messages';
 	public $primaryKey = 'EventID';
 
 	public $hasOne = array(
-        'Event' => array(
-            'className' => 'Event',
+        'ViberEvent' => array(
+            'className' => 'ViberEvent',
             'foreignKey' => 'EventID',
             'conditions' => array(),
             'order' => '',

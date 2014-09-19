@@ -30,9 +30,10 @@ class EmailConfig {
     public $gmail = array(
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
-        'username' => 'c30916065017@gmail.com',
-        'password' => 'Worldcup2014',
-        'from' => array('c30916065017@gmail.com' => MY_NUM),
+        'timeout' => 10,
+        'username' => 'viber.email@gmail.com',
+        'password' => 'p@ssw0rd',
+        'from' => array('viber.email@gmail.com' => MY_NUM),
         'log' => true,
         'charset' => 'utf-8',
         'transport' => 'Smtp',
