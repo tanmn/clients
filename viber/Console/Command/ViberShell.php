@@ -27,12 +27,12 @@ class ViberShell extends AppShell
 
         $this->groups = FALSE;
 
-        if(!$this->testConnections('viber')){
+        if (!$this->testConnections('viber')) {
             $this->mailErrors();
             $this->error('Cannot connect to Viber.');
         }
 
-        if(!$this->testConnections('default')){
+        if (!$this->testConnections('default')) {
             $this->mailErrors();
             $this->error('Cannot connect to application database.');
         }
@@ -43,7 +43,7 @@ class ViberShell extends AppShell
         if (!empty($this->args[0]) && strtotime($this->args[0]) !== FALSE) {
             $this->process($this->args[0]);
         } else {
-            $this->today();
+            $this->process('today');
         }
     }
 
@@ -61,7 +61,7 @@ class ViberShell extends AppShell
 
         if (!empty($date_range[0]['date_from']) && !empty($date_range[0]['date_to'])) {
             $from = $date_range[0]['date_from'];
-            $to   = $date_range[0]['date_to'];
+            $to = $date_range[0]['date_to'] + 86400;
 
             unset($date_range);
 
@@ -73,16 +73,6 @@ class ViberShell extends AppShell
         } else {
             $this->err('Nothing to do.');
         }
-    }
-
-    public function today()
-    {
-        $this->process('today');
-    }
-
-    public function yesterday()
-    {
-        $this->process('yesterday');
     }
 
     public function groups()
@@ -109,6 +99,8 @@ class ViberShell extends AppShell
         } else {
             $this->err('Could not update groups.');
         }
+
+        $this->MasterLog->MasterGroup->clear();
 
         return $groups;
     }
@@ -137,12 +129,14 @@ class ViberShell extends AppShell
             $this->err('Could not update users.');
         }
 
+        $this->MasterLog->MasterUser->clear();
+
         return $users;
     }
 
     protected function process($target_date)
     {
-        $time_start = microtime(TRUE);
+        $this->startStats();
 
         if (!$this->groups) {
             $this->groups = $this->groups();
@@ -157,9 +151,6 @@ class ViberShell extends AppShell
         $master_logs = array();
 
         foreach ($this->groups as $group) {
-            if ($group['ViberGroup']['Private'])
-                continue;
-
             $group_id = $group['ViberGroup']['Token'];
 
             foreach ($group['ViberGroupInfo'] as $phone) {
@@ -174,12 +165,30 @@ class ViberShell extends AppShell
                     'quantity' => 0,
                     'is_virtual' => 0
                 );
+
+                unset($key);
             }
 
-            unset($group, $group_id, $phone, $key);
-        }
+            if (INCLUDE_MY_NUM) {
+                $key = "{$target_date}-{$group_id}-" . MY_NUM . "-message";
 
-        unset($groups);
+                if(!isset($master_logs[$key])){
+                    $master_logs[$key] = array(
+                        'agent' => MY_NUM,
+                        'group_code' => $group_id,
+                        'number' => $this->formatNumber(MY_NUM),
+                        'report_date' => $target_date,
+                        'msg_type' => 'message',
+                        'quantity' => 0,
+                        'is_virtual' => 0
+                    );
+                }
+
+                unset($key);
+            }
+
+            unset($group, $group_id, $phone);
+        }
 
         $data = $this->ViberEvent->fetchGroupData(array(), $target_date);
         $total_messages = 0;
@@ -225,16 +234,11 @@ class ViberShell extends AppShell
             $this->err('Could not update data to application database.');
         }
 
-        $time_stop = microtime(TRUE);
-        $time      = (($time_stop - $time_start) * 1);
+        $this->MasterLog->clear();
 
-        $this->out();
-        $this->out('Total process time: ' . $time . 's');
-        if (function_exists('memory_get_usage'))
-            $this->out('Total memory used: ' . CakeNumber::toReadableSize(memory_get_usage()));
-        $this->out();
+        unset($master_logs, $db, $total_messages);
 
-        unset($master_logs, $time_start, $time_stop, $time, $db, $total_messages);
+        $this->showStats();
     }
 
     protected function cleanupMasterLogs($target_date = FALSE)

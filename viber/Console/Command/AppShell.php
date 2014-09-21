@@ -18,6 +18,8 @@ App::uses('Shell', 'Console');
  */
 class AppShell extends Shell
 {
+    protected $_startTime;
+
     protected function formatNumber($number)
     {
         return preg_replace('/^0/', '+84', $number);
@@ -49,6 +51,26 @@ class AppShell extends Shell
         return true;
     }
 
+    protected function startStats(){
+        $this->_startTime = microtime(TRUE);
+    }
+
+    protected function showStats(){
+        $time_stop = microtime(TRUE);
+        $time      = (($time_stop - $this->_startTime) * 1);
+
+        if($time > 30){
+            $this->mailOverloaded($time);
+        }
+
+        $this->out();
+        $this->out('Total process time: ' . $time . 's');
+        if (function_exists('memory_get_usage'))
+            $this->out('Total memory used: ' . CakeNumber::toReadableSize(memory_get_usage()));
+        $this->out();
+
+    }
+
     protected function sql($source = 'default'){
         $db = ConnectionManager::getDataSource($source);
         $logs = $db->getLog();
@@ -73,6 +95,9 @@ class AppShell extends Shell
 
     protected function mailErrors($data = NULL)
     {
+        $receivers = Configure::read('DEVELOPERS');
+        if(empty($receivers)) return;
+
         if (empty($this->errors))
             return;
 
@@ -115,12 +140,15 @@ class AppShell extends Shell
 
     public function mailOverloaded($time)
     {
+        $receivers = Configure::read('DEVELOPERS');
+        if(empty($receivers)) return;
+
         $message = 'Dear administrators,';
         $message .= "\n\n";
-        $message .= 'It seems process has been taking to long to respond. Time detected: ' . $time . 's.';
+        $message .= 'It seems process has been taking to long to respond. Time detected: ' . $time . 's.' . "\n\n";
         $message .= ' ※ This message was sent automatically from the agent ' . MY_NUM . ' at ' . date('Y-m-d H:i:s') . '.';
 
-        $this->out('ERROR!!! Sending email to developers...');
+        $this->out('TIMEOUT WARNING!!! Sending email to developers...');
 
         App::uses('CakeEmail', 'Network/Email');
         $Email = new CakeEmail('gmail');

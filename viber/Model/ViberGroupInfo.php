@@ -49,6 +49,7 @@ class ViberGroupInfo extends ViberModel
                 'ViberNumber.AvatarPath'
             ),
             'conditions' => $conditions,
+            'group' => array('ViberGroupInfo.Number'),
             'contain' => array(
                 'ViberNumber.ViberNumberInfo' => array(
                     'fields' => array(

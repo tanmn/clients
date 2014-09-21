@@ -12,6 +12,7 @@ App::uses('AppModel', 'Model');
 class MasterGroup extends AppModel
 {
     public $primaryKey = 'group_code';
+    public $displayField = 'group_name';
 
     public function getWhitelist()
     {

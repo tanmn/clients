@@ -2,6 +2,7 @@
 #################################################
 /viber/*.db
 /viber/webroot/files
+/viber/Reports
 /viber/tmp
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins

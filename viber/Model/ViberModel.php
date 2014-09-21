@@ -12,7 +12,6 @@ App::uses('AppModel', 'Model');
 class ViberModel extends AppModel
 {
     public $useDbConfig = 'viber';
-    public $cacheQueries = false;
 
     public function beforeSave($options = array()) {
         return false;

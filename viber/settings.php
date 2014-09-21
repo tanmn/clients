@@ -41,6 +41,9 @@ define('REPORT_INCLUDE_PRIVATE', TRUE);
 // Prefers exporting reports of groups in whitelist
 define('REPORT_WHITELIST_ONLY', TRUE);
 
+// Excludes groups that have no activity
+define('REPORT_EXCLUDE_INACTIVE_GROUPS', FALSE);
+
 /*
 |--------------------------------------------------------------------------
 | MAILING
@@ -49,11 +52,11 @@ define('REPORT_WHITELIST_ONLY', TRUE);
 
 // For receiving daily reports
 Configure::write('RECEIVERS', array(
-    'tanmn@c3tek.biz',
+    // 'tanmn@c3tek.biz',
 ));
 
 
 // For debug errors
 Configure::write('DEVELOPERS', array(
-    'tanmn@c3tek.biz',
+    // 'tanmn@c3tek.biz',
 ));

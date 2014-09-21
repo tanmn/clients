@@ -55,6 +55,7 @@ class ViberGroup extends ViberModel
                 'ViberGroup.Private'
             ),
             'conditions' => $conditions,
+            'group' => array('ViberGroup.Token'),
             'order' => 'ViberGroup.Private, ViberGroup.Token ASC',
             'contain' => array(
                 'ViberGroupInfo' => array(

@@ -12,13 +12,15 @@ App::uses('AppModel', 'Model');
 class MasterUser extends AppModel
 {
     public $primaryKey = 'number';
+    public $displayField = 'viber_name';
 
-        public function __construct($id = false, $table = null, $ds = null)
-        {
-            parent::__construct($id, $table, $ds);
+    public function __construct($id = false, $table = null, $ds = null)
+    {
+        parent::__construct($id, $table, $ds);
 
-            $this->virtualFields = array(
-                'is_agent' => "(CASE WHEN MasterUser.number = '" . MY_NUM . "' THEN 1 ELSE 0 END)"
-            );
-        }
+        $this->virtualFields = array(
+            'is_agent' => "(CASE WHEN MasterUser.number = '" . MY_NUM . "' THEN 1 ELSE 0 END)",
+            'viber_name' => "(CASE WHEN MasterUser.number = '" . MY_NUM . "' THEN 'VIBER AGENT' ELSE MasterUser.viber_name END)"
+        );
+    }
 }

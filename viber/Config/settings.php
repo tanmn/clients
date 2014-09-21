@@ -33,3 +33,7 @@ if(!defined('REPORT_INCLUDE_PRIVATE')) define('REPORT_INCLUDE_PRIVATE', INCLUDE_
 
 // Prefers exporting reports of groups in whitelist
 if(!defined('REPORT_WHITELIST_ONLY')) define('REPORT_WHITELIST_ONLY', TRUE);
+
+// Excludes groups that have no activity
+if(!defined('REPORT_EXCLUDE_INACTIVE_GROUPS')) define('REPORT_EXCLUDE_INACTIVE_GROUPS', FALSE);
+
